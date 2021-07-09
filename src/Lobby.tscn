@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/test_map.jpg" type="Texture" id=4]
+
+[node name="Lobby" type="Control"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="test_map" type="Sprite" parent="."]
+visible = false
+position = Vector2( -607.797, 473.764 )
+scale = Vector2( 2.54612, 2.51161 )
+texture = ExtResource( 4 )
+offset = Vector2( 416.079, -17.8716 )
+region_enabled = true
+region_rect = Rect2( 558, 25, 340, 330 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 412.138, 269.871 )
