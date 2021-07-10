@@ -1,7 +1,7 @@
 extends Node
 
 var loader
-var wait_frames
+var wait_frames = 0
 var time_max = 100 # msec
 var current_scene
 
@@ -9,7 +9,7 @@ func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() -1)
 
-func goto_scene(path): # Game requests to switch to this scene.
+func goto_scene(path, instant=false): # Game requests to switch to this scene.
 	loader = ResourceLoader.load_interactive(path)
 	if loader == null: # Check for errors.
 		show_error()
@@ -19,9 +19,9 @@ func goto_scene(path): # Game requests to switch to this scene.
 	
 	current_scene.queue_free() # Get rid of the old scene.
 	
-	LoadingScreen.visible = true
-	
-	wait_frames = 1
+	if not instant:
+		LoadingScreen.visible = true
+		wait_frames = 1
 
 func _process(time):
 	if loader == null:
