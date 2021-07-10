@@ -5,7 +5,7 @@ const DEFAULT_IP   = '127.0.0.1'
 const MAX_PEERS    = 16
 var   players      = {}
 var   player_name
-var	  status       = 0	# 0 - nothing, 1 - connecting.., -1 - failed to join server
+var   status       = 0 # 0 - nothing, 1 - connecting.., -1 - failed to join server
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
@@ -17,7 +17,6 @@ func _ready():
 func start_server(name, port):
 	status = 1
 	player_name = name
-	Chat.set_username(name)
 	var host = NetworkedMultiplayerENet.new()
 
 	if port == "default":
@@ -31,14 +30,10 @@ func start_server(name, port):
 	status = 0
 	get_tree().set_network_peer(host)
 	load_lobby_scene()
-	Chat.add_system_message("Server created on port " + str(port))
-
-	spawn_player(1)
 	
 func join_server(name, ip, port):
 	status = 1
 	player_name = name
-	Chat.set_username(name)
 	var host = NetworkedMultiplayerENet.new()
 
 	if ip == "default" or ip == "0" or ip == "localhost":
@@ -59,13 +54,12 @@ func _player_disconnected(id):
 	unregister_player(id)
 	rpc("unregister_player", id)
 	players.erase(id) # Erase player from info.
-	remove_from_lobby(id)
+	# Call function to update lobby UI here
 
 func _connected_ok():
 	status = 0
 	load_lobby_scene()
 	var server_owner = str(get_node("/root/Lobby").get_network_master())
-	Chat.add_system_message("Joined " + server_owner + "'s server.") # Only called on clients, not server.
 	rpc_id(1, "user_ready", get_tree().get_network_unique_id(), player_name)
 
 func _connected_fail():
@@ -81,7 +75,6 @@ remote func register_in_game():
 	register_new_player(get_tree().get_network_unique_id(), player_name)
 
 func _server_disconnected():
-	Chat.add_system_message("Server disconnected.")
 	quit_game()
 
 remote func register_new_player(id, name):
@@ -92,43 +85,18 @@ remote func register_new_player(id, name):
 			rpc_id(id, "register_new_player", peer_id, players[peer_id])
 		
 	players[id] = name
-	spawn_player(id)
 	
 remote func register_player(id, name):			
 	players[id] = name
-
 	# Call function to update lobby UI here
-	add_to_lobby(id)
 	
 remote func unregister_player(id):
 	get_node("/root/" + str(id)).queue_free()
 	players.erase(id)
 
-func add_to_lobby(id):
-	Chat.add_system_message("Player " + str(id) + " joined.")
-	
-func remove_from_lobby(id):
-	Chat.add_system_message("Player " + str(id) + " left.")
-
 func quit_game():
 	get_tree().set_network_peer(null)
 	players.clear()
 		
-func spawn_player(id):
-	var player = preload("res://src/player/Player.tscn").instance()
-		
-	player.set_name(str(id))
-	player.set_position(Vector2(500, 300))
-	player.player_id = id
-		
-	if id == get_tree().get_network_unique_id():
-		player.set_network_master(id)
-		player.control   = true
-	else:
-		player.process_ghost_player()
-			
-	#get_node("/root/World/Entities/Characters").call_deferred('add_child', player)
-	print('Spawned Player at:', player.get_position())
-
 func load_lobby_scene():
 	SceneManager.goto_scene("res://src/Lobby.tscn")

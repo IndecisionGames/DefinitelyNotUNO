@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/font/Comfortaa-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/bar_fill.png" type="Texture" id=2]
 [ext_resource path="res://assets/bar_background.png" type="Texture" id=3]
-[ext_resource path="res://src/LoadingScreen.gd" type="Script" id=4]
+[ext_resource path="res://src/ui/LoadingScreen.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24

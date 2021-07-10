@@ -4,7 +4,6 @@ var loader
 var wait_frames
 var time_max = 100 # msec
 var current_scene
-var disable_chat
 
 func _ready():
 	var root = get_tree().get_root()
@@ -16,7 +15,6 @@ func goto_scene(path): # Game requests to switch to this scene.
 		show_error()
 		return
 
-	disable_chat = (path == "res://src/Main.tscn")
 	set_process(true)
 	
 	current_scene.queue_free() # Get rid of the old scene.
@@ -62,7 +60,6 @@ func update_progress():
 			
 func set_new_scene(scene_resource):
 	yield(get_tree().create_timer(1), "timeout")
-	Chat.set_enabled(not disable_chat)
 	LoadingScreen.visible = false
 	LoadingScreen.reset()
 	current_scene = scene_resource.instance()

@@ -1,6 +1,6 @@
 [gd_scene format=2]
 
-[node name="Lobby" type="Control"]
+[node name="Game" type="Control"]
 __meta__ = {
 "_edit_use_anchors_": false
 }
