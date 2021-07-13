@@ -1,0 +1,152 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/game/Card.gd" type="Script" id=1]
+
+[node name="CardBase" type="MarginContainer"]
+margin_right = 250.0
+margin_bottom = 350.0
+rect_pivot_offset = Vector2( 125, 175 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Colour" type="ColorRect" parent="."]
+margin_right = 250.0
+margin_bottom = 350.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Text" type="VBoxContainer" parent="."]
+margin_right = 250.0
+margin_bottom = 350.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopGap" type="MarginContainer" parent="Text"]
+margin_right = 250.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Top" type="HBoxContainer" parent="Text"]
+margin_top = 29.0
+margin_right = 250.0
+margin_bottom = 43.0
+
+[node name="LeftGap" type="MarginContainer" parent="Text/Top"]
+margin_right = 25.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 25, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Text/Top"]
+margin_left = 29.0
+margin_right = 60.0
+margin_bottom = 14.0
+text = "Num"
+align = 1
+valign = 1
+
+[node name="RightGap" type="MarginContainer" parent="Text/Top"]
+margin_left = 64.0
+margin_right = 250.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopMiddleGap" type="MarginContainer" parent="Text"]
+margin_top = 47.0
+margin_right = 250.0
+margin_bottom = 164.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Middle" type="HBoxContainer" parent="Text"]
+margin_top = 168.0
+margin_right = 250.0
+margin_bottom = 182.0
+
+[node name="LeftGap" type="MarginContainer" parent="Text/Middle"]
+margin_right = 105.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Text/Middle"]
+margin_left = 109.0
+margin_right = 140.0
+margin_bottom = 14.0
+text = "Num"
+align = 1
+valign = 1
+
+[node name="RightGap" type="MarginContainer" parent="Text/Middle"]
+margin_left = 144.0
+margin_right = 250.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomMiddleGap" type="MarginContainer" parent="Text"]
+margin_top = 186.0
+margin_right = 250.0
+margin_bottom = 303.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bottom" type="HBoxContainer" parent="Text"]
+margin_top = 307.0
+margin_right = 250.0
+margin_bottom = 321.0
+
+[node name="LeftGap" type="MarginContainer" parent="Text/Bottom"]
+margin_right = 186.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Text/Bottom"]
+margin_left = 190.0
+margin_right = 221.0
+margin_bottom = 14.0
+text = "Num"
+align = 1
+valign = 1
+
+[node name="RightGap" type="MarginContainer" parent="Text/Bottom"]
+margin_left = 225.0
+margin_right = 250.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 25, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomGap" type="MarginContainer" parent="Text"]
+margin_top = 325.0
+margin_right = 250.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 0, 25 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}

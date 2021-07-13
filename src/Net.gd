@@ -59,7 +59,7 @@ func _player_disconnected(id):
 func _connected_ok():
 	status = 0
 	load_lobby_scene()
-	var server_owner = str(get_node("/root/Lobby").get_network_master())
+	var server_owner = str(get_node("/root/Game").get_network_master())
 	rpc_id(1, "user_ready", get_tree().get_network_unique_id(), player_name)
 
 func _connected_fail():
@@ -99,4 +99,4 @@ func quit_game():
 	players.clear()
 		
 func load_lobby_scene():
-	SceneManager.goto_scene("res://src/Lobby.tscn", true)
+	SceneManager.goto_scene("res://src/Game.tscn", true)

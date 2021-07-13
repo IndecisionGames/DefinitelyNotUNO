@@ -1,6 +1,10 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="Game" type="Control"]
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[ext_resource path="res://src/game/Deck.gd" type="Script" id=1]
+
+[node name="Game" type="Node2D"]
+
+[node name="Cards" type="Node" parent="."]
+
+[node name="Deck" type="Node2D" parent="."]
+script = ExtResource( 1 )
