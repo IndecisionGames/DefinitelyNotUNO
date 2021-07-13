@@ -99,4 +99,4 @@ func quit_game():
 	players.clear()
 		
 func load_lobby_scene():
-	SceneManager.goto_scene("res://src/Game.tscn", true)
+	SceneManager.goto_scene("res://src/game/Game.tscn", true)

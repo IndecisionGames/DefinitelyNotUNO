@@ -7,7 +7,7 @@
 size = 100
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_width_left = 2
 border_width_top = 2
@@ -26,7 +26,7 @@ size = 42
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_width_left = 2
 border_width_top = 2
@@ -34,16 +34,16 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 size = 48
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=7]
 size = 26
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=8]
 size = 28
 font_data = ExtResource( 2 )
 
@@ -113,7 +113,7 @@ margin_left = -50.0
 margin_top = -25.0
 margin_right = 1070.0
 margin_bottom = 105.0
-custom_styles/panel = SubResource( 8 )
+custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -159,7 +159,7 @@ margin_left = -50.0
 margin_top = -10.0
 margin_right = 1070.0
 margin_bottom = 440.0
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -185,7 +185,7 @@ margin_right = 131.0
 margin_bottom = 111.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "Host"
 
 [node name="MarginContainer2" type="MarginContainer" parent="GUI/Container/VBoxContainer"]
@@ -214,7 +214,7 @@ caret_blink = true
 margin_top = 84.0
 margin_right = 1020.0
 margin_bottom = 145.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "Join"
 
 [node name="MarginContainer3" type="MarginContainer" parent="GUI/Container/VBoxContainer"]
@@ -227,7 +227,7 @@ custom_constants/margin_top = 20
 margin_top = 20.0
 margin_right = 1020.0
 margin_bottom = 50.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.772549, 0.0980392, 0.0980392, 1 )
 text = "Error"
 align = 1
@@ -249,7 +249,7 @@ margin_left = 7.0
 margin_top = 3.0
 margin_right = 341.0
 margin_bottom = 35.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 0.639216, 0.639216, 0.639216, 0.647059 )
 text = "Indecision Games ©"
 [connection signal="pressed" from="GUI/Container/VBoxContainer/CreateServer/MarginContainer/Host" to="." method="_on_Host_pressed"]

@@ -4,7 +4,7 @@ class_name Card
 
 const Types = preload("res://src/game/Types.gd")
 
-onready var background = get_node("Colour")
+onready var background = get_node("Background")
 onready var top_label = get_node("Text/Top/Label")
 onready var mid_label = get_node("Text/Middle/Label")
 onready var bot_label = get_node("Text/Bottom/Label")
