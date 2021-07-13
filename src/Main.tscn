@@ -13,7 +13,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
+border_color = Color( 0.666667, 0.666667, 0.666667, 1 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 48
@@ -32,7 +32,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
+border_color = Color( 0.666667, 0.666667, 0.666667, 1 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 48
@@ -92,7 +92,7 @@ custom_constants/margin_bottom = 75
 margin_right = 1020.0
 margin_bottom = 113.0
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.8, 0.792157, 0.792157, 1 )
+custom_colors/font_color = Color( 0.819608, 0.819608, 0.819608, 1 )
 text = "Definitely Not UNO"
 align = 1
 

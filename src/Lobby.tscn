@@ -1,0 +1,161 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/crown.png" type="Texture" id=1]
+[ext_resource path="res://assets/font/Comfortaa-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://src/LobbySlot.tscn" type="PackedScene" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 28
+font_data = ExtResource( 2 )
+
+[node name="Lobby" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="ColorRect" parent="."]
+margin_right = 1920.0
+margin_bottom = 1087.0
+color = Color( 0.121569, 0.121569, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GUI" type="Control" parent="."]
+anchor_top = 0.007
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 10.0
+margin_top = -10.0
+margin_right = -10.0
+margin_bottom = 548.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerSlotColumns" type="HBoxContainer" parent="GUI"]
+margin_left = 118.0
+margin_top = 274.44
+margin_right = 1382.0
+margin_bottom = 834.44
+rect_min_size = Vector2( 1000, 500 )
+custom_constants/separation = 650
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerSlots1" type="VBoxContainer" parent="GUI/PlayerSlotColumns"]
+margin_bottom = 560.0
+custom_constants/separation = 150
+
+[node name="Slot" parent="GUI/PlayerSlotColumns/PlayerSlots1" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="Slot4" parent="GUI/PlayerSlotColumns/PlayerSlots1" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 150.0
+margin_right = 0.0
+margin_bottom = 150.0
+
+[node name="Slot3" parent="GUI/PlayerSlotColumns/PlayerSlots1" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 300.0
+margin_right = 0.0
+margin_bottom = 300.0
+
+[node name="Slot2" parent="GUI/PlayerSlotColumns/PlayerSlots1" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 450.0
+margin_right = 0.0
+margin_bottom = 450.0
+
+[node name="PlayerSlots2" type="VBoxContainer" parent="GUI/PlayerSlotColumns"]
+margin_left = 650.0
+margin_right = 650.0
+margin_bottom = 560.0
+custom_constants/separation = 150
+
+[node name="Slot" parent="GUI/PlayerSlotColumns/PlayerSlots2" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="Slot4" parent="GUI/PlayerSlotColumns/PlayerSlots2" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 150.0
+margin_right = 0.0
+margin_bottom = 150.0
+
+[node name="Slot3" parent="GUI/PlayerSlotColumns/PlayerSlots2" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 300.0
+margin_right = 0.0
+margin_bottom = 300.0
+
+[node name="Slot2" parent="GUI/PlayerSlotColumns/PlayerSlots2" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 450.0
+margin_right = 0.0
+margin_bottom = 450.0
+
+[node name="Control" type="Control" parent="."]
+margin_left = 34.0
+margin_top = 251.0
+margin_right = 274.0
+margin_bottom = 427.0
+rect_rotation = -28.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="crown" type="Sprite" parent="Control"]
+position = Vector2( 86.193, 53.7158 )
+scale = Vector2( 0.128862, 0.149848 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 800, 400, 700, 450 )
+region_filter_clip = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -42.403
+margin_right = 341.0
+margin_bottom = 2.59705
+custom_constants/margin_left = 7
+custom_constants/margin_bottom = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer"]
+margin_left = 7.0
+margin_top = 3.0
+margin_right = 341.0
+margin_bottom = 35.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.639216, 0.639216, 0.639216, 0.647059 )
+text = "Indecision Games ©"
