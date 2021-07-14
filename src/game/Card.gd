@@ -27,10 +27,11 @@ func flip():
 
 func set_face_up():
 	is_face_up = true
+	var card_string = Types.card_type_to_string(self.type)
 	
-	top_label.text = "%s" % self.type
-	mid_label.text = "%s" % self.type
-	bot_label.text = "%s" % self.type
+	top_label.text = card_string
+	mid_label.text = card_string
+	bot_label.text = card_string
 	background.color = Types.card_colour_to_colour(self.colour)
 	
 func set_face_down():

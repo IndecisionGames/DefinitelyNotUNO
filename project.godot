@@ -37,6 +37,7 @@ SceneManager="*res://src/SceneManager.gd"
 Net="*res://src/Net.gd"
 Commands="*res://src/Commands.gd"
 Types="*res://src/game/Types.gd"
+Rules="*res://src/game/Rules.gd"
 
 [display]
 

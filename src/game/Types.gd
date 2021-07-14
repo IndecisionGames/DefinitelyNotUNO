@@ -33,9 +33,37 @@ enum card_type {
 	CARD_WILD,
 }
 
-const standard_types = [card_type.CARD_0, card_type.CARD_1, card_type.CARD_2, card_type.CARD_3, card_type.CARD_4, card_type.CARD_5, card_type.CARD_6, card_type.CARD_7, card_type.CARD_8, card_type.CARD_9, card_type.CARD_SKIP, card_type.CARD_REVERSE, card_type.CARD_PLUS2]
-const standard_colours = [card_colour.RED, card_colour.GREEN, card_colour.BLUE, card_colour.YELLOW]
-const wild_types = [card_type.CARD_PLUS4, card_type.CARD_WILD]
+static func card_type_to_string(type) -> String:
+	match type:
+		card_type.CARD_0:
+			return "0"
+		card_type.CARD_1:
+			return "1"
+		card_type.CARD_2:
+			return "2"
+		card_type.CARD_4:
+			return "4"
+		card_type.CARD_5:
+			return "5"
+		card_type.CARD_6:
+			return "6"
+		card_type.CARD_7:
+			return "7"
+		card_type.CARD_8:
+			return "8"
+		card_type.CARD_9:
+			return "9"
+		card_type.CARD_SKIP:
+			return "Skip"
+		card_type.CARD_REVERSE:
+			return "No U"
+		card_type.CARD_PLUS2:
+			return "+2"
+		card_type.CARD_PLUS4:
+			return "+4"
+		card_type.CARD_WILD:
+			return "Wild"
+	return ""
 
 static func card_colour_to_colour(colour) -> Color:
 	match colour:

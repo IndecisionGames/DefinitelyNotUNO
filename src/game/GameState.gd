@@ -21,10 +21,13 @@ var current_pickup_count = 0
 # Other
 var skip_required = false
 
-# TODO: Allow for custom rules. e.g. playing cards out of turn
 func is_playable(player: int, proposed_card: Card) -> bool:
 	# Check Player
 	if player != current_player:
+		if Rules.INTERRUPT:
+			# TODO: Stop from affecting player who has started turn. Otherwise someone could play mid/post draw
+			if proposed_card.type == current_card_type and proposed_card.colour == current_card_colour:
+				return true
 		return false
 
 	if pickup_required:
@@ -48,6 +51,7 @@ func is_playable(player: int, proposed_card: Card) -> bool:
 	return false
 
 
+# TODO: Add WILD pick colour logic
 func play_card(player: int, card: Card):
 	if !is_playable(player, card):
 		print("this card can not be played")
