@@ -14,14 +14,14 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/Card.gd"
 }, {
-"base": "Reference",
-"class": "Types",
+"base": "Node",
+"class": "GameState",
 "language": "GDScript",
-"path": "res://src/game/Types.gd"
+"path": "res://src/game/GameState.gd"
 } ]
 _global_script_class_icons={
 "Card": "",
-"Types": ""
+"GameState": ""
 }
 
 [application]
@@ -36,7 +36,7 @@ LoadingScreen="*res://src/ui/LoadingScreen.tscn"
 SceneManager="*res://src/SceneManager.gd"
 Net="*res://src/Net.gd"
 Commands="*res://src/Commands.gd"
-Chat="*res://src/ui/ChatBox.tscn"
+Types="*res://src/game/Types.gd"
 
 [display]
 
