@@ -9,19 +9,13 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "MarginContainer",
+"base": "CardBase",
 "class": "Card",
 "language": "GDScript",
-"path": "res://src/game/Card.gd"
-}, {
-"base": "Node",
-"class": "GameState",
-"language": "GDScript",
-"path": "res://src/game/GameState.gd"
+"path": "res://src/game/card/Card.gd"
 } ]
 _global_script_class_icons={
-"Card": "",
-"GameState": ""
+"Card": ""
 }
 
 [application]
@@ -35,9 +29,10 @@ config/icon="res://icon.png"
 LoadingScreen="*res://src/ui/LoadingScreen.tscn"
 SceneManager="*res://src/SceneManager.gd"
 Net="*res://src/Net.gd"
-Commands="*res://src/Commands.gd"
 Types="*res://src/game/Types.gd"
 Rules="*res://src/game/Rules.gd"
+GameState="*res://src/game/GameState.gd"
+CardBase="res://src/game/card/CardBase.gd"
 
 [display]
 

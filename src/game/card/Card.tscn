@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/game/Card.gd" type="Script" id=1]
+[ext_resource path="res://src/game/card/Card.gd" type="Script" id=1]
 
 [node name="CardBase" type="MarginContainer"]
 margin_right = 250.0
@@ -14,7 +14,13 @@ __meta__ = {
 [node name="Background" type="ColorRect" parent="."]
 margin_right = 250.0
 margin_bottom = 350.0
-color = Color( 0, 0, 0, 1 )
+color = Color( 1, 0.0470588, 0.0470588, 1 )
+
+[node name="Border" type="ReferenceRect" parent="."]
+margin_right = 250.0
+margin_bottom = 350.0
+border_color = Color( 0, 0, 0, 1 )
+editor_only = false
 
 [node name="Text" type="VBoxContainer" parent="."]
 margin_right = 250.0

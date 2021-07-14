@@ -1,6 +1,7 @@
 extends Node
 
 const NUM_EACH_CARD = 2
+const NUM_PLAYERS = 1
 
 const INTERRUPT = false
 

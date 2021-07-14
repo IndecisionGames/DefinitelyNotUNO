@@ -12,8 +12,3 @@ func add_card(card: Card):
 	card.set_position(Vector2(0,0))
 	card.flip()
 	self.cards.append(card)
-	self._update_card_positions()
-
-func _update_card_positions():
-	for i in range(self.cards.size()):
-		cards[i].set_position(Vector2(-25-100*(self.cards.size())+i*200,0))

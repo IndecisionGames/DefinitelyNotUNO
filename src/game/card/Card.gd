@@ -1,4 +1,4 @@
-extends MarginContainer
+extends CardBase
 
 class_name Card
 
@@ -6,9 +6,6 @@ onready var background = get_node("Background")
 onready var top_label = get_node("Text/Top/Label")
 onready var mid_label = get_node("Text/Middle/Label")
 onready var bot_label = get_node("Text/Bottom/Label")
-
-var colour: int
-var type: int
 
 var is_face_up: bool
 
