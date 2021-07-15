@@ -1,47 +1,46 @@
 extends Control
 
-onready var activePanel = find_node("ActivePanel")
-onready var readyOn = find_node("ReadyON")
-onready var nameLabel = find_node("NameLabel")
+onready var active_panel = find_node("ActivePanel")
+onready var ready_on = find_node("ReadyON")
+onready var name_label = find_node("NameLabel")
 
-var isReady = false
+var is_ready = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	readyOn.visible = isReady
-	nameLabel.text = "Player"
-	activePanel.visible = false
-
+	ready_on.visible = is_ready
+	name_label.text = "Player"
+	active_panel.visible = false
 
 # DEBUG===========================================
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_I:
-			toggleReady()
+			toggle_ready()
 		if event.pressed and event.scancode == KEY_O:
-			addPlayer("ExodusIV")
+			add_player("ExodusIV")
 		if event.pressed and event.scancode == KEY_P:
-			removePlayer()
+			remove_player()
 # ================================================
 
-func addPlayer(name):
-	nameLabel.text = name
-	activePanel.visible = true
+func add_player(name):
+	name_label.text = name
+	active_panel.visible = true
 
-func removePlayer():
-	activePanel.visible = false
-	isReady = false
-	readyOn.visible = isReady
+func remove_player():
+	active_panel.visible = false
+	is_ready = false
+	ready_on.visible = is_ready
 
-func getIsReady():
-	return isReady
+func get_is_ready():
+	return is_ready
 
-func toggleReady():
-	if activePanel.visible:
-		isReady = !isReady;
-		readyOn.visible = isReady
+func toggle_ready():
+	if active_panel.visible:
+		is_ready = !is_ready;
+		ready_on.visible = is_ready
 
-func transferSlot(anotherSlot):
-	readyOn.visible = anotherSlot.readyOn.visible
-	nameLabel.text = anotherSlot.nameLabel.text
-	activePanel.visible = anotherSlot.activePanel.visible
+func transfer_slot(another_slot):
+	ready_on.visible = another_slot.ready_on.visible
+	name_label.text = another_slot.name_label.text
+	active_panel.visible = another_slot.active_panel.visible

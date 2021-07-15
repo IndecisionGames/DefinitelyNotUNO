@@ -27,13 +27,13 @@ func _ready():
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_W:
-			addPlayer("Siv")
+			add_player("Siv")
 		if event.pressed and event.scancode == KEY_E:
-			removePlayer("Siv (1)")
+			remove_player("Siv (1)")
 # ================================================
 
 # TODO:Use network id
-func addPlayer(name):
+func add_player(name):
 	name = name.strip_edges()
 	if len(players) < 8:
 		var duplicate_index = 1
@@ -44,18 +44,18 @@ func addPlayer(name):
 
 		players.append(name)
 		var slot_index = len(players) - 1
-		slots[slot_index].addPlayer(name)
+		slots[slot_index].add_player(name)
 
 # TODO:Use network id
-func removePlayer(name):
+func remove_player(name):
 	var player_index = players.find(name)
 	if player_index == -1:
 		return
 
 	players.remove(player_index)
-	slots[player_index].removePlayer()
+	slots[player_index].remove_player()
 	while player_index < len(slots) - 1:
-		slots[player_index].transferSlot(slots[player_index+1])
-		slots[player_index+1].removePlayer()
+		slots[player_index].transfer_slot(slots[player_index+1])
+		slots[player_index+1].remove_player()
 		player_index += 1
 	

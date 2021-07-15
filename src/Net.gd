@@ -45,6 +45,7 @@ func join_server(name, ip, port):
 	host.create_client(ip, port)
 
 	get_tree().set_network_peer(host)
+	load_lobby_scene()
 	
 func _player_connected(id):
 	# Called on both clients and server when a peer connects. Send my info to it.
@@ -99,4 +100,4 @@ func quit_game():
 	players.clear()
 		
 func load_lobby_scene():
-	SceneManager.goto_scene("res://src/game/Game.tscn", true)
+	SceneManager.goto_scene("res://src/lobby/Lobby.tscn", false)
