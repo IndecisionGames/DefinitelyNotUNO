@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/crown.png" type="Texture" id=1]
 [ext_resource path="res://assets/font/Comfortaa-Bold.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://src/LobbySlot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/lobby/LobbySlot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/lobby/Lobby.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 28
@@ -11,6 +12,7 @@ font_data = ExtResource( 2 )
 [node name="Lobby" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ],
 "_edit_use_anchors_": false
@@ -51,7 +53,7 @@ __meta__ = {
 margin_bottom = 560.0
 custom_constants/separation = 150
 
-[node name="Slot" parent="GUI/PlayerSlotColumns/PlayerSlots1" instance=ExtResource( 3 )]
+[node name="Slot1" parent="GUI/PlayerSlotColumns/PlayerSlots1" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
@@ -59,7 +61,7 @@ margin_top = 0.0
 margin_right = 0.0
 margin_bottom = 0.0
 
-[node name="Slot4" parent="GUI/PlayerSlotColumns/PlayerSlots1" instance=ExtResource( 3 )]
+[node name="Slot2" parent="GUI/PlayerSlotColumns/PlayerSlots1" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
@@ -75,7 +77,7 @@ margin_top = 300.0
 margin_right = 0.0
 margin_bottom = 300.0
 
-[node name="Slot2" parent="GUI/PlayerSlotColumns/PlayerSlots1" instance=ExtResource( 3 )]
+[node name="Slot4" parent="GUI/PlayerSlotColumns/PlayerSlots1" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
@@ -89,7 +91,7 @@ margin_right = 650.0
 margin_bottom = 560.0
 custom_constants/separation = 150
 
-[node name="Slot" parent="GUI/PlayerSlotColumns/PlayerSlots2" instance=ExtResource( 3 )]
+[node name="Slot5" parent="GUI/PlayerSlotColumns/PlayerSlots2" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
@@ -97,7 +99,7 @@ margin_top = 0.0
 margin_right = 0.0
 margin_bottom = 0.0
 
-[node name="Slot4" parent="GUI/PlayerSlotColumns/PlayerSlots2" instance=ExtResource( 3 )]
+[node name="Slot6" parent="GUI/PlayerSlotColumns/PlayerSlots2" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
@@ -105,7 +107,7 @@ margin_top = 150.0
 margin_right = 0.0
 margin_bottom = 150.0
 
-[node name="Slot3" parent="GUI/PlayerSlotColumns/PlayerSlots2" instance=ExtResource( 3 )]
+[node name="Slot7" parent="GUI/PlayerSlotColumns/PlayerSlots2" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
@@ -113,7 +115,7 @@ margin_top = 300.0
 margin_right = 0.0
 margin_bottom = 300.0
 
-[node name="Slot2" parent="GUI/PlayerSlotColumns/PlayerSlots2" instance=ExtResource( 3 )]
+[node name="Slot8" parent="GUI/PlayerSlotColumns/PlayerSlots2" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
