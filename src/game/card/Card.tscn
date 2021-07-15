@@ -165,3 +165,4 @@ rect_min_size = Vector2( 250, 350 )
 expand = true
 [connection signal="mouse_entered" from="Interact" to="." method="_on_Interact_mouse_entered"]
 [connection signal="mouse_exited" from="Interact" to="." method="_on_Interact_mouse_exited"]
+[connection signal="pressed" from="Interact" to="." method="_on_Interact_pressed"]

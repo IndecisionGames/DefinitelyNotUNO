@@ -11,6 +11,9 @@ onready var bot_label = get_node("Text/Bottom/Label")
 var is_face_up: bool
 var is_playable: bool
 var is_hovered: bool
+var is_in_hand: bool
+
+signal play(card)
 
 func setup(colour, type):
 	self.colour = colour
@@ -20,15 +23,29 @@ func _ready():
 	is_playable = false
 	is_hovered = false
 	_set_border_color()
-	set_face_down()
+	_set_face_down()
 
 func flip():
 	if is_face_up:
-		set_face_down()
+		_set_face_down()
 	else:
-		set_face_up()
+		_set_face_up()
 
-func set_face_up():
+func set_in_hand():
+	is_in_hand = true
+	_set_face_up()
+
+func set_in_play():
+	is_in_hand = false
+	is_hovered = false
+	is_playable = false
+	_set_face_up()
+
+func set_playable(playable: bool):
+	is_playable = playable
+	_set_border_color()
+
+func _set_face_up():
 	is_face_up = true
 	var card_string = Types.card_type_to_string(type)
 
@@ -36,31 +53,37 @@ func set_face_up():
 	mid_label.text = card_string
 	bot_label.text = card_string
 	background.color = Types.card_colour_to_colour(colour)
+	_set_border_color()
 
-func set_face_down():
+func _set_face_down():
 	is_face_up = false
 
 	top_label.text = ""
 	mid_label.text = "Uno"
 	bot_label.text = ""
 	background.color = Types.facedown
-
-func set_playable(playable: bool):
-	is_playable = playable
-	_set_border_color()
-
-func _on_Interact_mouse_entered():
-	is_hovered = true
-	_set_border_color()
-
-func _on_Interact_mouse_exited():
-	is_hovered = false
 	_set_border_color()
 
 func _set_border_color():
-	if is_hovered:
+	if !is_in_hand:
+		border.border_color = Types.facedown
+	elif is_hovered:
 		border.border_color = Types.hover
 	elif is_playable:
 		border.border_color = Types.playable
 	else:
 		border.border_color = Types.facedown
+
+func _on_Interact_mouse_entered():
+	if is_in_hand:
+		is_hovered = true
+		_set_border_color()
+
+func _on_Interact_mouse_exited():
+	if is_in_hand:
+		is_hovered = false
+		_set_border_color()
+
+func _on_Interact_pressed():
+	if is_playable:
+		emit_signal("play", self)
