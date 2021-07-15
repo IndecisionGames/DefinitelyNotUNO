@@ -1,7 +1,5 @@
 extends Node2D
 
-enum pickup_type {NULL, PLUS2, PLUS4}
-
 # Play Checks
 var current_player = 0
 var current_card_type: int
@@ -11,7 +9,7 @@ var current_card_colour: int
 var play_order_clockwise = true
 var skip_required = false
 var pickup_required = false
-var active_pickup_type = pickup_type.NULL
+var active_pickup_type = Types.pickup_type.NULL
 var current_pickup_count = 0
 
 func is_playable(player: int, proposed_card: CardBase) -> bool:
@@ -24,14 +22,14 @@ func is_playable(player: int, proposed_card: CardBase) -> bool:
 
 	if pickup_required:
 		# Require matching Plus 2
-		if active_pickup_type == pickup_type.PLUS2:
+		if active_pickup_type == Types.pickup_type.PLUS2:
 			if proposed_card.type == Types.card_type.CARD_PLUS2:
-				if proposed_card.colour == current_card_colour or proposed_card.type == Types.card_colour.WILD:
+				if proposed_card.colour == current_card_colour or proposed_card.colour == Types.card_colour.WILD:
 					return true
 		# Require matching Plus 4
-		if active_pickup_type == pickup_type.PLUS4:
+		if active_pickup_type == Types.pickup_type.PLUS4:
 			if proposed_card.type == Types.card_type.CARD_PLUS4:
-				if proposed_card.colour == current_card_colour or proposed_card.type == Types.card_colour.WILD:
+				if proposed_card.colour == current_card_colour or proposed_card.colour == Types.card_colour.WILD:
 					return true
 		return false
 

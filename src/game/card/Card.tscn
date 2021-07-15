@@ -5,6 +5,7 @@
 [node name="CardBase" type="MarginContainer"]
 margin_right = 250.0
 margin_bottom = 350.0
+rect_min_size = Vector2( 250, 350 )
 rect_pivot_offset = Vector2( 125, 175 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -156,3 +157,11 @@ size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Interact" type="TextureButton" parent="."]
+margin_right = 250.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 250, 350 )
+expand = true
+[connection signal="mouse_entered" from="Interact" to="." method="_on_Interact_mouse_entered"]
+[connection signal="mouse_exited" from="Interact" to="." method="_on_Interact_mouse_exited"]

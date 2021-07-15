@@ -7,6 +7,9 @@ const blue = Color(0.1,0.1,0.44,1)
 const wild = Color(0.44,0.5,0.56,1)
 const facedown = Color(0,0,0,1)
 
+const playable = Color(0.58,0,0.83,1)
+const hover = Color(0.97,0.97,1,1)
+
 enum card_colour {
 	RED, 
 	GREEN, 
@@ -33,6 +36,12 @@ enum card_type {
 	CARD_WILD,
 }
 
+enum pickup_type {
+	NULL, 
+	PLUS2, 
+	PLUS4,
+}
+
 static func card_type_to_string(type) -> String:
 	match type:
 		card_type.CARD_0:
@@ -40,6 +49,8 @@ static func card_type_to_string(type) -> String:
 		card_type.CARD_1:
 			return "1"
 		card_type.CARD_2:
+			return "2"
+		card_type.CARD_3:
 			return "2"
 		card_type.CARD_4:
 			return "4"

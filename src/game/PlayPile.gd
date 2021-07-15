@@ -10,5 +10,5 @@ func _ready():
 func add_card(card: Card):
 	add_child(card)
 	card.set_position(Vector2(0,0))
-	card.flip()
-	self.cards.append(card)
+	card.set_face_up()
+	cards.append(card)

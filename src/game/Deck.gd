@@ -9,23 +9,23 @@ func _ready():
 	shuffle()
 
 func generate():
-	self.cards = []
+	cards = []
 	for colour in Rules.standard_colours:
 		for type in Rules.standard_types:
 			for i in range(Rules.NUM_EACH_CARD):
 				var new_card = Card.instance()
 				new_card.setup(colour, type)
-				self.cards.append(new_card)
+				cards.append(new_card)
 
 	for type in Rules.wild_types:
 		for i in range(Rules.NUM_EACH_CARD):
 			var new_card = Card.instance()
 			new_card.setup(Types.card_colour.WILD, type)
-			self.cards.append(new_card)
+			cards.append(new_card)
 
 func shuffle():
-	self.cards.shuffle()
-	
+	cards.shuffle()
+
 func draw():
 	if len(cards) > 0:
 		return cards.pop_front()
