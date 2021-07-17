@@ -7,6 +7,8 @@ onready var game_info = get_node("GameInfo")
 
 func _ready():
 	player_hand.connect("play", self, "play_card")
+	deck.connect("out_of_cards", play_pile, "transfer_cards")
+	
 	var drawn_card = deck.draw()
 	GameState.current_card_type = drawn_card.type
 	GameState.current_card_colour = drawn_card.colour
@@ -90,14 +92,13 @@ func _turn_end():
 	print("Current Card: Colour %s, Type %s" % [GameState.current_card_colour, GameState.current_card_type])
 	print("Pickup Require: %s,  Active Pickup Type: %s, Pickup Count %s" % [GameState.pickup_required, GameState.active_pickup_type, GameState.required_pickup_count])
 	print("Player Order: %s" % GameState.play_order_clockwise)
+	print("Cards in PlayPile: %s" % play_pile.cards.size())
+	print("Cards in Deck: %s" % deck.cards.size())
 	print("==============END==============")
 
 
 func _on_DrawButton_pressed():
 	for i in range(max(1,GameState.required_pickup_count)):
 		var drawn_card = deck.draw()
-		if !drawn_card:
-			print("out of cards")
-			return
 		player_hand.add_card(drawn_card)
 	pass_turn()

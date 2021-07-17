@@ -12,3 +12,11 @@ func add_card(card: Card):
 	card.set_position(Vector2(0,0))
 	card.set_in_play()
 	cards.append(card)
+
+func cycle_cards(deck):
+	while cards.size() > 1:
+		var card = cards.pop_front()
+		remove_child(card)
+		cards.erase(card)
+		deck.add_card(card)
+	deck.shuffle()

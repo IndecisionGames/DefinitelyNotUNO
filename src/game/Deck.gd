@@ -4,6 +4,8 @@ const Card = preload("res://src/game/card/Card.tscn")
 
 var cards = []
 
+signal out_of_cards(deck)
+
 func _ready():
 	generate()
 	shuffle()
@@ -27,5 +29,10 @@ func shuffle():
 	cards.shuffle()
 
 func draw():
-	if len(cards) > 0:
-		return cards.pop_front()
+	if len(cards) <= 1:
+		emit_signal("out_of_cards", self)
+	return cards.pop_front()
+	
+# called by PlayPile to cycle cards
+func add_card(card: Card):
+	cards.append(card)
