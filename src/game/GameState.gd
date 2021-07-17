@@ -10,7 +10,7 @@ var play_order_clockwise = true
 var skip_required = false
 var pickup_required = false
 var active_pickup_type: int
-var current_pickup_count = 0
+var required_pickup_count = 0
 
 func is_playable(player: int, proposed_card: CardBase) -> bool:
 	if player != current_player:

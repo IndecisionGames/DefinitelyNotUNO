@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/game/Deck.gd" type="Script" id=1]
 [ext_resource path="res://src/game/GameController.gd" type="Script" id=2]
 [ext_resource path="res://src/game/PlayerHand.gd" type="Script" id=3]
 [ext_resource path="res://src/game/PlayPile.gd" type="Script" id=4]
+[ext_resource path="res://src/game/GameInfo.gd" type="Script" id=5]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
@@ -34,6 +35,9 @@ margin_right = 153.511
 margin_bottom = 172.96
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Play Pile"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Deck" type="Node2D" parent="."]
 position = Vector2( 1500, 365 )
@@ -59,5 +63,73 @@ __meta__ = {
 }
 
 [node name="PlayerHand" type="Node2D" parent="."]
-position = Vector2( 960, 825 )
+position = Vector2( 835, 825 )
 script = ExtResource( 3 )
+
+[node name="DrawButton" type="MarginContainer" parent="."]
+margin_left = 1560.0
+margin_top = 730.0
+margin_right = 1685.0
+margin_bottom = 780.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="DrawButton"]
+margin_right = 125.0
+margin_bottom = 50.0
+color = Color( 0.141176, 0.72549, 0.839216, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Label" parent="DrawButton"]
+margin_left = 46.0
+margin_top = 18.0
+margin_right = 78.0
+margin_bottom = 32.0
+size_flags_horizontal = 4
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Draw"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DrawButton" type="TextureButton" parent="DrawButton"]
+margin_right = 125.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 125, 50 )
+
+[node name="GameInfo" type="MarginContainer" parent="."]
+margin_left = 1200.0
+margin_top = 365.0
+margin_right = 1350.0
+margin_bottom = 565.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="GameInfo"]
+margin_right = 150.0
+margin_bottom = 200.0
+color = Color( 0.0705882, 0.168627, 0.423529, 0.223529 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="VBoxContainer" parent="GameInfo"]
+margin_right = 150.0
+margin_bottom = 200.0
+
+[node name="PlayerTurn" type="Label" parent="GameInfo/Text"]
+margin_right = 150.0
+margin_bottom = 31.0
+text = "
+"
+
+[node name="PickupRequiredCount" type="Label" parent="GameInfo/Text"]
+margin_top = 35.0
+margin_right = 150.0
+margin_bottom = 49.0
+[connection signal="pressed" from="DrawButton/DrawButton" to="." method="_on_DrawButton_pressed"]

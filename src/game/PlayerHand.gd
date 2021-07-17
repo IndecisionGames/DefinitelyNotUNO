@@ -15,8 +15,9 @@ func add_card(card: Card):
 	card.set_position(Vector2(0,0))
 	card.set_in_hand()
 	cards.append(card)
-	_update_card_positions()
 	card.connect("play", self, "_play")
+	update_playable()
+	_update_card_positions()
 
 
 func remove_card(card: Card):
@@ -25,13 +26,17 @@ func remove_card(card: Card):
 	remove_child(card)
 	_update_card_positions()
 
-func update():
+func update_playable():
 	for card in cards:
 		card.set_playable(GameState.is_playable(player, card))
 
 func _update_card_positions():
+	var card_seperation = 260
+	if self.cards.size() > 7:
+		card_seperation = float(1600)/float(self.cards.size()-1)
+
 	for i in range(self.cards.size()):
-		cards[i].set_position(Vector2(-25-100*(self.cards.size())+i*200,0))
+		cards[i].set_position(Vector2(-card_seperation/2*(self.cards.size()-1)+i*card_seperation,0))
 
 
 func _play(card: Card):
