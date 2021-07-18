@@ -5,6 +5,8 @@ const Card = preload("res://src/game/card/Card.tscn")
 var cards = []
 var player: int
 
+onready var draw = get_node("../../Draw")
+
 signal play(player, card)
 
 func _ready():
@@ -12,22 +14,27 @@ func _ready():
 
 func add_card(card: Card):
 	add_child(card)
-	card.set_position(Vector2(0,0))
 	card.set_in_hand()
-	cards.append(card)
 	card.connect("play", self, "_play")
+	cards.append(card)
 	update_playable()
 	_update_card_positions()
 
 func remove_card(card: Card):
-	card.disconnect("play", self, "_play")
 	cards.erase(card)
+	card.disconnect("play", self, "_play")
 	remove_child(card)
+	update_playable()
 	_update_card_positions()
 
 func update_playable():
+	var has_playable_card = false
 	for card in cards:
-		card.set_playable(GameState.is_playable(player, card))
+		var is_playable = GameState.is_playable(player, card)
+		card.set_playable(is_playable)
+		has_playable_card = has_playable_card || is_playable
+	
+	draw.allow_draw(!has_playable_card)
 
 func _update_card_positions():
 	var card_seperation = 260

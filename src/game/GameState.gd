@@ -4,12 +4,15 @@ extends Node2D
 var current_player: int
 var current_card_type: int
 var current_card_colour: int
-var play_in_progress: bool
-var waiting_action: bool
+var play_in_progress = false
 
-# Card Effects
+# Wild
+var waiting_action = false
+# Reverse
 var play_order_clockwise = true
+# Skip
 var skip_required = false
+# Plus2 / Plus4
 var pickup_required = false
 var active_pickup_type = 0
 var required_pickup_count = 0

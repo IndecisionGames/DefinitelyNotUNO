@@ -7,6 +7,7 @@ var cards = []
 signal out_of_cards(deck)
 
 func _ready():
+	randomize()
 	generate()
 	shuffle()
 

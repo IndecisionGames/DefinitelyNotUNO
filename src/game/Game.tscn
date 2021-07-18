@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/game/Deck.gd" type="Script" id=1]
 [ext_resource path="res://src/game/GameController.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/game/PlayPile.gd" type="Script" id=4]
 [ext_resource path="res://src/game/GameInfo.gd" type="Script" id=5]
 [ext_resource path="res://src/game/WildPicker.gd" type="Script" id=6]
+[ext_resource path="res://src/game/Draw.gd" type="Script" id=7]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
@@ -63,20 +64,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerHand" type="Node2D" parent="."]
-position = Vector2( 835, 825 )
-script = ExtResource( 3 )
-
-[node name="DrawButton" type="MarginContainer" parent="."]
+[node name="Draw" type="MarginContainer" parent="."]
 margin_left = 1560.0
 margin_top = 730.0
 margin_right = 1685.0
 margin_bottom = 780.0
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="ColorRect" parent="DrawButton"]
+[node name="Background" type="ColorRect" parent="Draw"]
 margin_right = 125.0
 margin_bottom = 50.0
 color = Color( 0.141176, 0.72549, 0.839216, 1 )
@@ -84,7 +82,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Text" type="Label" parent="DrawButton"]
+[node name="Text" type="Label" parent="Draw"]
 margin_left = 46.0
 margin_top = 18.0
 margin_right = 78.0
@@ -96,7 +94,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DrawButton" type="TextureButton" parent="DrawButton"]
+[node name="DrawButton" type="TextureButton" parent="Draw"]
 margin_right = 125.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 125, 50 )
@@ -138,7 +136,7 @@ margin_bottom = 49.0
 margin_left = 550.0
 margin_top = 365.0
 margin_right = 700.0
-margin_bottom = 565.0
+margin_bottom = 577.0
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -218,7 +216,13 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="DrawButton/DrawButton" to="." method="_on_DrawButton_pressed"]
+
+[node name="Hands" type="Node2D" parent="."]
+
+[node name="PlayerHand" type="Node2D" parent="Hands"]
+position = Vector2( 835, 825 )
+script = ExtResource( 3 )
+[connection signal="pressed" from="Draw/DrawButton" to="." method="_on_DrawButton_pressed"]
 [connection signal="wild_pick" from="WildPicker" to="." method="_on_WildPicker_wild_pick"]
 [connection signal="wild_pick" from="WildPicker" to="PlayPile" method="_on_WildPicker_wild_pick"]
 [connection signal="pressed" from="WildPicker/Buttons/Red/RedButton" to="WildPicker" method="_on_RedButton_pressed"]

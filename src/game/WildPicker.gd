@@ -5,8 +5,6 @@ onready var green = get_node("Buttons/Green")
 onready var yellow = get_node("Buttons/Yellow")
 onready var blue = get_node("Buttons/Blue")
 
-var is_active = false
-
 signal wild_pick(colour)
 
 func _ready():
@@ -17,29 +15,20 @@ func _ready():
 	blue.color = Types.blue
 
 func display_picker():
-	is_active = true
 	show()
 
 func _on_RedButton_pressed():
-	if is_active:
-		emit_signal("wild_pick", Types.card_colour.RED)
-		is_active = false
-		hide()
+	emit_signal("wild_pick", Types.card_colour.RED)
+	hide()
 
 func _on_GreenButton_pressed():
-	if is_active:
-		emit_signal("wild_pick", Types.card_colour.GREEN)
-		is_active = false
-		hide()
+	emit_signal("wild_pick", Types.card_colour.GREEN)
+	hide()
 
 func _on_YellowButton_pressed():
-	if is_active:
-		emit_signal("wild_pick", Types.card_colour.YELLOW)
-		is_active = false
-		hide()
+	emit_signal("wild_pick", Types.card_colour.YELLOW)
+	hide()
 
 func _on_BlueButton_pressed():
-	if is_active:
-		emit_signal("wild_pick", Types.card_colour.BLUE)
-		is_active = false
-		hide()
+	emit_signal("wild_pick", Types.card_colour.BLUE)
+	hide()

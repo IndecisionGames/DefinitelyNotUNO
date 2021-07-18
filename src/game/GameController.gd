@@ -2,27 +2,31 @@ extends Node2D
 
 onready var deck = get_node("Deck")
 onready var play_pile = get_node("PlayPile")
-onready var player_hand = get_node("PlayerHand")
+onready var player_hand = get_node("Hands/PlayerHand")
 onready var game_info = get_node("GameInfo")
 onready var wild_picker = get_node("WildPicker")
 
 func _ready():
 	player_hand.connect("play", self, "play_card")
-	deck.connect("out_of_cards", play_pile, "transfer_cards")
-	
-	var drawn_card = deck.draw()
-	GameState.current_card_type = drawn_card.type
-	GameState.current_card_colour = drawn_card.colour
-	play_pile.add_card(drawn_card)
-	player_hand.update_playable()
+	deck.connect("out_of_cards", play_pile, "cycle_cards")
+	start_game()
 
 func _input(event):
-	pass
+	# Force Draw for debugging
+	if Input.is_action_just_pressed("ui_right"):
+		_on_DrawButton_pressed()
 
-func play_card(player: int, card: Card) -> bool:
+func start_game():
+	for i in range(Rules.STARTING_HAND_SIZE):
+		player_hand.add_card(deck.draw())
+
+	# TODO: Fix opening card on wild
+	play_card(-1, deck.draw(), true)
+
+func play_card(player: int, card: Card, opening_card = false) -> bool:
 	if GameState.play_in_progress:
 		return false
-	if !GameState.is_playable(player, card):
+	if !GameState.is_playable(player, card) and !opening_card:
 		print("this card can not be played")
 		return false
 	GameState.play_in_progress = true
@@ -45,7 +49,7 @@ func play_card(player: int, card: Card) -> bool:
 			GameState.active_pickup_type = Types.pickup_type.PLUS2
 			GameState.required_pickup_count += 2
 
-		if GameState.current_card_colour == Types.card_type.CARD_PLUS4:
+		if GameState.current_card_type == Types.card_type.CARD_PLUS4:
 			GameState.active_pickup_type = Types.pickup_type.PLUS4
 			GameState.required_pickup_count += 4
 
@@ -54,7 +58,8 @@ func play_card(player: int, card: Card) -> bool:
 		GameState.waiting_action = true
 
 	# Update Card States
-	player_hand.remove_card(card)
+	if !opening_card:
+		player_hand.remove_card(card)
 	play_pile.add_card(card)
 	_turn_end()
 	return true
@@ -77,13 +82,13 @@ func _turn_end():
 	if GameState.skip_required:
 		GameState.skip_required = false
 		turn_increment = 2
-	
+
 	for i in range(turn_increment):
 		if GameState.play_order_clockwise:
 			GameState.current_player += 1
 		else:
 			GameState.current_player -= 1
-	
+
 		if GameState.current_player >= Rules.NUM_PLAYERS:
 			GameState.current_player -= Rules.NUM_PLAYERS
 		if GameState.current_player < 0:
