@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/game/Deck.gd" type="Script" id=1]
 [ext_resource path="res://src/game/GameController.gd" type="Script" id=2]
 [ext_resource path="res://src/game/PlayerHand.gd" type="Script" id=3]
 [ext_resource path="res://src/game/PlayPile.gd" type="Script" id=4]
 [ext_resource path="res://src/game/GameInfo.gd" type="Script" id=5]
+[ext_resource path="res://src/game/WildPicker.gd" type="Script" id=6]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
@@ -132,4 +133,95 @@ text = "
 margin_top = 35.0
 margin_right = 150.0
 margin_bottom = 49.0
+
+[node name="WildPicker" type="MarginContainer" parent="."]
+margin_left = 550.0
+margin_top = 365.0
+margin_right = 700.0
+margin_bottom = 565.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="VBoxContainer" parent="WildPicker"]
+margin_right = 150.0
+margin_bottom = 212.0
+
+[node name="Red" type="ColorRect" parent="WildPicker/Buttons"]
+margin_right = 150.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 150, 50 )
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RedButton" type="TextureButton" parent="WildPicker/Buttons/Red"]
+margin_right = 150.0
+margin_bottom = 50.0
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Green" type="ColorRect" parent="WildPicker/Buttons"]
+margin_top = 54.0
+margin_right = 150.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 150, 50 )
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GreenButton" type="TextureButton" parent="WildPicker/Buttons/Green"]
+margin_right = 150.0
+margin_bottom = 50.0
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Yellow" type="ColorRect" parent="WildPicker/Buttons"]
+margin_top = 108.0
+margin_right = 150.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 150, 50 )
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="YellowButton" type="TextureButton" parent="WildPicker/Buttons/Yellow"]
+margin_right = 150.0
+margin_bottom = 50.0
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Blue" type="ColorRect" parent="WildPicker/Buttons"]
+margin_top = 162.0
+margin_right = 150.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 150, 50 )
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlueButton" type="TextureButton" parent="WildPicker/Buttons/Blue"]
+margin_right = 150.0
+margin_bottom = 50.0
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="DrawButton/DrawButton" to="." method="_on_DrawButton_pressed"]
+[connection signal="wild_pick" from="WildPicker" to="." method="_on_WildPicker_wild_pick"]
+[connection signal="wild_pick" from="WildPicker" to="PlayPile" method="_on_WildPicker_wild_pick"]
+[connection signal="pressed" from="WildPicker/Buttons/Red/RedButton" to="WildPicker" method="_on_RedButton_pressed"]
+[connection signal="pressed" from="WildPicker/Buttons/Green/GreenButton" to="WildPicker" method="_on_GreenButton_pressed"]
+[connection signal="pressed" from="WildPicker/Buttons/Yellow/YellowButton" to="WildPicker" method="_on_YellowButton_pressed"]
+[connection signal="pressed" from="WildPicker/Buttons/Blue/BlueButton" to="WildPicker" method="_on_BlueButton_pressed"]

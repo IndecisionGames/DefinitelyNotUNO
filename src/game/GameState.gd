@@ -1,15 +1,17 @@
 extends Node2D
 
 # Play Checks
-var current_player = 0
+var current_player: int
 var current_card_type: int
 var current_card_colour: int
+var play_in_progress: bool
+var waiting_action: bool
 
 # Card Effects
 var play_order_clockwise = true
 var skip_required = false
 var pickup_required = false
-var active_pickup_type: int
+var active_pickup_type = 0
 var required_pickup_count = 0
 
 func is_playable(player: int, proposed_card: CardBase) -> bool:

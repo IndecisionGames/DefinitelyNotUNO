@@ -33,6 +33,9 @@ func draw():
 		emit_signal("out_of_cards", self)
 	return cards.pop_front()
 	
-# called by PlayPile to cycle cards
+# Called by PlayPile to cycle cards
 func add_card(card: Card):
+	# Reset the wild colour chosen
+	if Rules.wild_types.has(card.type):
+		card.colour = Types.card_colour.WILD
 	cards.append(card)

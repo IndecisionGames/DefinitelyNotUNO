@@ -20,3 +20,9 @@ func cycle_cards(deck):
 		cards.erase(card)
 		deck.add_card(card)
 	deck.shuffle()
+
+func _on_WildPicker_wild_pick(colour):
+	var card = cards[cards.size()-1]
+	if Rules.wild_types.has(card.type):
+		card.colour = colour
+		card.set_in_play()

@@ -4,6 +4,7 @@ onready var deck = get_node("Deck")
 onready var play_pile = get_node("PlayPile")
 onready var player_hand = get_node("PlayerHand")
 onready var game_info = get_node("GameInfo")
+onready var wild_picker = get_node("WildPicker")
 
 func _ready():
 	player_hand.connect("play", self, "play_card")
@@ -14,16 +15,17 @@ func _ready():
 	GameState.current_card_colour = drawn_card.colour
 	play_pile.add_card(drawn_card)
 	player_hand.update_playable()
-	
 
 func _input(event):
 	pass
 
-
 func play_card(player: int, card: Card) -> bool:
+	if GameState.play_in_progress:
+		return false
 	if !GameState.is_playable(player, card):
 		print("this card can not be played")
 		return false
+	GameState.play_in_progress = true
 	GameState.current_player = player
 
 	GameState.current_card_type  = card.type
@@ -48,17 +50,17 @@ func play_card(player: int, card: Card) -> bool:
 			GameState.required_pickup_count += 4
 
 	if GameState.current_card_colour == Types.card_colour.WILD:
-		# TODO: Add WILD pick colour logic
-		pass
+		wild_picker.display_picker()
+		GameState.waiting_action = true
 
 	# Update Card States
-
 	player_hand.remove_card(card)
 	play_pile.add_card(card)
 	_turn_end()
 	return true
 
 func pass_turn():
+	GameState.waiting_action = false
 	GameState.skip_required = false
 	GameState.pickup_required = false
 	GameState.active_pickup_type = Types.pickup_type.NULL
@@ -67,6 +69,9 @@ func pass_turn():
 
 func _turn_end():
 	var turn_increment = 1
+	# Prevent turn end if waiting for input
+	if GameState.waiting_action:
+		return
 
 	# Card specific OnTurnEnd effects
 	if GameState.skip_required:
@@ -86,19 +91,23 @@ func _turn_end():
 
 	player_hand.update_playable()
 	game_info.update()
+	GameState.play_in_progress = false
 
 	print("=============START=============")
 	print("Player Turn: %s" % GameState.current_player)
 	print("Current Card: Colour %s, Type %s" % [GameState.current_card_colour, GameState.current_card_type])
 	print("Pickup Require: %s,  Active Pickup Type: %s, Pickup Count %s" % [GameState.pickup_required, GameState.active_pickup_type, GameState.required_pickup_count])
 	print("Player Order: %s" % GameState.play_order_clockwise)
-	print("Cards in PlayPile: %s" % play_pile.cards.size())
-	print("Cards in Deck: %s" % deck.cards.size())
+	print("Cards in Deck: %s, PlayPile: %s" % [deck.cards.size(), play_pile.cards.size()])
 	print("==============END==============")
-
 
 func _on_DrawButton_pressed():
 	for i in range(max(1,GameState.required_pickup_count)):
 		var drawn_card = deck.draw()
 		player_hand.add_card(drawn_card)
 	pass_turn()
+
+func _on_WildPicker_wild_pick(colour):
+	GameState.waiting_action = false
+	GameState.current_card_colour = colour
+	_turn_end()
