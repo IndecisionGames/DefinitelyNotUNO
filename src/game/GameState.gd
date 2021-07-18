@@ -16,8 +16,10 @@ var play_order_clockwise = true
 var skip_required = false
 # Plus2 / Plus4
 var pickup_required = false
-var active_pickup_type = 0
+var pickup_type = 0
 var required_pickup_count = 0
+
+signal new_turn()
 
 func is_playable(player: int, proposed_card: CardBase) -> bool:
 	if player != current_player:
@@ -29,11 +31,11 @@ func is_playable(player: int, proposed_card: CardBase) -> bool:
 
 	if pickup_required:
 		# Require matching Plus 2
-		if active_pickup_type == Types.pickup_type.PLUS2:
+		if pickup_type == Types.pickup_type.PLUS2:
 			if proposed_card.type == Types.card_type.CARD_PLUS2:
 				return true
 		# Require matching Plus 4
-		if active_pickup_type == Types.pickup_type.PLUS4:
+		if pickup_type == Types.pickup_type.PLUS4:
 			if proposed_card.type == Types.card_type.CARD_PLUS4:
 				return true
 		return false
@@ -44,3 +46,6 @@ func is_playable(player: int, proposed_card: CardBase) -> bool:
 		return true
 
 	return false
+
+func emit_new_turn():
+	emit_signal("new_turn")

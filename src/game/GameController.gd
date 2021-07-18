@@ -8,7 +8,6 @@ onready var hands = get_node("Hands")
 
 onready var game_info = get_node("GameInfo")
 onready var wild_picker = get_node("WildPicker")
-onready var draw = get_node("Draw")
 
 var player_hands = []
 var active_player_hand
@@ -29,9 +28,15 @@ func _ready():
 	start_game()
 
 func _input(event):
-	# Force Draw for debugging
+	# Change Players
 	if Input.is_action_just_pressed("ui_right"):
-		_on_DrawButton_pressed()
+		active_player_hand.make_active(false)
+		GameState.active_player += 1
+		if GameState.active_player >= Rules.NUM_PLAYERS:
+			GameState.active_player = 0
+		active_player_hand = player_hands[GameState.active_player]
+		active_player_hand.make_active(true)
+		game_info.update()
 
 func start_game():
 	for i in range(Rules.STARTING_HAND_SIZE):
@@ -64,11 +69,11 @@ func play_card(player: int, card: Card, opening_card = false) -> bool:
 		GameState.pickup_required = true
 
 		if GameState.current_card_type == Types.card_type.CARD_PLUS2:
-			GameState.active_pickup_type = Types.pickup_type.PLUS2
+			GameState.pickup_type = Types.pickup_type.PLUS2
 			GameState.required_pickup_count += 2
 
 		if GameState.current_card_type == Types.card_type.CARD_PLUS4:
-			GameState.active_pickup_type = Types.pickup_type.PLUS4
+			GameState.pickup_type = Types.pickup_type.PLUS4
 			GameState.required_pickup_count += 4
 
 	if GameState.current_card_colour == Types.card_colour.WILD:
@@ -86,7 +91,7 @@ func pass_turn():
 	GameState.waiting_action = false
 	GameState.skip_required = false
 	GameState.pickup_required = false
-	GameState.active_pickup_type = Types.pickup_type.NULL
+	GameState.pickup_type = Types.pickup_type.NULL
 	GameState.required_pickup_count = 0
 	_turn_end()
 
@@ -112,24 +117,17 @@ func _turn_end():
 		if GameState.current_player < 0:
 			GameState.current_player += Rules.NUM_PLAYERS
 
+	_turn_start()
+
+func _turn_start():
 	game_info.update()
-	for hand in player_hands:
-		hand.update_playable()
+	GameState.emit_new_turn()
 	GameState.play_in_progress = false
 
-	active_player_hand.make_active(false)
-	GameState.active_player = GameState.current_player
-	active_player_hand = player_hands[GameState.active_player]
-	active_player_hand.make_active(true)
-	draw.allow_draw(!active_player_hand.has_playable_card)
-
 	print("=============START=============")
-	print("Player Turn: %s" % GameState.current_player)
 	print("Current Card: Colour %s, Type %s" % [GameState.current_card_colour, GameState.current_card_type])
-	print("Pickup Require: %s,  Active Pickup Type: %s, Pickup Count %s" % [GameState.pickup_required, GameState.active_pickup_type, GameState.required_pickup_count])
+	print("Pickup Require: %s,  Active Pickup Type: %s, Pickup Count %s" % [GameState.pickup_required, GameState.pickup_type, GameState.required_pickup_count])
 	print("Player Order: %s" % GameState.play_order_clockwise)
-	print("Cards in Deck: %s, PlayPile: %s" % [deck.cards.size(), play_pile.cards.size()])
-	print("Player had playable card: %s, Player: %s" % [active_player_hand.has_playable_card, active_player_hand.player])
 	print("==============END==============")
 
 func _on_DrawButton_pressed():
@@ -142,3 +140,7 @@ func _on_WildPicker_wild_pick(colour):
 	GameState.waiting_action = false
 	GameState.current_card_colour = colour
 	_turn_end()
+
+
+func _on_UnoButton_pressed():
+	pass # Replace with function body.

@@ -1,6 +1,7 @@
 extends Node2D
 
 const Card = preload("res://src/game/card/Card.tscn")
+onready var draw = get_node("../../Draw")
 
 var cards = []
 var player: int
@@ -12,6 +13,7 @@ func setup(player):
 	self.player = player
 
 func _ready():
+	GameState.connect("new_turn", self, "_new_turn")
 	hide()
 
 func add_card(card: Card):
@@ -19,28 +21,39 @@ func add_card(card: Card):
 	card.set_in_hand()
 	card.connect("play", self, "_play")
 	cards.append(card)
-	update_playable()
+	_update_playable()
 	_update_card_positions()
 
 func remove_card(card: Card):
 	cards.erase(card)
 	card.disconnect("play", self, "_play")
 	remove_child(card)
-	update_playable()
 	_update_card_positions()
 
-func update_playable():
+func make_active(active: bool):
+	_toggle_options()
+	if active:
+		show()
+	else:
+		hide()
+
+func _new_turn():
+	_update_playable()
+	_toggle_options()
+
+# Used when on turn change to enable interface if it is players turn
+func _toggle_options():
+	if GameState.active_player == player and GameState.current_player == player:
+		draw.enable_button(!has_playable_card)
+	else:
+		draw.enable_button(false)
+
+func _update_playable():
 	has_playable_card = false
 	for card in cards:
 		var is_playable = GameState.is_playable(player, card)
 		card.set_playable(is_playable)
 		has_playable_card = has_playable_card || is_playable
-
-func make_active(active: bool):
-	if active:
-		show()
-	else:
-		hide()
 
 func _update_card_positions():
 	var card_seperation = 260
