@@ -21,6 +21,9 @@ var required_pickup_count = 0
 
 signal new_turn()
 
+# For use on single client only
+signal refresh()
+
 func is_playable(player: int, proposed_card: CardBase) -> bool:
 	if player != current_player:
 		if Rules.INTERRUPT:
@@ -49,3 +52,6 @@ func is_playable(player: int, proposed_card: CardBase) -> bool:
 
 func emit_new_turn():
 	emit_signal("new_turn")
+
+func emit_refresh():
+	emit_signal("refresh")

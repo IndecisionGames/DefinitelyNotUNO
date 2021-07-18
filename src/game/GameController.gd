@@ -6,7 +6,6 @@ onready var deck = get_node("Deck")
 onready var play_pile = get_node("PlayPile")
 onready var hands = get_node("Hands")
 
-onready var game_info = get_node("GameInfo")
 onready var wild_picker = get_node("WildPicker")
 
 var player_hands = []
@@ -36,7 +35,7 @@ func _input(event):
 			GameState.active_player = 0
 		active_player_hand = player_hands[GameState.active_player]
 		active_player_hand.make_active(true)
-		game_info.update()
+		GameState.emit_refresh()
 
 func start_game():
 	for i in range(Rules.STARTING_HAND_SIZE):
@@ -120,7 +119,6 @@ func _turn_end():
 	_turn_start()
 
 func _turn_start():
-	game_info.update()
 	GameState.emit_new_turn()
 	GameState.play_in_progress = false
 

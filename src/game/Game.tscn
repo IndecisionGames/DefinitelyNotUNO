@@ -1,11 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/game/Deck.gd" type="Script" id=1]
 [ext_resource path="res://src/game/GameController.gd" type="Script" id=2]
+[ext_resource path="res://assets/font/Comfortaa-Bold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://src/game/PlayPile.gd" type="Script" id=4]
 [ext_resource path="res://src/game/GameInfo.gd" type="Script" id=5]
 [ext_resource path="res://src/game/WildPicker.gd" type="Script" id=6]
 [ext_resource path="res://src/game/Button.gd" type="Script" id=7]
+[ext_resource path="res://src/game/TurnDisplay.gd" type="Script" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 3 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
@@ -13,7 +19,7 @@ script = ExtResource( 2 )
 [node name="Background" type="ColorRect" parent="."]
 margin_right = 1920.0
 margin_bottom = 1080.0
-color = Color( 0.490196, 0.572549, 0.498039, 1 )
+color = Color( 0.6, 0.682353, 0.607843, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -87,6 +93,23 @@ __meta__ = {
 margin_right = 125.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 125, 50 )
+
+[node name="TurnDisplay" type="MarginContainer" parent="."]
+margin_left = 20.0
+margin_top = 480.0
+margin_right = 310.0
+margin_bottom = 552.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Turn" type="Label" parent="TurnDisplay"]
+margin_top = 8.0
+margin_right = 290.0
+margin_bottom = 63.0
+custom_fonts/font = SubResource( 1 )
+text = "Player Turn"
 
 [node name="GameInfo" type="MarginContainer" parent="."]
 margin_left = 1200.0
