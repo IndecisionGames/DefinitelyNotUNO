@@ -1,10 +1,11 @@
 extends Node
 
-const NUM_PLAYERS = 1
+const NUM_PLAYERS = 2
 
 const INTERRUPT = false
 
 # Not implemented
+const UNO_CARD_PENALTY = 1
 const PICKUP_STACKING = false
 const PLAY_AFTER_DRAW = false
 const DRAW_UNTIL_PLAY = false

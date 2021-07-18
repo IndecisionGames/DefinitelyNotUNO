@@ -1,5 +1,7 @@
 extends Node2D
 
+var active_player = 0
+
 # Play Checks
 var current_player: int
 var current_card_type: int

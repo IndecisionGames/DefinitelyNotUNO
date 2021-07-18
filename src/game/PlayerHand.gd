@@ -4,13 +4,15 @@ const Card = preload("res://src/game/card/Card.tscn")
 
 var cards = []
 var player: int
-
-onready var draw = get_node("../../Draw")
+var has_playable_card = false
 
 signal play(player, card)
 
+func setup(player):
+	self.player = player
+
 func _ready():
-	player = 0
+	hide()
 
 func add_card(card: Card):
 	add_child(card)
@@ -28,13 +30,17 @@ func remove_card(card: Card):
 	_update_card_positions()
 
 func update_playable():
-	var has_playable_card = false
+	has_playable_card = false
 	for card in cards:
 		var is_playable = GameState.is_playable(player, card)
 		card.set_playable(is_playable)
 		has_playable_card = has_playable_card || is_playable
-	
-	draw.allow_draw(!has_playable_card)
+
+func make_active(active: bool):
+	if active:
+		show()
+	else:
+		hide()
 
 func _update_card_positions():
 	var card_seperation = 260

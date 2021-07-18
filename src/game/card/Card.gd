@@ -25,12 +25,6 @@ func _ready():
 	_set_border_color()
 	_set_face_down()
 
-func flip():
-	if is_face_up:
-		_set_face_down()
-	else:
-		_set_face_up()
-
 func set_in_hand():
 	is_in_hand = true
 	_set_face_up()

@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/game/Deck.gd" type="Script" id=1]
 [ext_resource path="res://src/game/GameController.gd" type="Script" id=2]
-[ext_resource path="res://src/game/PlayerHand.gd" type="Script" id=3]
 [ext_resource path="res://src/game/PlayPile.gd" type="Script" id=4]
 [ext_resource path="res://src/game/GameInfo.gd" type="Script" id=5]
 [ext_resource path="res://src/game/WildPicker.gd" type="Script" id=6]
@@ -15,51 +14,6 @@ script = ExtResource( 2 )
 margin_right = 1920.0
 margin_bottom = 1080.0
 color = Color( 0.490196, 0.572549, 0.498039, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PlayPile" type="Node2D" parent="."]
-position = Vector2( 835, 365 )
-script = ExtResource( 4 )
-
-[node name="Background" type="ColorRect" parent="PlayPile"]
-margin_right = 250.0
-margin_bottom = 350.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Text" type="Label" parent="PlayPile"]
-margin_left = 99.5114
-margin_top = 158.96
-margin_right = 153.511
-margin_bottom = 172.96
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Play Pile"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Deck" type="Node2D" parent="."]
-position = Vector2( 1500, 365 )
-script = ExtResource( 1 )
-
-[node name="Background" type="ColorRect" parent="Deck"]
-margin_right = 250.0
-margin_bottom = 350.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Text" type="Label" parent="Deck"]
-margin_left = 103.0
-margin_top = 168.0
-margin_right = 147.0
-margin_bottom = 182.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Deck"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -217,14 +171,55 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hands" type="Node2D" parent="."]
+[node name="PlayPile" type="Node2D" parent="."]
+position = Vector2( 835, 365 )
+script = ExtResource( 4 )
 
-[node name="PlayerHand" type="Node2D" parent="Hands"]
-position = Vector2( 835, 825 )
-script = ExtResource( 3 )
+[node name="Background" type="ColorRect" parent="PlayPile"]
+margin_right = 250.0
+margin_bottom = 350.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Label" parent="PlayPile"]
+margin_left = 99.5114
+margin_top = 158.96
+margin_right = 153.511
+margin_bottom = 172.96
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Play Pile"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Deck" type="Node2D" parent="."]
+position = Vector2( 1500, 365 )
+script = ExtResource( 1 )
+
+[node name="Background" type="ColorRect" parent="Deck"]
+margin_right = 250.0
+margin_bottom = 350.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Label" parent="Deck"]
+margin_left = 103.0
+margin_top = 168.0
+margin_right = 147.0
+margin_bottom = 182.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Deck"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hands" type="Node2D" parent="."]
 [connection signal="pressed" from="Draw/DrawButton" to="." method="_on_DrawButton_pressed"]
-[connection signal="wild_pick" from="WildPicker" to="." method="_on_WildPicker_wild_pick"]
 [connection signal="wild_pick" from="WildPicker" to="PlayPile" method="_on_WildPicker_wild_pick"]
+[connection signal="wild_pick" from="WildPicker" to="." method="_on_WildPicker_wild_pick"]
 [connection signal="pressed" from="WildPicker/Buttons/Red/RedButton" to="WildPicker" method="_on_RedButton_pressed"]
 [connection signal="pressed" from="WildPicker/Buttons/Green/GreenButton" to="WildPicker" method="_on_GreenButton_pressed"]
 [connection signal="pressed" from="WildPicker/Buttons/Yellow/YellowButton" to="WildPicker" method="_on_YellowButton_pressed"]
