@@ -1,6 +1,6 @@
 extends Node
 
-const NUM_PLAYERS = 2
+const NUM_PLAYERS = 3
 
 const INTERRUPT = false
 

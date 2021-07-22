@@ -1,6 +1,5 @@
 extends MarginContainer
 
-
 onready var active_player = get_node("Text/ActivePlayer")
 onready var player_turn = get_node("Text/PlayerTurn")
 onready var pickup_required_count = get_node("Text/PickupRequiredCount")

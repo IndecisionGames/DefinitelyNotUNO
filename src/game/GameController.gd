@@ -19,6 +19,7 @@ func _ready():
 		hands.add_child(new_hand)
 		new_hand.connect("play", self, "play_card")
 		player_hands.append(new_hand)
+		GameState.player_hand_card_count.append(Rules.STARTING_HAND_SIZE)
 
 	active_player_hand = player_hands[GameState.active_player]
 	active_player_hand.make_active(true)

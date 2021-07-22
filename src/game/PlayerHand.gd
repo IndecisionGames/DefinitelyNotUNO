@@ -21,6 +21,7 @@ func add_card(card: Card):
 	card.set_in_hand()
 	card.connect("play", self, "_play")
 	cards.append(card)
+	GameState.player_hand_card_count[player] = cards.size()
 	_update_playable()
 	_update_card_positions()
 
@@ -28,6 +29,7 @@ func remove_card(card: Card):
 	cards.erase(card)
 	card.disconnect("play", self, "_play")
 	remove_child(card)
+	GameState.player_hand_card_count[player] = cards.size()
 	_update_card_positions()
 
 func make_active(active: bool):

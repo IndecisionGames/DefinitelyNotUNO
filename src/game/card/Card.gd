@@ -41,12 +41,12 @@ func set_playable(playable: bool):
 
 func _set_face_up():
 	is_face_up = true
-	var card_string = Types.card_type_to_string(type)
+	var card_string = type()
 
 	top_label.text = card_string
 	mid_label.text = card_string
 	bot_label.text = card_string
-	background.color = Types.card_colour_to_colour(colour)
+	background.color = colour()
 	_set_border_color()
 
 func _set_face_down():

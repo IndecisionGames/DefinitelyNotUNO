@@ -1,6 +1,11 @@
 extends Node2D
 
+# Should be per client, used for single client
 var active_player = 0
+
+# Player State
+# TODO: Expand into states, include UNO status
+var player_hand_card_count = []
 
 # Play Checks
 var current_player: int
@@ -19,10 +24,9 @@ var pickup_required = false
 var pickup_type = 0
 var required_pickup_count = 0
 
+# Global Signals
 signal new_turn()
-
-# For use on single client only
-signal refresh()
+signal refresh() # For use on single client only
 
 func is_playable(player: int, proposed_card: CardBase) -> bool:
 	if player != current_player:
