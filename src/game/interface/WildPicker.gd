@@ -15,7 +15,8 @@ func _ready():
 	blue.color = Types.blue
 
 func display_picker():
-	show()
+	if GameState.current_player == GameState.active_player:
+		show()
 
 func _on_RedButton_pressed():
 	emit_signal("wild_pick", Types.card_colour.RED)

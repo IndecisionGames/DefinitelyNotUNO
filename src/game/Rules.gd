@@ -11,8 +11,9 @@ const PLAY_AFTER_DRAW = false
 const DRAW_UNTIL_PLAY = false
 
 # Generation Rules
+const STARTING_HAND_SIZE = 3
 const NUM_EACH_CARD = 2
-const STARTING_HAND_SIZE = 7
+const NUM_EACH_WILD_CARD = 4
 
 const standard_types = [
 	Types.card_type.CARD_0, 

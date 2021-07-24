@@ -2,6 +2,7 @@ extends Node2D
 
 const Card = preload("res://src/game/card/Card.tscn")
 onready var draw = get_node("../../Draw")
+onready var uno = get_node("../../Uno")
 
 var cards = []
 var player: int
@@ -21,7 +22,7 @@ func add_card(card: Card):
 	card.set_in_hand()
 	card.connect("play", self, "_play")
 	cards.append(card)
-	GameState.player_hand_card_count[player] = cards.size()
+	GameState.player_states[player].card_count = cards.size()
 	_update_playable()
 	_update_card_positions()
 
@@ -29,7 +30,7 @@ func remove_card(card: Card):
 	cards.erase(card)
 	card.disconnect("play", self, "_play")
 	remove_child(card)
-	GameState.player_hand_card_count[player] = cards.size()
+	GameState.player_states[player].card_count = cards.size()
 	_update_card_positions()
 
 func make_active(active: bool):
@@ -49,6 +50,11 @@ func _toggle_options():
 		draw.enable_button(!has_playable_card)
 	else:
 		draw.enable_button(false)
+
+	if GameState.active_player == player and GameState.current_player == player:
+		uno.enable_button(cards.size() == 2 && has_playable_card)
+	else:
+		uno.enable_button(false)
 
 func _update_playable():
 	has_playable_card = false

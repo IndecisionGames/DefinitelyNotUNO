@@ -23,4 +23,6 @@ func _update():
 		if i == GameState.active_player:
 			player_info[i].text = ""
 		else:
-			player_info[i].text = player_text % [i, GameState.player_hand_card_count[i]]
+			player_info[i].text = player_text % [i, GameState.player_states[i].card_count]
+			if GameState.player_states[i].uno_status:
+				player_info[i].text = player_info[i].text + " UNO"

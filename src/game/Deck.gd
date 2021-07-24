@@ -21,7 +21,7 @@ func generate():
 				cards.append(new_card)
 
 	for type in Rules.wild_types:
-		for i in range(Rules.NUM_EACH_CARD):
+		for i in range(Rules.NUM_EACH_WILD_CARD):
 			var new_card = Card.instance()
 			new_card.setup(Types.card_colour.WILD, type)
 			cards.append(new_card)

@@ -19,7 +19,7 @@ func _ready():
 		hands.add_child(new_hand)
 		new_hand.connect("play", self, "play_card")
 		player_hands.append(new_hand)
-		GameState.player_hand_card_count.append(Rules.STARTING_HAND_SIZE)
+		GameState.player_states.append(GameState.PlayerState.new())
 
 	active_player_hand = player_hands[GameState.active_player]
 	active_player_hand.make_active(true)
@@ -96,6 +96,10 @@ func pass_turn():
 	_turn_end()
 
 func _turn_end():
+	if GameState.player_states[GameState.current_player].card_count == 1 && !GameState.player_states[GameState.current_player].uno_status:
+		for i in range(Rules.UNO_CARD_PENALTY):
+			player_hands[i].add_card(deck.draw())
+
 	var turn_increment = 1
 	# Prevent turn end if waiting for input
 	if GameState.waiting_action:
@@ -123,12 +127,6 @@ func _turn_start():
 	GameState.emit_new_turn()
 	GameState.play_in_progress = false
 
-	print("=============START=============")
-	print("Current Card: Colour %s, Type %s" % [GameState.current_card_colour, GameState.current_card_type])
-	print("Pickup Require: %s,  Active Pickup Type: %s, Pickup Count %s" % [GameState.pickup_required, GameState.pickup_type, GameState.required_pickup_count])
-	print("Player Order: %s" % GameState.play_order_clockwise)
-	print("==============END==============")
-
 func _on_DrawButton_pressed():
 	for i in range(max(1,GameState.required_pickup_count)):
 		var drawn_card = deck.draw()
@@ -140,6 +138,6 @@ func _on_WildPicker_wild_pick(colour):
 	GameState.current_card_colour = colour
 	_turn_end()
 
-
 func _on_UnoButton_pressed():
-	pass # Replace with function body.
+	GameState.player_states[GameState.current_player].uno_status = true
+	GameState.emit_refresh()

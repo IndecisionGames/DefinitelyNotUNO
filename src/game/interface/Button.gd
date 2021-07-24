@@ -8,3 +8,6 @@ func enable_button(enable: bool):
 		show()
 	else:
 		hide()
+
+func _on_UnoButton_pressed():
+	hide()
