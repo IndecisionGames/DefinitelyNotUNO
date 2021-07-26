@@ -31,7 +31,9 @@ func leave_lobby():
 	Server.leave_lobby()
 
 func update_lobby(position, players):
-	# TODO:Highlight current player
+	for slot in slots:
+		slot.remove_player()
 	print("My updated pos: " + str(position))
 	for n in range(len(players)):
 		slots[n].add_player(players[n])
+	slots[position].set_highlight(true)
