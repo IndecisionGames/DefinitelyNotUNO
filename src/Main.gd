@@ -12,10 +12,7 @@ func _on_Play_pressed():
 	var check = check_name(name)
 	
 	if check:
-		join_server(name, "localhost", "default")
-
-func join_server(name, ip, port):
-	Net.join_server(name, ip, port)
+		Server.connect_to_server(name)
 
 func check_name(name):
 	if name.length() == 0:
@@ -24,11 +21,8 @@ func check_name(name):
 	errorText.text = ""
 	return true
 
-func _process(_delta):
-	if Net.status == 1:
-		errorText.text = "Connecting..."
-	if Net.status == -1:
-		errorText.text = "Failed to connect, make sure the server address is correct."
-
 func _on_Debug_pressed():
 	SceneManager.goto_scene("res://src/game/Game.tscn", false)
+
+func set_error_text(txt):
+	errorText.text = txt

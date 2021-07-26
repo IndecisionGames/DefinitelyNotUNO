@@ -9,10 +9,9 @@ onready var slot6 = find_node("Slot6")
 onready var slot7 = find_node("Slot7")
 onready var slot8 = find_node("Slot8")
 
+var position = -1
 var slots = []
-var players = []
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	slots.append(slot1)
 	slots.append(slot2)
@@ -23,39 +22,16 @@ func _ready():
 	slots.append(slot7)
 	slots.append(slot8)
 
-# DEBUG===========================================
-func _input(event):
-	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_W:
-			add_player("Siv")
-		if event.pressed and event.scancode == KEY_E:
-			remove_player("Siv (1)")
-# ================================================
+	join_lobby()
 
-# TODO:Use network id
-func add_player(name):
-	name = name.strip_edges()
-	if len(players) < 8:
-		var duplicate_index = 1
-		var original_name = name
-		while name in players:
-			name = original_name.substr(0,8) + " (" + str(duplicate_index) + ")"
-			duplicate_index += 1
+func join_lobby():
+	Server.join_lobby()
 
-		players.append(name)
-		var slot_index = len(players) - 1
-		slots[slot_index].add_player(name)
+func leave_lobby():
+	Server.leave_lobby()
 
-# TODO:Use network id
-func remove_player(name):
-	var player_index = players.find(name)
-	if player_index == -1:
-		return
-
-	players.remove(player_index)
-	slots[player_index].remove_player()
-	while player_index < len(slots) - 1:
-		slots[player_index].transfer_slot(slots[player_index+1])
-		slots[player_index+1].remove_player()
-		player_index += 1
-	
+func update_lobby(position, players):
+	# TODO:Highlight current player
+	print("My updated pos: " + str(position))
+	for n in range(len(players)):
+		slots[n].add_player(players[n])
