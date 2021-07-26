@@ -9,5 +9,8 @@ func enable_button(enable: bool):
 	else:
 		hide()
 
+func _on_DrawButton_pressed():
+	hide()
+
 func _on_UnoButton_pressed():
 	hide()

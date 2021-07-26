@@ -2,9 +2,9 @@ extends Node2D
 
 const Card = preload("res://src/game/card/Card.tscn")
 
-var cards = []
+onready var play_pile = get_parent().get_node("PlayPile")
 
-signal out_of_cards(deck)
+var cards = []
 
 func _ready():
 	randomize()
@@ -31,10 +31,11 @@ func shuffle():
 
 func draw():
 	if len(cards) <= 1:
-		emit_signal("out_of_cards", self)
+		play_pile.cycle_cards()
+		shuffle()
 	return cards.pop_front()
-	
-# Called by PlayPile to cycle cards
+
+# Called by PlayPile Only
 func add_card(card: Card):
 	# Reset the wild colour chosen
 	if Rules.wild_types.has(card.type):

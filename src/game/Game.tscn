@@ -251,18 +251,20 @@ margin_top = 70.0
 margin_right = 150.0
 margin_bottom = 84.0
 
-[node name="PlayPile" type="Node2D" parent="."]
+[node name="PlaySpace" type="Node2D" parent="."]
+
+[node name="PlayPile" type="Node2D" parent="PlaySpace"]
 position = Vector2( 835, 365 )
 script = ExtResource( 4 )
 
-[node name="Background" type="ColorRect" parent="PlayPile"]
+[node name="Background" type="ColorRect" parent="PlaySpace/PlayPile"]
 margin_right = 250.0
 margin_bottom = 350.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Text" type="Label" parent="PlayPile"]
+[node name="Text" type="Label" parent="PlaySpace/PlayPile"]
 margin_left = 99.5114
 margin_top = 158.96
 margin_right = 153.511
@@ -273,11 +275,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Deck" type="Node2D" parent="."]
+[node name="Deck" type="Node2D" parent="PlaySpace"]
 position = Vector2( 1500, 365 )
 script = ExtResource( 1 )
 
-[node name="Background" type="ColorRect" parent="Deck"]
+[node name="Background" type="ColorRect" parent="PlaySpace/Deck"]
 margin_right = 250.0
 margin_bottom = 350.0
 color = Color( 0, 0, 0, 1 )
@@ -285,7 +287,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Text" type="Label" parent="Deck"]
+[node name="Text" type="Label" parent="PlaySpace/Deck"]
 margin_left = 103.0
 margin_top = 168.0
 margin_right = 147.0
@@ -298,10 +300,11 @@ __meta__ = {
 
 [node name="Hands" type="Node2D" parent="."]
 [connection signal="pressed" from="Draw/DrawButton" to="." method="_on_DrawButton_pressed"]
+[connection signal="pressed" from="Draw/DrawButton" to="Draw" method="_on_DrawButton_pressed"]
 [connection signal="pressed" from="Uno/UnoButton" to="." method="_on_UnoButton_pressed"]
 [connection signal="pressed" from="Uno/UnoButton" to="Uno" method="_on_UnoButton_pressed"]
 [connection signal="wild_pick" from="WildPicker" to="." method="_on_WildPicker_wild_pick"]
-[connection signal="wild_pick" from="WildPicker" to="PlayPile" method="_on_WildPicker_wild_pick"]
+[connection signal="wild_pick" from="WildPicker" to="PlaySpace/PlayPile" method="_on_WildPicker_wild_pick"]
 [connection signal="pressed" from="WildPicker/Buttons/Red/RedButton" to="WildPicker" method="_on_RedButton_pressed"]
 [connection signal="pressed" from="WildPicker/Buttons/Green/GreenButton" to="WildPicker" method="_on_GreenButton_pressed"]
 [connection signal="pressed" from="WildPicker/Buttons/Yellow/YellowButton" to="WildPicker" method="_on_YellowButton_pressed"]

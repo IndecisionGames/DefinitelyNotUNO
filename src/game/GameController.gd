@@ -2,8 +2,8 @@ extends Node2D
 
 const PlayerHand = preload("res://src/game/PlayerHand.gd")
 
-onready var deck = get_node("Deck")
-onready var play_pile = get_node("PlayPile")
+onready var deck = get_node("PlaySpace/Deck")
+onready var play_pile = get_node("PlaySpace/PlayPile")
 onready var hands = get_node("Hands")
 
 onready var wild_picker = get_node("WildPicker")

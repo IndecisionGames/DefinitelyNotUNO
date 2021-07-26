@@ -37,3 +37,7 @@ func update_lobby(position, players):
 	for n in range(len(players)):
 		slots[n].add_player(players[n])
 	slots[position].set_highlight(true)
+
+
+func _on_Play_pressed():
+	SceneManager.goto_scene("res://src/game/Game.tscn", false)

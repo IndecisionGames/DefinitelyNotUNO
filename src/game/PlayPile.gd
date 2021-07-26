@@ -2,6 +2,8 @@ extends Node2D
 
 const Card = preload("res://src/game/card/Card.tscn")
 
+onready var deck = get_parent().get_node("Deck")
+
 var cards = []
 
 func _ready():
@@ -13,7 +15,8 @@ func add_card(card: Card):
 	card.set_in_play()
 	cards.append(card)
 
-func cycle_cards(deck):
+# Called by Deck Only
+func cycle_cards():
 	while cards.size() > 1:
 		var card = cards.pop_front()
 		remove_child(card)
