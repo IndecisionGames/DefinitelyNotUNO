@@ -38,3 +38,16 @@ func leave_lobby():
 
 remote func update_lobby(pos, player_names):
 	get_node("/root/Lobby").update_lobby(pos, player_names)
+	
+ #### Game Setup ####
+func server_start_game():
+	rpc_id(1, "start_game")
+
+remote func set_rules(rules={}):
+	Rules.set_rules(rules)
+
+remote func set_game_state(active_player):
+	GameState.active_player = active_player
+
+remote func start_game():
+	SceneManager.goto_scene("res://src/game/Game.tscn", false)

@@ -23,8 +23,6 @@ func _ready():
 
 	active_player_hand = player_hands[GameState.active_player]
 	active_player_hand.make_active(true)
-
-	deck.connect("out_of_cards", play_pile, "cycle_cards")
 	start_game()
 
 func _input(event):

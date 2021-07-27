@@ -7,7 +7,6 @@ onready var play_pile = get_parent().get_node("PlayPile")
 var cards = []
 
 func _ready():
-	randomize()
 	generate()
 	shuffle()
 

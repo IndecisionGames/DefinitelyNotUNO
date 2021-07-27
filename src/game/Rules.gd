@@ -1,19 +1,24 @@
 extends Node
 
-const NUM_PLAYERS = 3
+var NUM_PLAYERS: int
 
-const INTERRUPT = false
-
+var INTERRUPT: bool
+var UNO_CARD_PENALTY : int
 # Not implemented
-const UNO_CARD_PENALTY = 1
 const PICKUP_STACKING = false
 const PLAY_AFTER_DRAW = false
 const DRAW_UNTIL_PLAY = false
 
+func set_rules(rules={}):
+	seed(rules.get("SEED", 0))
+	NUM_PLAYERS = rules.get("NUM_PLAYERS", 3)
+	INTERRUPT = rules.get("INTERRUPT", false)
+	UNO_CARD_PENALTY = rules.get("UNO_CARD_PENALTY", 1)
+
 # Generation Rules
-const STARTING_HAND_SIZE = 3
-const NUM_EACH_CARD = 1
-const NUM_EACH_WILD_CARD = 1
+const STARTING_HAND_SIZE = 7
+const NUM_EACH_CARD = 2
+const NUM_EACH_WILD_CARD = 4
 
 const standard_types = [
 	Types.card_type.CARD_0, 

@@ -38,6 +38,5 @@ func update_lobby(position, players):
 		slots[n].add_player(players[n])
 	slots[position].set_highlight(true)
 
-
 func _on_Play_pressed():
-	SceneManager.goto_scene("res://src/game/Game.tscn", false)
+	Server.server_start_game()

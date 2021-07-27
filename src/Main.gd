@@ -22,6 +22,8 @@ func check_name(name):
 	return true
 
 func _on_Debug_pressed():
+	Rules.set_rules()
+	randomize()
 	SceneManager.goto_scene("res://src/game/Game.tscn", false)
 
 func set_error_text(txt):
