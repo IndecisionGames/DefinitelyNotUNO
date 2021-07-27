@@ -281,12 +281,12 @@ __meta__ = {
 }
 
 [node name="Hands" type="Node2D" parent="."]
-[connection signal="pressed" from="Draw/DrawButton" to="." method="_on_DrawButton_pressed"]
 [connection signal="pressed" from="Draw/DrawButton" to="Draw" method="_on_DrawButton_pressed"]
-[connection signal="pressed" from="Uno/UnoButton" to="." method="_on_UnoButton_pressed"]
+[connection signal="pressed" from="Draw/DrawButton" to="." method="_on_DrawButton_pressed"]
 [connection signal="pressed" from="Uno/UnoButton" to="Uno" method="_on_UnoButton_pressed"]
-[connection signal="wild_pick" from="WildPicker" to="PlaySpace/PlayPile" method="_on_WildPicker_wild_pick"]
+[connection signal="pressed" from="Uno/UnoButton" to="." method="_on_UnoButton_pressed"]
 [connection signal="wild_pick" from="WildPicker" to="." method="_on_WildPicker_wild_pick"]
+[connection signal="wild_pick" from="WildPicker" to="PlaySpace/PlayPile" method="_on_WildPicker_wild_pick"]
 [connection signal="pressed" from="WildPicker/Buttons/Red/RedButton" to="WildPicker" method="_on_RedButton_pressed"]
 [connection signal="pressed" from="WildPicker/Buttons/Green/GreenButton" to="WildPicker" method="_on_GreenButton_pressed"]
 [connection signal="pressed" from="WildPicker/Buttons/Yellow/YellowButton" to="WildPicker" method="_on_YellowButton_pressed"]

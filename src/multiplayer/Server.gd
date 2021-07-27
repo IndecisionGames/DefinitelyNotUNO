@@ -45,7 +45,6 @@ remote func update_lobby(pos, player_names):
 func server_start_game():
 	rpc_id(1, "start_game")
 
-# TODO: change to use rset
 remote func set_rules(rules={}):
 	Rules.set_rules(rules)
 

@@ -9,7 +9,6 @@ onready var hands = get_node("Hands")
 onready var wild_picker = get_node("WildPicker")
 
 var player_hands = []
-var active_player_hand
 
 func _ready():
 	for player in range(Rules.NUM_PLAYERS):
@@ -21,25 +20,25 @@ func _ready():
 		player_hands.append(new_hand)
 		GameState.player_states.append(GameState.PlayerState.new())
 
-	active_player_hand = player_hands[Server.player_id]
-	active_player_hand.make_active(true)
+	player_hands[Server.player_id].make_active(true)
 	start_game()
 
 func _input(event):
 	# Change Players
 	if Input.is_action_just_pressed("ui_right"):
-		active_player_hand.make_active(false)
+		player_hands[Server.player_id].make_active(false)
 		Server.player_id += 1
 		if Server.player_id >= Rules.NUM_PLAYERS:
 			Server.player_id = 0
-		active_player_hand = player_hands[Server.player_id]
-		active_player_hand.make_active(true)
+		player_hands[Server.player_id].make_active(true)
 		GameState.emit_refresh()
 
 func start_game():
 	for _i in range(Rules.STARTING_HAND_SIZE):
-		for hand in player_hands:
-			hand.add_card(deck.draw())
+		for i in range(player_hands.size()):
+			var drawn_card = deck.draw()
+			GameState.player_states[i].cards.append(drawn_card)
+			player_hands[i].add_card(drawn_card)
 
 	# TODO: Fix opening card on wild
 	play_card(-1, deck.draw(), true)
@@ -80,7 +79,8 @@ func play_card(player: int, card: CardBase, opening_card = false) -> bool:
 
 	# Update Card States
 	if !opening_card:
-		active_player_hand.remove_card(card)
+		GameState.remove_card_from_player(Server.player_id, card)
+		player_hands[Server.player_id].remove_card(card)
 	play_pile.add_card(card)
 	_turn_end()
 	return true
@@ -94,9 +94,11 @@ func pass_turn():
 	_turn_end()
 
 func _turn_end():
-	if GameState.player_states[GameState.current_player].card_count == 1 && !GameState.player_states[GameState.current_player].uno_status:
+	if GameState.player_states[GameState.current_player].cards.size() == 1 && !GameState.player_states[GameState.current_player].uno_status:
 		for i in range(Rules.UNO_CARD_PENALTY):
-			player_hands[i].add_card(deck.draw())
+			var drawn_card = deck.draw()
+			GameState.player_states[i].cards.append(drawn_card)
+			player_hands[i].add_card(drawn_card)
 
 	var turn_increment = 1
 	# Prevent turn end if waiting for input
@@ -128,7 +130,8 @@ func _turn_start():
 func _on_DrawButton_pressed():
 	for _i in range(max(1,GameState.required_pickup_count)):
 		var drawn_card = deck.draw()
-		active_player_hand.add_card(drawn_card)
+		player_hands[Server.player_id].add_card(drawn_card)
+		GameState.player_states[Server.player_id].cards.append(drawn_card)
 	pass_turn()
 
 func _on_WildPicker_wild_pick(colour):

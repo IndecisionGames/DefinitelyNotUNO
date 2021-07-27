@@ -1,8 +1,10 @@
 extends Node
 
 # Player State
+# TODO: Move to own file?
 class PlayerState:
-	var card_count: int
+	var name: String
+	var cards = []
 	var uno_status: bool
 
 var player_states = []
@@ -53,6 +55,12 @@ func is_playable(player: int, proposed_card: CardBase) -> bool:
 		return true
 
 	return false
+
+func remove_card_from_player(player, card: CardBase):
+	for c in player_states[player].cards:
+		if card.colour == c.colour and card.type == c.type:
+			player_states[player].cards.erase(c)
+			return
 
 func emit_new_turn():
 	emit_signal("new_turn")

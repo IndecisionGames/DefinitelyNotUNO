@@ -29,7 +29,6 @@ func add_card(card: CardBase):
 	card_bases.append(card_instance.base)
 	cards.append(card_instance)
 
-	GameState.player_states[player].card_count = cards.size()
 	_update_playable()
 	_update_card_positions()
 
@@ -41,8 +40,6 @@ func remove_card(card: CardBase):
 	cards.remove(idx)
 	card_instance.disconnect("play", self, "_play")
 	remove_child(card_instance)
-	
-	GameState.player_states[player].card_count = cards.size()
 	_update_card_positions()
 
 func make_active(active: bool):
