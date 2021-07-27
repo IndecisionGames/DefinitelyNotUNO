@@ -1,7 +1,4 @@
-extends Node2D
-
-# Should be per client, used for single client
-var active_player = 0
+extends Node
 
 # Player State
 class PlayerState:

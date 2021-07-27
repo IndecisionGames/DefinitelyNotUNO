@@ -15,7 +15,7 @@ func _ready():
 	blue.color = Types.blue
 
 func display_picker():
-	if GameState.current_player == GameState.active_player:
+	if GameState.current_player == Server.player_id:
 		show()
 
 func _on_RedButton_pressed():

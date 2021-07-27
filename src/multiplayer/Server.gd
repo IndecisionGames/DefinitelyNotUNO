@@ -1,5 +1,7 @@
 extends Node
 
+var player_id: int
+
 var network = NetworkedMultiplayerENet.new()
 var port = 31416
 var ip = "127.0.0.1"
@@ -43,11 +45,12 @@ remote func update_lobby(pos, player_names):
 func server_start_game():
 	rpc_id(1, "start_game")
 
+# TODO: change to use rset
 remote func set_rules(rules={}):
 	Rules.set_rules(rules)
 
-remote func set_game_state(active_player):
-	GameState.active_player = active_player
+remote func set_game_state(player):
+	player_id = player
 
 remote func start_game():
 	SceneManager.goto_scene("res://src/game/Game.tscn", false)

@@ -11,7 +11,7 @@ func _ready():
 	player_turn.text = "Current Player: %s" % GameState.current_player
 
 func _update():
-	active_player.text= "Active Player: %s" % GameState.active_player 
+	active_player.text= "Active Player: %s" % Server.player_id 
 	player_turn.text = "Current Player: %s" % GameState.current_player
 	if GameState.pickup_required:
 		pickup_required_count.text = "Pickup Required: %s" % GameState.required_pickup_count

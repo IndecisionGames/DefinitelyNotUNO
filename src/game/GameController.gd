@@ -21,7 +21,7 @@ func _ready():
 		player_hands.append(new_hand)
 		GameState.player_states.append(GameState.PlayerState.new())
 
-	active_player_hand = player_hands[GameState.active_player]
+	active_player_hand = player_hands[Server.player_id]
 	active_player_hand.make_active(true)
 	start_game()
 
@@ -29,22 +29,22 @@ func _input(event):
 	# Change Players
 	if Input.is_action_just_pressed("ui_right"):
 		active_player_hand.make_active(false)
-		GameState.active_player += 1
-		if GameState.active_player >= Rules.NUM_PLAYERS:
-			GameState.active_player = 0
-		active_player_hand = player_hands[GameState.active_player]
+		Server.player_id += 1
+		if Server.player_id >= Rules.NUM_PLAYERS:
+			Server.player_id = 0
+		active_player_hand = player_hands[Server.player_id]
 		active_player_hand.make_active(true)
 		GameState.emit_refresh()
 
 func start_game():
-	for i in range(Rules.STARTING_HAND_SIZE):
+	for _i in range(Rules.STARTING_HAND_SIZE):
 		for hand in player_hands:
 			hand.add_card(deck.draw())
 
 	# TODO: Fix opening card on wild
 	play_card(-1, deck.draw(), true)
 
-func play_card(player: int, card: Card, opening_card = false) -> bool:
+func play_card(player: int, card: CardBase, opening_card = false) -> bool:
 	if GameState.play_in_progress:
 		return false
 	if !GameState.is_playable(player, card) and !opening_card:
@@ -108,7 +108,7 @@ func _turn_end():
 		GameState.skip_required = false
 		turn_increment = 2
 
-	for i in range(turn_increment):
+	for _i in range(turn_increment):
 		if GameState.play_order_clockwise:
 			GameState.current_player += 1
 		else:
@@ -126,7 +126,7 @@ func _turn_start():
 	GameState.play_in_progress = false
 
 func _on_DrawButton_pressed():
-	for i in range(max(1,GameState.required_pickup_count)):
+	for _i in range(max(1,GameState.required_pickup_count)):
 		var drawn_card = deck.draw()
 		active_player_hand.add_card(drawn_card)
 	pass_turn()

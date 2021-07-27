@@ -1,4 +1,6 @@
-extends CardBase
+extends MarginContainer
+
+const CardBase = preload("res://src/game/card/CardBase.gd")
 
 class_name Card
 
@@ -8,6 +10,7 @@ onready var top_label = get_node("Text/Top/Label")
 onready var mid_label = get_node("Text/Middle/Label")
 onready var bot_label = get_node("Text/Bottom/Label")
 
+var base: CardBase
 var is_face_up: bool
 var is_playable: bool
 var is_hovered: bool
@@ -16,8 +19,8 @@ var is_in_hand: bool
 signal play(card)
 
 func setup(colour, type):
-	self.colour = colour
-	self.type = type
+	base = CardBase.new()
+	base.setup(colour, type)
 
 func _ready():
 	is_playable = false
@@ -41,12 +44,12 @@ func set_playable(playable: bool):
 
 func _set_face_up():
 	is_face_up = true
-	var card_string = type()
+	var card_string = base.type()
 
 	top_label.text = card_string
 	mid_label.text = card_string
 	bot_label.text = card_string
-	background.color = colour()
+	background.color = base.colour()
 	_set_border_color()
 
 func _set_face_down():

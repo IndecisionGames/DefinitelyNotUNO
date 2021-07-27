@@ -1,10 +1,25 @@
-extends MarginContainer
-
 var colour: int
 var type: int
 
 func _to_string():
-	return "%s %s" % [colour(), type()]
+	var colour_string = ""
+	match self.colour:
+		Types.card_colour.RED:
+			colour_string = "red"
+		Types.card_colour.GREEN:
+			colour_string = "green"
+		Types.card_colour.BLUE:
+			colour_string = "blue"
+		Types.card_colour.YELLOW:
+			colour_string = "yellow"
+		Types.card_colour.WILD:
+			colour_string = "wild"
+
+	return "%s %s" % [colour_string, type()]
+
+func setup(card_colour, card_type):
+	self.colour = card_colour
+	self.type = card_type
 
 func type() -> String:
 	match self.type:
@@ -31,7 +46,7 @@ func type() -> String:
 		Types.card_type.CARD_SKIP:
 			return "Skip"
 		Types.card_type.CARD_REVERSE:
-			return "No U"
+			return "REVERSE"
 		Types.card_type.CARD_PLUS2:
 			return "+2"
 		Types.card_type.CARD_PLUS4:

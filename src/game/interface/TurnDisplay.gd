@@ -7,7 +7,7 @@ func _ready():
 	GameState.connect("refresh", self, "_update")
 	
 func _update():
-	if GameState.active_player == GameState.current_player:
+	if Server.player_id == GameState.current_player:
 		 turn_indicator.text = "Your Turn"
 	else:
 		turn_indicator.text = "Player %s's Turn" % GameState.current_player

@@ -13,14 +13,14 @@ func _ready():
 		var label = Label.new()
 		base.add_child(label)
 		player_info.append(label)
-		if i == GameState.active_player:
+		if i == Server.player_id:
 			label.text = ""
 		else:
 			label.text = player_text % [i, Rules.STARTING_HAND_SIZE]
 
 func _update():
 	for i in Rules.NUM_PLAYERS:
-		if i == GameState.active_player:
+		if i == Server.player_id:
 			player_info[i].text = ""
 		else:
 			player_info[i].text = player_text % [i, GameState.player_states[i].card_count]
