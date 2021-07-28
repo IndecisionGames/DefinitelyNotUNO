@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/game/Deck.gd" type="Script" id=1]
 [ext_resource path="res://src/game/GameController.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/game/interface/Button.gd" type="Script" id=7]
 [ext_resource path="res://src/game/interface/TurnDisplay.gd" type="Script" id=8]
 [ext_resource path="res://src/game/interface/OpponentHands.gd" type="Script" id=9]
+[ext_resource path="res://src/game/PlayerHand.gd" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -280,13 +281,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hands" type="Node2D" parent="."]
+[node name="PlayerHand" type="Node2D" parent="."]
+position = Vector2( 835, 825 )
+script = ExtResource( 10 )
 [connection signal="pressed" from="Draw/DrawButton" to="Draw" method="_on_DrawButton_pressed"]
 [connection signal="pressed" from="Draw/DrawButton" to="." method="_on_DrawButton_pressed"]
 [connection signal="pressed" from="Uno/UnoButton" to="Uno" method="_on_UnoButton_pressed"]
 [connection signal="pressed" from="Uno/UnoButton" to="." method="_on_UnoButton_pressed"]
-[connection signal="wild_pick" from="WildPicker" to="." method="_on_WildPicker_wild_pick"]
 [connection signal="wild_pick" from="WildPicker" to="PlaySpace/PlayPile" method="_on_WildPicker_wild_pick"]
+[connection signal="wild_pick" from="WildPicker" to="." method="_on_WildPicker_wild_pick"]
 [connection signal="pressed" from="WildPicker/Buttons/Red/RedButton" to="WildPicker" method="_on_RedButton_pressed"]
 [connection signal="pressed" from="WildPicker/Buttons/Green/GreenButton" to="WildPicker" method="_on_GreenButton_pressed"]
 [connection signal="pressed" from="WildPicker/Buttons/Yellow/YellowButton" to="WildPicker" method="_on_YellowButton_pressed"]

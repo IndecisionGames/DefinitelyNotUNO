@@ -30,6 +30,9 @@ var required_pickup_count = 0
 signal new_turn()
 signal refresh()
 
+signal remove_card(player, card)
+signal add_card(player, card)
+
 func is_playable(player: int, proposed_card: CardBase) -> bool:
 	if player != current_player:
 		if Rules.INTERRUPT:
@@ -56,11 +59,22 @@ func is_playable(player: int, proposed_card: CardBase) -> bool:
 
 	return false
 
+# TODO: find a better place to put this
+func matching_card(card: CardBase, cards):
+	for i in range(cards.size()):
+		if card.colour == cards[i].colour and card.type == cards[i].type:
+			return i
+	return -1
+
+# Used by GameController Only
+func add_card_to_player(player, card: CardBase):
+	emit_signal("add_card", player, card)
+	player_states[player].cards.append(card)
+
 func remove_card_from_player(player, card: CardBase):
-	for c in player_states[player].cards:
-		if card.colour == c.colour and card.type == c.type:
-			player_states[player].cards.erase(c)
-			return
+	emit_signal("remove_card", player, card)
+	var idx = matching_card(card, player_states[player].cards)
+	player_states[player].cards.remove(idx)
 
 func emit_new_turn():
 	emit_signal("new_turn")

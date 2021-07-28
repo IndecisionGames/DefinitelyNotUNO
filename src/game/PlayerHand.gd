@@ -1,8 +1,8 @@
 extends Node2D
 
 const Card = preload("res://src/game/card/Card.tscn")
-onready var draw = get_node("../../Draw")
-onready var uno = get_node("../../Uno")
+onready var draw = get_node("../Draw")
+onready var uno = get_node("../Uno")
 
 var cards = []
 var card_bases = []
@@ -12,14 +12,30 @@ var has_playable_card = false
 
 signal play(player, card)
 
-func setup(player):
-	self.player = player
+func setup(setup_player, setup_cards):
+	player = setup_player
+	while card_bases.size() > 0:
+		_remove_card(card_bases[0])
+	for card in setup_cards:
+		_add_card(card)
+
+	_update_playable()
+	_update_options()
 
 func _ready():
 	GameState.connect("new_turn", self, "_new_turn")
-	hide()
+	GameState.connect("add_card", self, "_add_card_listener")
+	GameState.connect("remove_card", self, "_remove_card_listener")
 
-func add_card(card: CardBase):
+func _add_card_listener(p: int, card: CardBase):
+	if p == player:
+		_add_card(card)
+
+func _remove_card_listener(p: int, card: CardBase):
+	if p == player:
+		_remove_card(card)
+
+func _add_card(card: CardBase):
 	var card_instance = Card.instance()
 	card_instance.setup(card.colour, card.type)
 	add_child(card_instance)
@@ -32,8 +48,8 @@ func add_card(card: CardBase):
 	_update_playable()
 	_update_card_positions()
 
-func remove_card(card: CardBase):
-	var idx = card_bases.find(card)
+func _remove_card(card: CardBase):
+	var idx = GameState.matching_card(card, card_bases)
 	card_bases.remove(idx)
 	
 	var card_instance = cards[idx]
@@ -42,25 +58,17 @@ func remove_card(card: CardBase):
 	remove_child(card_instance)
 	_update_card_positions()
 
-func make_active(active: bool):
-	_toggle_options()
-	if active:
-		show()
-	else:
-		hide()
-
 func _new_turn():
 	_update_playable()
-	_toggle_options()
+	_update_options()
 
-# Used when on turn change to enable interface if it is players turn
-func _toggle_options():
-	if Server.player_id == player and GameState.current_player == player:
+func _update_options():
+	if GameState.current_player == player:
 		draw.enable_button(!has_playable_card)
 	else:
 		draw.enable_button(false)
 
-	if Server.player_id == player and GameState.current_player == player:
+	if GameState.current_player == player:
 		uno.enable_button(cards.size() == 2 && has_playable_card)
 	else:
 		uno.enable_button(false)
