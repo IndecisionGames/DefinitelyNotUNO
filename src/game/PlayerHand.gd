@@ -7,13 +7,11 @@ onready var uno = get_node("../Uno")
 var cards = []
 var card_bases = []
 
-var player: int
 var has_playable_card = false
 
 signal play(player, card)
 
-func setup(setup_player, setup_cards):
-	player = setup_player
+func setup(setup_cards):
 	while card_bases.size() > 0:
 		_remove_card(card_bases[0])
 	for card in setup_cards:
@@ -27,12 +25,12 @@ func _ready():
 	GameState.connect("add_card", self, "_add_card_listener")
 	GameState.connect("remove_card", self, "_remove_card_listener")
 
-func _add_card_listener(p: int, card: CardBase):
-	if p == player:
+func _add_card_listener(player: int, card: CardBase):
+	if player == Server.player_id:
 		_add_card(card)
 
-func _remove_card_listener(p: int, card: CardBase):
-	if p == player:
+func _remove_card_listener(player: int, card: CardBase):
+	if player == Server.player_id:
 		_remove_card(card)
 
 func _add_card(card: CardBase):
@@ -40,7 +38,6 @@ func _add_card(card: CardBase):
 	card_instance.setup(card.colour, card.type)
 	add_child(card_instance)
 	card_instance.set_in_hand()
-	card_instance.connect("play", self, "_play")
 	
 	card_bases.append(card_instance.base)
 	cards.append(card_instance)
@@ -54,7 +51,6 @@ func _remove_card(card: CardBase):
 	
 	var card_instance = cards[idx]
 	cards.remove(idx)
-	card_instance.disconnect("play", self, "_play")
 	remove_child(card_instance)
 	_update_card_positions()
 
@@ -63,20 +59,17 @@ func _new_turn():
 	_update_options()
 
 func _update_options():
-	if GameState.current_player == player:
+	if GameState.current_player == Server.player_id:
 		draw.enable_button(!has_playable_card)
-	else:
-		draw.enable_button(false)
-
-	if GameState.current_player == player:
 		uno.enable_button(cards.size() == 2 && has_playable_card)
 	else:
+		draw.enable_button(false)
 		uno.enable_button(false)
 
 func _update_playable():
 	has_playable_card = false
 	for card in cards:
-		var is_playable = GameState.is_playable(player, card.base)
+		var is_playable = GameState.is_playable(Server.player_id, card.base)
 		card.set_playable(is_playable)
 		has_playable_card = has_playable_card || is_playable
 
@@ -87,6 +80,3 @@ func _update_card_positions():
 
 	for i in range(self.cards.size()):
 		cards[i].set_position(Vector2(-card_seperation/2*(self.cards.size()-1)+i*card_seperation,0))
-
-func _play(card: Card):
-	emit_signal("play", player, card.base)

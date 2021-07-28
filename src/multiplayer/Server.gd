@@ -1,6 +1,7 @@
 extends Node
 
 var player_id: int
+var is_local: bool
 
 var network = NetworkedMultiplayerENet.new()
 var port = 31416

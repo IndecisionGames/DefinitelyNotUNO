@@ -16,8 +16,6 @@ var is_playable: bool
 var is_hovered: bool
 var is_in_hand: bool
 
-signal play(card)
-
 func setup(colour, type):
 	base = CardBase.new()
 	base.setup(colour, type)
@@ -83,4 +81,4 @@ func _on_Interact_mouse_exited():
 
 func _on_Interact_pressed():
 	if is_playable:
-		emit_signal("play", self)
+		GameState.request_play_card(Server.player_id, base)

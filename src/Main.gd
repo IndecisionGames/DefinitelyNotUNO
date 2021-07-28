@@ -22,6 +22,7 @@ func check_name(name):
 	return true
 
 func _on_Debug_pressed():
+	Server.is_local = true
 	Rules.set_rules()
 	randomize()
 	SceneManager.goto_scene("res://src/game/Game.tscn", false)

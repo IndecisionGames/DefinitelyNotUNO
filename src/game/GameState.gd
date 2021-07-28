@@ -26,12 +26,15 @@ var pickup_required = false
 var pickup_type = 0
 var required_pickup_count = 0
 
-# Global Signals
+
+# Server to Client
+signal add_card(player, card)
+signal remove_card(player, card)
 signal new_turn()
 signal refresh()
 
-signal remove_card(player, card)
-signal add_card(player, card)
+# Client to Server
+signal play_card(player, card)
 
 func is_playable(player: int, proposed_card: CardBase) -> bool:
 	if player != current_player:
@@ -65,6 +68,10 @@ func matching_card(card: CardBase, cards):
 		if card.colour == cards[i].colour and card.type == cards[i].type:
 			return i
 	return -1
+
+# Used by Player/Card Only
+func request_play_card(player, card: CardBase):
+	emit_signal("play_card", player, card)
 
 # Used by GameController Only
 func add_card_to_player(player, card: CardBase):
