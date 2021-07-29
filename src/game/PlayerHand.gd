@@ -1,8 +1,7 @@
 extends Node2D
 
 const Card = preload("res://src/game/card/Card.tscn")
-onready var draw = get_node("../Draw")
-onready var uno = get_node("../Uno")
+onready var buttons = get_node("../ButtonManager")
 
 var cards = []
 var card_bases = []
@@ -22,16 +21,14 @@ func setup(setup_cards):
 
 func _ready():
 	GameState.connect("new_turn", self, "_new_turn")
-	GameState.connect("add_card", self, "_add_card_listener")
-	GameState.connect("remove_card", self, "_remove_card_listener")
+	GameState.connect("add_card_request", self, "_on_add_card_request")
+	GameState.connect("remove_card_request", self, "_on_remove_card_request")
 
-func _add_card_listener(player: int, card: CardBase):
-	if player == Server.player_id:
-		_add_card(card)
+func _on_add_card_request(card: CardBase):
+	_add_card(card)
 
-func _remove_card_listener(player: int, card: CardBase):
-	if player == Server.player_id:
-		_remove_card(card)
+func _on_remove_card_request(card: CardBase):
+	_remove_card(card)
 
 func _add_card(card: CardBase):
 	var card_instance = Card.instance()
@@ -60,11 +57,11 @@ func _new_turn():
 
 func _update_options():
 	if GameState.current_player == Server.player_id:
-		draw.enable_button(!has_playable_card)
-		uno.enable_button(cards.size() == 2 && has_playable_card)
+		buttons.enable_draw_button(!has_playable_card)
+		buttons.enable_uno_button(cards.size() == 2 && has_playable_card)
 	else:
-		draw.enable_button(false)
-		uno.enable_button(false)
+		buttons.enable_draw_button(false)
+		buttons.enable_uno_button(false)
 
 func _update_playable():
 	has_playable_card = false

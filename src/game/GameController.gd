@@ -4,14 +4,14 @@ onready var deck = get_node("PlaySpace/Deck")
 onready var play_pile = get_node("PlaySpace/PlayPile")
 onready var player_hand = get_node("PlayerHand")
 
-onready var wild_picker = get_node("WildPicker")
-
 func _ready():
-	GameState.connect("play_card", self, "_play_card")
-	for player in range(Rules.NUM_PLAYERS):
+	GameState.connect("play_request", self, "_play_card")
+	GameState.connect("draw_request", self, "_draw_cards")
+	GameState.connect("uno_request", self, "_on_uno_request")
+	GameState.connect("wild_pick", self, "_on_wild_pick")
+	for _i in range(Rules.NUM_PLAYERS):
 		GameState.player_states.append(GameState.PlayerState.new())
 
-	player_hand.setup([])
 	_start_game()
 
 func _input(event):
@@ -29,15 +29,17 @@ func _start_game():
 			var drawn_card = deck.draw()
 			GameState.add_card_to_player(i, drawn_card)
 
+	player_hand.setup(GameState.player_states[Server.player_id].cards)
+
 	# TODO: Fix opening card on wild
 	_play_card(-1, deck.draw(), true)
 
-func _play_card(player: int, card: CardBase, opening_card = false) -> bool:
+func _play_card(player, card: CardBase, opening_card = false):
 	if GameState.play_in_progress:
-		return false
+		return
 	if !GameState.is_playable(player, card) and !opening_card:
 		print("this card can not be played")
-		return false
+		return
 	GameState.play_in_progress = true
 	GameState.current_player = player
 
@@ -63,7 +65,7 @@ func _play_card(player: int, card: CardBase, opening_card = false) -> bool:
 			GameState.required_pickup_count += 4
 
 	if GameState.current_card_colour == Types.card_colour.WILD:
-		wild_picker.display_picker()
+		GameState.request_wild_pick(player)
 		GameState.waiting_action = true
 
 	# Update Card States
@@ -71,7 +73,16 @@ func _play_card(player: int, card: CardBase, opening_card = false) -> bool:
 		GameState.remove_card_from_player(Server.player_id, card)
 	play_pile.add_card(card)
 	_turn_end()
-	return true
+
+func _draw_cards(player):
+	for _i in range(max(1,GameState.required_pickup_count)):
+		var drawn_card = deck.draw()
+		GameState.add_card_to_player(player, drawn_card)
+	
+	GameState.pickup_required = false
+	GameState.pickup_type = Types.pickup_type.NULL
+	GameState.required_pickup_count = 0
+	_turn_end()
 
 func _turn_end():
 	# Prevent turn end if waiting for input
@@ -107,21 +118,11 @@ func _turn_start():
 	GameState.emit_new_turn()
 	GameState.play_in_progress = false
 
-func _on_DrawButton_pressed():
-	for _i in range(max(1,GameState.required_pickup_count)):
-		var drawn_card = deck.draw()
-		GameState.add_card_to_player(Server.player_id, drawn_card)
-	
-	GameState.pickup_required = false
-	GameState.pickup_type = Types.pickup_type.NULL
-	GameState.required_pickup_count = 0
-	_turn_end()
-
-func _on_WildPicker_wild_pick(colour):
+func _on_wild_pick(colour):
 	GameState.waiting_action = false
 	GameState.current_card_colour = colour
 	_turn_end()
 
-func _on_UnoButton_pressed():
-	GameState.player_states[GameState.current_player].uno_status = true
+func _on_uno_request(player):
+	GameState.player_states[player].uno_status = true
 	GameState.emit_refresh()

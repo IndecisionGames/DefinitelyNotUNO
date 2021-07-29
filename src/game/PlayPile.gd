@@ -8,7 +8,7 @@ var cards = []
 var current_card
 
 func _ready():
-	pass
+	GameState.connect("wild_pick", self, "_on_wild_pick")
 
 func add_card(card: CardBase):
 	cards.append(card)
@@ -30,7 +30,7 @@ func cycle_cards():
 		cards.erase(card)
 		deck.add_card(card)
 
-func _on_WildPicker_wild_pick(colour):
+func _on_wild_pick(colour):
 	if Rules.wild_types.has(current_card.base.type):
 		current_card.base.colour = colour
 		current_card.set_in_play()

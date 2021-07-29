@@ -8,11 +8,8 @@ func _ready():
 	GameState.connect("new_turn", self, "_update")
 	GameState.connect("refresh", self, "_update")
 
-	player_turn.text = "Current Player: %s" % GameState.current_player
-
 func _update():
-	active_player.text= "Active Player: %s" % Server.player_id 
-	player_turn.text = "Current Player: %s" % GameState.current_player
+	active_player.text= "You are Player %s" % Server.player_id 
 	if GameState.pickup_required:
 		pickup_required_count.text = "Pickup Required: %s" % GameState.required_pickup_count
 	else:

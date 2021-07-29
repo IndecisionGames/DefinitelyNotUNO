@@ -26,17 +26,20 @@ var pickup_required = false
 var pickup_type = 0
 var required_pickup_count = 0
 
-
 # Server to Client
-signal add_card(player, card)
-signal remove_card(player, card)
+signal add_card_request(card)
+signal remove_card_request(card)
+signal wild_pick_request(player)
 signal new_turn()
 signal refresh()
 
 # Client to Server
-signal play_card(player, card)
+signal play_request(player, card)
+signal draw_request(player)
+signal uno_request(player)
+signal wild_pick(colour)
 
-func is_playable(player: int, proposed_card: CardBase) -> bool:
+func is_playable(player, proposed_card: CardBase) -> bool:
 	if player != current_player:
 		if Rules.INTERRUPT:
 			# TODO: Stop from affecting player who has started turn. Otherwise someone could play mid/post draw
@@ -71,17 +74,29 @@ func matching_card(card: CardBase, cards):
 
 # Used by Player/Card Only
 func request_play_card(player, card: CardBase):
-	emit_signal("play_card", player, card)
+	emit_signal("play_request", player, card)
+
+func request_draw_card(player):
+	emit_signal("draw_request", player)
+
+func request_uno(player):
+	emit_signal("uno_request", player)
+
+func emit_wild_pick(colour):
+	emit_signal("wild_pick", colour)
 
 # Used by GameController Only
 func add_card_to_player(player, card: CardBase):
-	emit_signal("add_card", player, card)
 	player_states[player].cards.append(card)
+	emit_signal("add_card_request", card)
 
 func remove_card_from_player(player, card: CardBase):
-	emit_signal("remove_card", player, card)
 	var idx = matching_card(card, player_states[player].cards)
 	player_states[player].cards.remove(idx)
+	emit_signal("remove_card_request", card)
+
+func request_wild_pick(player):
+	emit_signal("wild_pick_request", player)
 
 func emit_new_turn():
 	emit_signal("new_turn")
