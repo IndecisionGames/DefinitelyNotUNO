@@ -1,36 +1,18 @@
-extends Node2D
+extends Control
 
 const Card = preload("res://src/game/card/Card.tscn")
 
-onready var deck = get_parent().get_node("Deck")
-
-var cards = []
-var current_card
+var card
 
 func _ready():
-	GameState.connect("wild_pick", self, "_on_wild_pick")
+	GameState.connect("game_state_update", self, "_on_game_state_update")
+	card = Card.instance()
+	card.setup(0, 0)
+	add_child(card)
+	card.set_position(Vector2(0,0))
+	card.set_in_play()
 
-func add_card(card: CardBase):
-	cards.append(card)
-	if current_card:
-		remove_child(current_card)
-
-	var new_card = Card.instance()
-	new_card.setup(card.colour, card.type)
-	add_child(new_card)
-	new_card.set_position(Vector2(0,0))
-	new_card.set_in_play()
-
-	current_card = new_card
-
-# Called by Deck Only
-func cycle_cards():
-	while cards.size() > 1:
-		var card = cards.pop_front()
-		cards.erase(card)
-		deck.add_card(card)
-
-func _on_wild_pick(colour):
-	if Rules.wild_types.has(current_card.base.type):
-		current_card.base.colour = colour
-		current_card.set_in_play()
+func _on_game_state_update():
+	card.base.type = GameState.current_card_type
+	card.base.colour = GameState.current_card_colour
+	card.set_in_play()

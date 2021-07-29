@@ -8,6 +8,8 @@ class PlayerState:
 	var uno_status: bool
 
 var player_states = []
+var deck = []
+var play_pile = []
 
 # Play Checks
 var current_player: int
@@ -31,7 +33,7 @@ signal add_card_request(card)
 signal remove_card_request(card)
 signal wild_pick_request(player)
 signal new_turn()
-signal refresh()
+signal game_state_update()
 
 # Client to Server
 signal play_request(player, card)
@@ -101,5 +103,5 @@ func request_wild_pick(player):
 func emit_new_turn():
 	emit_signal("new_turn")
 
-func emit_refresh():
-	emit_signal("refresh")
+func emit_game_state_update():
+	emit_signal("game_state_update")

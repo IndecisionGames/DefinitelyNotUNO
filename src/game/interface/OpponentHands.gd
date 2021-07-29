@@ -7,7 +7,7 @@ const player_text = "Player %s: %s"
 func _ready():
 	var base = get_node("Text")
 	GameState.connect("new_turn", self, "_update")
-	GameState.connect("refresh", self, "_update")
+	GameState.connect("game_state_update", self, "_update")
 
 	for i in Rules.NUM_PLAYERS:
 		var label = Label.new()
