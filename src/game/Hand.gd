@@ -5,32 +5,28 @@ onready var buttons = get_node("../ButtonManager")
 
 var cards = []
 var card_bases = []
-
 var has_playable_card = false
 
-signal play(player, card)
-
-func setup(setup_cards):
-	while card_bases.size() > 0:
-		_remove_card(card_bases[0])
-	for card in setup_cards:
-		_add_card(card)
-
-	_update_playable()
-	_update_options()
-
 func _ready():
+	GameState.connect("game_start", self, "_load")
 	GameState.connect("new_turn", self, "_new_turn")
 	GameState.connect("add_card_request", self, "_on_add_card_request")
 	GameState.connect("remove_card_request", self, "_on_remove_card_request")
 
+func _load():
+	while card_bases.size() > 0:
+		_on_remove_card_request(card_bases[0])
+	for card in GameState.player_states[Server.player_id].cards:
+		_on_add_card_request(card)
+
+	_update_playable()
+	_update_options()
+
+func _new_turn():
+	_update_playable()
+	_update_options()
+
 func _on_add_card_request(card: CardBase):
-	_add_card(card)
-
-func _on_remove_card_request(card: CardBase):
-	_remove_card(card)
-
-func _add_card(card: CardBase):
 	var card_instance = Card.instance()
 	card_instance.setup(card.colour, card.type)
 	add_child(card_instance)
@@ -42,7 +38,7 @@ func _add_card(card: CardBase):
 	_update_playable()
 	_update_card_positions()
 
-func _remove_card(card: CardBase):
+func _on_remove_card_request(card: CardBase):
 	var idx = GameState.matching_card(card, card_bases)
 	card_bases.remove(idx)
 	
@@ -50,10 +46,6 @@ func _remove_card(card: CardBase):
 	cards.remove(idx)
 	remove_child(card_instance)
 	_update_card_positions()
-
-func _new_turn():
-	_update_playable()
-	_update_options()
 
 func _update_options():
 	if GameState.current_player == Server.player_id:

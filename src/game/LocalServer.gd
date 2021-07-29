@@ -1,38 +1,22 @@
-extends Node2D
+extends Node
 
 const CardBase = preload("res://src/game/card/CardBase.gd")
-
-onready var player_hand = get_node("PlayerHand")
 
 func _ready():
 	GameState.connect("play_request", self, "_play_card")
 	GameState.connect("draw_request", self, "_draw_cards")
 	GameState.connect("uno_request", self, "_on_uno_request")
 	GameState.connect("wild_pick", self, "_on_wild_pick")
-	for _i in range(Rules.NUM_PLAYERS):
-		GameState.player_states.append(GameState.PlayerState.new())
 
-	_start_game()
-
-func _input(event):
-	# Change Players
-	if Input.is_action_just_pressed("ui_right") && Server.is_local:
-		Server.player_id += 1
-		if Server.player_id >= Rules.NUM_PLAYERS:
-			Server.player_id = 0
-		player_hand.setup(GameState.player_states[Server.player_id].cards)
-		GameState.emit_game_state_update()
-
-func _start_game():
+func start_game():
 	_generate_deck()
 	for _i in range(Rules.STARTING_HAND_SIZE):
 		for i in range(Rules.NUM_PLAYERS):
 			GameState.add_card_to_player(i, _draw())
 
-	player_hand.setup(GameState.player_states[Server.player_id].cards)
-
 	# TODO: Fix opening card on wild
 	_play_card(-1, _draw(), true)
+	GameState.emit_game_start()
 
 func _play_card(player, card: CardBase, opening_card = false):
 	if GameState.play_in_progress:
@@ -140,7 +124,6 @@ func _draw():
 		GameState.deck.shuffle()
 
 	return GameState.deck.pop_front()
-
 
 # Player Signals
 func _on_wild_pick(colour):

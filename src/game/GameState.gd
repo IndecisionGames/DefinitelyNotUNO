@@ -32,6 +32,7 @@ var required_pickup_count = 0
 signal add_card_request(card)
 signal remove_card_request(card)
 signal wild_pick_request(player)
+signal game_start()
 signal new_turn()
 signal game_state_update()
 
@@ -105,3 +106,6 @@ func emit_new_turn():
 
 func emit_game_state_update():
 	emit_signal("game_state_update")
+
+func emit_game_start():
+	emit_signal("game_start")
