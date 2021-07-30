@@ -5,7 +5,7 @@ onready var uno = get_node("Uno")
 onready var wild_picker = get_node("WildPicker")
 
 func _ready():
-	GameState.connect("wild_pick_request", self, "_enable_wild_picker")
+	Server.connect("wild_pick_request", self, "_on_wild_pick_request")
 	draw.hide()
 	uno.hide()
 	wild_picker.hide()
@@ -22,30 +22,29 @@ func enable_uno_button(enable: bool):
 	else:
 		uno.hide()
 
-func _enable_wild_picker(player):
-	if player == Server.player_id:
-		wild_picker.show()
+func _on_wild_pick_request():
+	wild_picker.show()
 
 func _on_DrawButton_pressed():
-	GameState.request_draw_card(Server.player_id)
+	Server.request_draw_card()
 	draw.hide()
 
 func _on_UnoButton_pressed():
-	GameState.request_uno(Server.player_id)
+	Server.request_uno()
 	uno.hide()
 
 func _on_RedButton_pressed():
-	GameState.emit_wild_pick(Types.card_colour.RED)
+	Server.emit_wild_pick(Types.card_colour.RED)
 	wild_picker.hide()
 
 func _on_GreenButton_pressed():
-	GameState.emit_wild_pick(Types.card_colour.GREEN)
+	Server.emit_wild_pick(Types.card_colour.GREEN)
 	wild_picker.hide()
 
 func _on_YellowButton_pressed():
-	GameState.emit_wild_pick(Types.card_colour.YELLOW)
+	Server.emit_wild_pick(Types.card_colour.YELLOW)
 	wild_picker.hide()
 
 func _on_BlueButton_pressed():
-	GameState.emit_wild_pick(Types.card_colour.BLUE)
+	Server.emit_wild_pick(Types.card_colour.BLUE)
 	wild_picker.hide()

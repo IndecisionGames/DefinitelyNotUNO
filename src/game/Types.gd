@@ -1,4 +1,5 @@
 extends Node
+# The following code should be identical in both the client and server
 
 const red = Color(0.7,0.13,0.13,1)
 const green = Color(0.18,0.55,0.34,1)
@@ -41,3 +42,9 @@ enum pickup_type {
 	PLUS2, 
 	PLUS4,
 }
+
+func matching_card(card: CardBase, cards):
+	for i in range(cards.size()):
+		if card.colour == cards[i].colour and card.type == cards[i].type:
+			return i
+	return -1

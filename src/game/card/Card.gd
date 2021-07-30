@@ -81,4 +81,4 @@ func _on_Interact_mouse_exited():
 
 func _on_Interact_pressed():
 	if is_playable:
-		GameState.request_play_card(Server.player_id, base)
+		Server.request_play_card(base)

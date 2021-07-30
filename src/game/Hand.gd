@@ -8,25 +8,26 @@ var card_bases = []
 var has_playable_card = false
 
 func _ready():
-	GameState.connect("game_start", self, "_load")
-	GameState.connect("new_turn", self, "_new_turn")
-	GameState.connect("add_card_request", self, "_on_add_card_request")
-	GameState.connect("remove_card_request", self, "_on_remove_card_request")
+	Server.connect("game_start", self, "_load")
+	Server.connect("new_turn", self, "_on_new_turn")
+	Server.connect("game_state_update", self, "_on_new_turn")
+	Server.connect("card_added", self, "_on_card_added")
+	Server.connect("card_removed", self, "_on_card_removed")
 
 func _load():
 	while card_bases.size() > 0:
-		_on_remove_card_request(card_bases[0])
-	for card in GameState.player_states[Server.player_id].cards:
-		_on_add_card_request(card)
+		_on_card_removed(card_bases[0])
+	for card in GameState.players[Server.player_id].cards:
+		_on_card_added(card)
 
 	_update_playable()
 	_update_options()
 
-func _new_turn():
+func _on_new_turn():
 	_update_playable()
 	_update_options()
 
-func _on_add_card_request(card: CardBase):
+func _on_card_added(card: CardBase):
 	var card_instance = Card.instance()
 	card_instance.setup(card.colour, card.type)
 	add_child(card_instance)
@@ -38,8 +39,8 @@ func _on_add_card_request(card: CardBase):
 	_update_playable()
 	_update_card_positions()
 
-func _on_remove_card_request(card: CardBase):
-	var idx = GameState.matching_card(card, card_bases)
+func _on_card_removed(card: CardBase):
+	var idx = Types.matching_card(card, card_bases)
 	card_bases.remove(idx)
 	
 	var card_instance = cards[idx]

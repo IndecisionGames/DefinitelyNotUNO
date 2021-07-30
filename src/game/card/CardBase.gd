@@ -1,3 +1,6 @@
+extends Node
+# The following code should be identical in both the client and server
+
 var colour: int
 var type: int
 
