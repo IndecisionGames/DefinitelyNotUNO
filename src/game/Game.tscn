@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/game/Game.gd" type="Script" id=1]
+[ext_resource path="res://src/game/GameLog.gd" type="Script" id=2]
 [ext_resource path="res://assets/font/Comfortaa-Bold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://src/game/PlayPile.gd" type="Script" id=4]
 [ext_resource path="res://src/game/interface/GameInfo.gd" type="Script" id=5]
@@ -292,6 +293,25 @@ margin_bottom = 50.0
 [node name="PickupCount" type="Label" parent="HUD/GameInfo/Text"]
 margin_right = 150.0
 margin_bottom = 14.0
+
+[node name="GameLog" type="MarginContainer" parent="HUD"]
+margin_left = 1600.0
+margin_right = 1920.0
+margin_bottom = 300.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="HUD/GameLog"]
+margin_right = 320.0
+margin_bottom = 300.0
+color = Color( 0.160784, 0.160784, 0.196078, 1 )
+
+[node name="Text" type="RichTextLabel" parent="HUD/GameLog"]
+margin_right = 320.0
+margin_bottom = 300.0
+scroll_following = true
 
 [node name="Hand" type="Node2D" parent="."]
 position = Vector2( 835, 850 )

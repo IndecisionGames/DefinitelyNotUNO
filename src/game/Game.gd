@@ -8,6 +8,11 @@ func _ready():
 	else:
 		var local_server = load("res://src/game/common/GameServer.gd").new()
 		add_child(local_server)
+		
+		var local_names = ["Alice", "Bob", "Charlie", "Delta"]
+		for i in range(Rules.NUM_PLAYERS):
+			GameState.players.append(GameState.Player.new())
+			GameState.players[i].name = local_names[i]
 		local_server.start_game()
 
 func _input(event):

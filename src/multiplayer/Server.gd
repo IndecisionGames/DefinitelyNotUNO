@@ -60,8 +60,8 @@ remote func set_player(player):
 # Server to Client
 signal game_start()
 signal game_update()
-signal card_added(card)
-signal card_removed(card)
+signal card_added(player, card)
+signal card_removed(player, card)
 signal wild_pick_request(player)
 
 remote func emit_game_start(rules={}, game_state={}):
@@ -80,15 +80,15 @@ remote func emit_game_update(game_state={}):
 
 remote func emit_card_added(player, card):
 	if !Server.is_local: # card is passed as dictionary via network
-		emit_signal("card_added", CardBase.new().load_from_dict(card))
+		emit_signal("card_added", player, CardBase.new().load_from_dict(card))
 	else:
-		emit_signal("card_added", card)
+		emit_signal("card_added", player, card)
 
 remote func emit_card_removed(player, card):
 	if !Server.is_local: # card is passed as dictionary via network
-		emit_signal("card_removed", CardBase.new().load_from_dict(card))
+		emit_signal("card_removed", player, CardBase.new().load_from_dict(card))
 	else:
-		emit_signal("card_removed", card)
+		emit_signal("card_removed", player, card)
 
 remote func request_wild_pick(player):
 	emit_signal("wild_pick_request")

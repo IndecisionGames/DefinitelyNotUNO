@@ -21,10 +21,7 @@ func _update():
 		if i == Server.player_id:
 			text += "You"
 		else:
-			var name = "Player %s" % i
-			if GameState.players[i].name:
-				name = GameState.players[i].name
-			text += "%s: %s" % [name, GameState.players[i].cards.size()]
+			text += "%s: %s" % [GameState.players[i].name, GameState.players[i].cards.size()]
 
 		if GameState.players[i].uno_status:
 			text += " UNO"

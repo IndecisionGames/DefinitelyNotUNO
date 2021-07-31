@@ -15,9 +15,9 @@ func _ready():
 
 func _load():
 	while card_bases.size() > 0:
-		_on_card_removed(card_bases[0])
+		_on_card_removed(Server.player_id, card_bases[0])
 	for card in GameState.players[Server.player_id].cards:
-		_on_card_added(card)
+		_on_card_added(Server.player_id, card)
 
 	_update_playable()
 	_update_options()
@@ -26,7 +26,10 @@ func _on_game_update():
 	_update_playable()
 	_update_options()
 
-func _on_card_added(card: CardBase):
+func _on_card_added(player, card: CardBase):
+	if player != Server.player_id:
+		return
+
 	var card_instance = Card.instance()
 	card_instance.setup(card.colour, card.type)
 	add_child(card_instance)
@@ -38,7 +41,10 @@ func _on_card_added(card: CardBase):
 	_update_playable()
 	_update_card_positions()
 
-func _on_card_removed(card: CardBase):
+func _on_card_removed(player, card: CardBase):
+	if player != Server.player_id:
+		return
+
 	var idx = card.is_in(card_bases)
 	card_bases.remove(idx)
 	

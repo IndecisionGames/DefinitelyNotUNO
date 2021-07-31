@@ -10,4 +10,4 @@ func _update():
 	if Server.player_id == GameState.current_player:
 		 turn_indicator.text = "Your Turn"
 	else:
-		turn_indicator.text = "Player %s's Turn" % GameState.current_player
+		turn_indicator.text = "%s's Turn" % GameState.get_current_player().name
