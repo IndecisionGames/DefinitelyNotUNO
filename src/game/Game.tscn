@@ -269,7 +269,7 @@ text = "Player Turn"
 
 [node name="GameInfo" type="MarginContainer" parent="HUD"]
 margin_left = 1200.0
-margin_top = 365.0
+margin_top = 515.0
 margin_right = 1350.0
 margin_bottom = 565.0
 script = ExtResource( 5 )
@@ -279,7 +279,7 @@ __meta__ = {
 
 [node name="Background" type="ColorRect" parent="HUD/GameInfo"]
 margin_right = 150.0
-margin_bottom = 200.0
+margin_bottom = 50.0
 color = Color( 0.0705882, 0.168627, 0.423529, 0.223529 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -287,25 +287,11 @@ __meta__ = {
 
 [node name="Text" type="VBoxContainer" parent="HUD/GameInfo"]
 margin_right = 150.0
-margin_bottom = 200.0
+margin_bottom = 50.0
 
-[node name="ActivePlayer" type="Label" parent="HUD/GameInfo/Text"]
+[node name="PickupCount" type="Label" parent="HUD/GameInfo/Text"]
 margin_right = 150.0
-margin_bottom = 31.0
-text = "
-"
-
-[node name="PlayerTurn" type="Label" parent="HUD/GameInfo/Text"]
-margin_top = 35.0
-margin_right = 150.0
-margin_bottom = 66.0
-text = "
-"
-
-[node name="PickupRequiredCount" type="Label" parent="HUD/GameInfo/Text"]
-margin_top = 70.0
-margin_right = 150.0
-margin_bottom = 84.0
+margin_bottom = 14.0
 
 [node name="Hand" type="Node2D" parent="."]
 position = Vector2( 835, 825 )

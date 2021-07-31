@@ -1,20 +1,14 @@
 extends Node
 # The following code should be identical in both the client and server
 
-var NUM_PLAYERS: int
+var NUM_PLAYERS = 3
 
-var INTERRUPT: bool
-var UNO_CARD_PENALTY : int
+var INTERRUPT = false
+var UNO_CARD_PENALTY = 1
 # Not implemented
 const PICKUP_STACKING = false
 const PLAY_AFTER_DRAW = false
 const DRAW_UNTIL_PLAY = false
-
-func set_rules(rules={}):
-	seed(rules.get("SEED", 0))
-	NUM_PLAYERS = rules.get("NUM_PLAYERS", 3)
-	INTERRUPT = rules.get("INTERRUPT", false)
-	UNO_CARD_PENALTY = rules.get("UNO_CARD_PENALTY", 1)
 
 # Generation Rules
 const STARTING_HAND_SIZE = 7

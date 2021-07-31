@@ -7,8 +7,6 @@ class Player:
 	var uno_status: bool
 
 var players = []
-var deck = []
-var play_pile = []
 
 # Play Checks
 var current_player: int

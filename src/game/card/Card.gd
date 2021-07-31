@@ -47,7 +47,7 @@ func _set_face_up():
 	top_label.text = card_string
 	mid_label.text = card_string
 	bot_label.text = card_string
-	background.color = base.colour()
+	_set_card_colour()
 	_set_border_color()
 
 func _set_face_down():
@@ -56,18 +56,31 @@ func _set_face_down():
 	top_label.text = ""
 	mid_label.text = "Uno"
 	bot_label.text = ""
-	background.color = Types.facedown
-	_set_border_color()
+	background.color = Values.facedown
+	border.border_color = Values.facedown
+
+func _set_card_colour():
+	match base.colour:
+		Types.card_colour.RED:
+			background.color = Values.red
+		Types.card_colour.GREEN:
+			background.color = Values.green
+		Types.card_colour.BLUE:
+			background.color = Values.blue
+		Types.card_colour.YELLOW:
+			background.color = Values.yellow
+		Types.card_colour.WILD:
+			background.color = Values.wild
 
 func _set_border_color():
 	if !is_in_hand:
-		border.border_color = Types.facedown
+		border.border_color = Values.facedown
 	elif is_hovered:
-		border.border_color = Types.hover
+		border.border_color = Values.hover
 	elif is_playable:
-		border.border_color = Types.playable
+		border.border_color = Values.playable
 	else:
-		border.border_color = Types.facedown
+		border.border_color = Values.facedown
 
 func _on_Interact_mouse_entered():
 	if is_in_hand:

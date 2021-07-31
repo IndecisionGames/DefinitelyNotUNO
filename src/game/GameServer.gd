@@ -3,6 +3,9 @@ extends Node
 
 const CardBase = preload("res://src/game/card/CardBase.gd")
 
+# Server only GameState values
+var deck = []
+var play_pile = []
 var wild_opening: bool
 
 func _ready():
@@ -20,21 +23,21 @@ func start_game():
 	Server.emit_game_start()
 
 func _generate_deck():
-	GameState.deck = []
+	deck = []
 	for colour in Rules.standard_colours:
 		for type in Rules.standard_types:
 			for _i in range(Rules.NUM_EACH_CARD):
 				var new_card = CardBase.new()
 				new_card.setup(colour, type)
-				GameState.deck.append(new_card)
+				deck.append(new_card)
 
 	for type in Rules.wild_types:
 		for _i in range(Rules.NUM_EACH_WILD_CARD):
 			var new_card = CardBase.new()
 			new_card.setup(Types.card_colour.WILD, type)
-			GameState.deck.append(new_card)
+			deck.append(new_card)
 
-	GameState.deck.shuffle()
+	deck.shuffle()
 
 func _generate_hands():
 	for _i in range(Rules.NUM_PLAYERS):
@@ -76,9 +79,9 @@ func _play_card(player, card: CardBase, opening_card = false):
 	if GameState.current_card_colour == Types.card_colour.WILD:
 		Server.request_wild_pick(player)
 		GameState.waiting_action = true
-		Server.emit_game_state_update()
+		Server.emit_game_update()
 
-	GameState.play_pile.append(card)
+	play_pile.append(card)
 	
 	if opening_card:
 		# Special cases
@@ -89,7 +92,7 @@ func _play_card(player, card: CardBase, opening_card = false):
 			wild_opening = true
 		return
 
-	var idx = Types.matching_card(card, GameState.get_current_player().cards)
+	var idx = card.is_in(GameState.get_current_player().cards)
 	GameState.get_current_player().cards.remove(idx)
 	Server.emit_card_removed(GameState.current_player, card)
 	_turn_end()
@@ -99,7 +102,8 @@ func _draw_cards(player):
 		var card = _draw()
 		GameState.players[player].cards.append(card)
 		Server.emit_card_added(player, card)
-	
+
+	GameState.players[player].uno_status = false
 	GameState.pickup_required = false
 	GameState.pickup_type = Types.pickup_type.NULL
 	GameState.required_pickup_count = 0
@@ -135,18 +139,17 @@ func _turn_end():
 		if GameState.current_player < 0:
 			GameState.current_player += Rules.NUM_PLAYERS
 
-	Server.emit_game_state_update()
-	Server.emit_new_turn()
-	GameState.play_in_progress = false
+		GameState.play_in_progress = false
+		Server.emit_game_update()
 
 func _draw():
 	# Refresh cards with PlayPile if running out
-	if len(GameState.deck) <= 1:
-		while GameState.play_pile.size() > 1:
-			GameState.deck.append(GameState.play_pile.pop_front())
-		GameState.deck.shuffle()
+	if len(deck) <= 1:
+		while play_pile.size() > 1:
+			deck.append(play_pile.pop_front())
+		deck.shuffle()
 
-	return GameState.deck.pop_front()
+	return deck.pop_front()
 
 # Player signals
 func _on_wild_pick(colour):
@@ -154,10 +157,10 @@ func _on_wild_pick(colour):
 	GameState.current_card_colour = colour
 	if wild_opening:
 		wild_opening = false
-		Server.emit_game_state_update()
+		Server.emit_game_update()
 		return
 	_turn_end()
 
 func _on_uno_request(player):
 	GameState.players[player].uno_status = true
-	Server.emit_game_state_update()
+	Server.emit_game_update()

@@ -46,31 +46,26 @@ remote func update_lobby(pos, player_names):
 func server_start_game():
 	rpc_id(1, "start_game")
 
-remote func set_rules(rules={}):
-	Rules.set_rules(rules)
-
-remote func set_game_state(player):
+remote func set_player(player):
 	player_id = player
-
-remote func start_game():
-	SceneManager.goto_scene("res://src/game/Game.tscn", false)
 
 # Server to Client
 signal game_start()
-signal game_state_update()
-signal new_turn()
+signal game_update()
 signal card_added(card)
 signal card_removed(card)
 signal wild_pick_request(player)
 
-remote func emit_new_turn():
-	emit_signal("new_turn")
-
-remote func emit_game_state_update():
-	emit_signal("game_state_update")
-
-remote func emit_game_start():
+remote func emit_game_start(rules={}, game_state={}):
+	if !Server.is_local:
+		pass
+		SceneManager.goto_scene("res://src/game/Game.tscn", false)
 	emit_signal("game_start")
+
+remote func emit_game_update(game_state={}):
+	if !Server.is_local:
+		pass
+	emit_signal("game_update")
 
 remote func emit_card_added(player, card: CardBase):
 	emit_signal("card_added", card)
@@ -88,25 +83,25 @@ signal uno_request(player)
 signal wild_pick(colour)
 
 func request_play_card(card: CardBase):
-	if Server.is_local:
-		emit_signal("play_request", player_id, card)
-	else:
+	if !Server.is_local:
 		pass
+	else:
+		emit_signal("play_request", player_id, card)
 
 func request_draw_card():
-	if Server.is_local:
-		emit_signal("draw_request", player_id)
-	else:
+	if !Server.is_local:
 		pass
+	else:
+		emit_signal("draw_request", player_id)
 
 func request_uno():
-	if Server.is_local:
-		emit_signal("uno_request", player_id)
-	else:
+	if !Server.is_local:
 		pass
+	else:
+		emit_signal("uno_request", player_id)
 
 func emit_wild_pick(colour):
-	if Server.is_local:
-		emit_signal("wild_pick", colour)
-	else:
+	if !Server.is_local:
 		pass
+	else:
+		emit_signal("wild_pick", colour)

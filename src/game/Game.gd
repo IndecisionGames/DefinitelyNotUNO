@@ -4,7 +4,7 @@ onready var hand = get_node("Hand")
 
 func _ready():
 	if Server.is_local:
-		var local_server = load("res://src/game/LocalServer.gd").new()
+		var local_server = load("res://src/game/GameServer.gd").new()
 		add_child(local_server)
 		local_server.start_game()
 
@@ -16,4 +16,4 @@ func _input(event):
 			if Server.player_id >= Rules.NUM_PLAYERS:
 				Server.player_id = 0
 			hand._load()
-			Server.emit_game_state_update()
+			Server.emit_game_update()

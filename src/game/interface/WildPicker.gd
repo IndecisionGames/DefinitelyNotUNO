@@ -6,7 +6,7 @@ onready var yellow = get_node("Buttons/Yellow")
 onready var blue = get_node("Buttons/Blue")
 
 func _ready():
-	red.color = Types.red
-	green.color = Types.green
-	yellow.color = Types.yellow
-	blue.color = Types.blue
+	red.color = Values.red
+	green.color = Values.green
+	yellow.color = Values.yellow
+	blue.color = Values.blue

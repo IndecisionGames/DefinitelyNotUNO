@@ -4,6 +4,16 @@ extends Node
 var colour: int
 var type: int
 
+func setup(card_colour, card_type):
+	self.colour = card_colour
+	self.type = card_type
+
+func is_in(cards):
+	for i in range(cards.size()):
+		if colour == cards[i].colour and type == cards[i].type:
+			return i
+	return -1
+
 func _to_string():
 	var colour_string = ""
 	match self.colour:
@@ -17,12 +27,7 @@ func _to_string():
 			colour_string = "yellow"
 		Types.card_colour.WILD:
 			colour_string = "wild"
-
 	return "%s %s" % [colour_string, type()]
-
-func setup(card_colour, card_type):
-	self.colour = card_colour
-	self.type = card_type
 
 func type() -> String:
 	match self.type:
@@ -57,16 +62,3 @@ func type() -> String:
 		Types.card_type.CARD_WILD:
 			return "Wild"
 	return ""
-
-func colour() -> Color:
-	match self.colour:
-		Types.card_colour.RED:
-			return Types.red
-		Types.card_colour.GREEN:
-			return Types.green
-		Types.card_colour.BLUE:
-			return Types.blue
-		Types.card_colour.YELLOW:
-			return Types.yellow
-	return Types.wild
-	

@@ -33,6 +33,7 @@ Rules="*res://src/game/Rules.gd"
 GameState="*res://src/game/GameState.gd"
 CardBase="res://src/game/card/CardBase.gd"
 Server="*res://src/multiplayer/Server.gd"
+Values="*res://src/game/Values.gd"
 
 [display]
 

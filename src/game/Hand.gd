@@ -9,8 +9,7 @@ var has_playable_card = false
 
 func _ready():
 	Server.connect("game_start", self, "_load")
-	Server.connect("new_turn", self, "_on_new_turn")
-	Server.connect("game_state_update", self, "_on_new_turn")
+	Server.connect("game_update", self, "_on_game_update")
 	Server.connect("card_added", self, "_on_card_added")
 	Server.connect("card_removed", self, "_on_card_removed")
 
@@ -23,7 +22,7 @@ func _load():
 	_update_playable()
 	_update_options()
 
-func _on_new_turn():
+func _on_game_update():
 	_update_playable()
 	_update_options()
 
@@ -40,7 +39,7 @@ func _on_card_added(card: CardBase):
 	_update_card_positions()
 
 func _on_card_removed(card: CardBase):
-	var idx = Types.matching_card(card, card_bases)
+	var idx = card.is_in(card_bases)
 	card_bases.remove(idx)
 	
 	var card_instance = cards[idx]
@@ -50,7 +49,7 @@ func _on_card_removed(card: CardBase):
 
 func _update_options():
 	if GameState.current_player == Server.player_id:
-		buttons.enable_draw_button(!has_playable_card)
+		buttons.enable_draw_button(!has_playable_card && !GameState.waiting_action)
 		buttons.enable_uno_button(cards.size() == 2 && has_playable_card)
 	else:
 		buttons.enable_draw_button(false)
