@@ -62,37 +62,3 @@ func type() -> String:
 		Types.card_type.CARD_WILD:
 			return "Wild"
 	return ""
-
-func card_asset() -> Texture:
-	match self.type:
-		Types.card_type.CARD_0:
-			return CardAssets.card_0_asset
-		Types.card_type.CARD_1:
-			return CardAssets.card_1_asset
-		Types.card_type.CARD_2:
-			return CardAssets.card_2_asset
-		Types.card_type.CARD_3:
-			return CardAssets.card_3_asset
-		Types.card_type.CARD_4:
-			return CardAssets.card_4_asset
-		Types.card_type.CARD_5:
-			return CardAssets.card_5_asset
-		Types.card_type.CARD_6:
-			return CardAssets.card_6_asset
-		Types.card_type.CARD_7:
-			return CardAssets.card_7_asset
-		Types.card_type.CARD_8:
-			return CardAssets.card_8_asset
-		Types.card_type.CARD_9:
-			return CardAssets.card_9_asset
-		Types.card_type.CARD_SKIP:
-			return CardAssets.card_skip_asset
-		Types.card_type.CARD_REVERSE:
-			return CardAssets.card_reverse_asset
-		Types.card_type.CARD_PLUS2:
-			return CardAssets.card_plus2_asset
-		Types.card_type.CARD_PLUS4:
-			return CardAssets.card_plus4_asset
-		Types.card_type.CARD_WILD:
-			return CardAssets.card_wild_asset
-	return null

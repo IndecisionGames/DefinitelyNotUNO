@@ -23,19 +23,16 @@ func _ready():
 	is_hovered = false
 	_set_border_color()
 	_set_face_down()
-	_set_card_asset()
 
 func set_in_hand():
 	is_in_hand = true
 	_set_face_up()
-	_set_card_asset()
 
 func set_in_play():
 	is_in_hand = false
 	is_hovered = false
 	is_playable = false
 	_set_face_up()
-	_set_card_asset()
 
 func set_playable(playable: bool):
 	is_playable = playable
@@ -50,9 +47,8 @@ func _set_face_up():
 	_set_card_asset()
 
 func _set_face_down():
-	# TODO: add facedown asset
 	is_face_up = false
-	background.color = Values.facedown
+	card_image.set_texture(CardAssets.card_back_asset)
 	# border.border_color = Values.facedown
 
 func _set_card_colour():
@@ -81,7 +77,7 @@ func _set_border_color():
 	# 	border.border_color = Values.facedown
 
 func _set_card_asset():
-	card_image.set_texture(base.card_asset())
+	card_image.set_texture(CardAssets.card_asset(base.type))
 
 func _on_Interact_mouse_entered():
 	if is_in_hand:
