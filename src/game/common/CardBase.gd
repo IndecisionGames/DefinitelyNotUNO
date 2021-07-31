@@ -5,8 +5,19 @@ var colour: int
 var type: int
 
 func setup(card_colour, card_type):
-	self.colour = card_colour
-	self.type = card_type
+	colour = card_colour
+	type = card_type
+
+func to_dict():
+	return {
+		"colour": colour,
+		"type": type,
+	}
+
+func load_from_dict(dict):
+	colour = dict.get("colour")
+	type = dict.get("type")
+	return self
 
 func is_in(cards):
 	for i in range(cards.size()):

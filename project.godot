@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
+"base": "Control",
 "class": "Card",
 "language": "GDScript",
 "path": "res://src/game/card/Card.gd"
@@ -28,11 +28,11 @@ config/icon="res://icon.png"
 
 LoadingScreen="*res://src/ui/LoadingScreen.tscn"
 SceneManager="*res://src/SceneManager.gd"
-Types="*res://src/game/Types.gd"
-Rules="*res://src/game/Rules.gd"
-GameState="*res://src/game/GameState.gd"
+Types="*res://src/game/common/Types.gd"
+Rules="*res://src/game/common/Rules.gd"
+CardBase="res://src/game/common/CardBase.gd"
+GameState="*res://src/game/common/GameState.gd"
 CardAssets="*res://src/game/card/CardAssets.gd"
-CardBase="res://src/game/card/CardBase.gd"
 Server="*res://src/multiplayer/Server.gd"
 Values="*res://src/game/Values.gd"
 

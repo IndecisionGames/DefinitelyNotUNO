@@ -3,8 +3,10 @@ extends Node
 onready var hand = get_node("Hand")
 
 func _ready():
-	if Server.is_local:
-		var local_server = load("res://src/game/GameServer.gd").new()
+	if !Server.is_local:
+		Server.client_ready()
+	else:
+		var local_server = load("res://src/game/common/GameServer.gd").new()
 		add_child(local_server)
 		local_server.start_game()
 

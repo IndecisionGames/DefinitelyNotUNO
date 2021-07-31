@@ -1,7 +1,7 @@
 extends Node
 # The following code should be identical in both the client and server
 
-const CardBase = preload("res://src/game/card/CardBase.gd")
+const CardBase = preload("res://src/game/common/CardBase.gd")
 
 # Server only GameState values
 var deck = []
@@ -70,11 +70,11 @@ func _play_card(player, card: CardBase, opening_card = false):
 
 		if GameState.current_card_type == Types.card_type.CARD_PLUS2:
 			GameState.pickup_type = Types.pickup_type.PLUS2
-			GameState.required_pickup_count += 2
+			GameState.pickup_count += 2
 
 		if GameState.current_card_type == Types.card_type.CARD_PLUS4:
 			GameState.pickup_type = Types.pickup_type.PLUS4
-			GameState.required_pickup_count += 4
+			GameState.pickup_count += 4
 
 	if GameState.current_card_colour == Types.card_colour.WILD:
 		Server.request_wild_pick(player)
@@ -98,7 +98,7 @@ func _play_card(player, card: CardBase, opening_card = false):
 	_turn_end()
 
 func _draw_cards(player):
-	for _i in range(max(1,GameState.required_pickup_count)):
+	for _i in range(max(1,GameState.pickup_count)):
 		var card = _draw()
 		GameState.players[player].cards.append(card)
 		Server.emit_card_added(player, card)
@@ -106,7 +106,7 @@ func _draw_cards(player):
 	GameState.players[player].uno_status = false
 	GameState.pickup_required = false
 	GameState.pickup_type = Types.pickup_type.NULL
-	GameState.required_pickup_count = 0
+	GameState.pickup_count = 0
 	_turn_end()
 
 func _turn_end():

@@ -1,6 +1,6 @@
 extends Control
 
-const CardBase = preload("res://src/game/card/CardBase.gd")
+const CardBase = preload("res://src/game/common/CardBase.gd")
 
 class_name Card
 

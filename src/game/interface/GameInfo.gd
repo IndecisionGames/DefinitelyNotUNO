@@ -9,6 +9,6 @@ func _ready():
 func _update():
 	if GameState.pickup_required:
 		show()
-		pickup_count.text = "Pickup %s" % GameState.required_pickup_count
+		pickup_count.text = "Pickup %s" % GameState.pickup_count
 	else:
 		hide()

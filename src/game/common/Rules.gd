@@ -1,7 +1,7 @@
 extends Node
 # The following code should be identical in both the client and server
 
-var NUM_PLAYERS = 3
+var NUM_PLAYERS = 4
 
 var INTERRUPT = false
 var UNO_CARD_PENALTY = 1
@@ -40,3 +40,15 @@ const wild_types = [
 	Types.card_type.CARD_PLUS4, 
 	Types.card_type.CARD_WILD
 ]
+
+func to_dict():
+	return {
+		"NUM_PLAYERS": NUM_PLAYERS,
+		"INTERRUPT": INTERRUPT,
+		"UNO_CARD_PENALTY": UNO_CARD_PENALTY,
+	}
+
+func load_from_dict(dict):
+	NUM_PLAYERS = dict.get("NUM_PLAYERS")
+	INTERRUPT = dict.get("INTERRUPT")
+	UNO_CARD_PENALTY = dict.get("UNO_CARD_PENALTY")

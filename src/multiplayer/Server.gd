@@ -1,5 +1,7 @@
 extends Node
 
+const CardBase = preload("res://src/game/common/CardBase.gd")
+
 var player_name: String
 var player_id: int
 var is_local: bool
@@ -42,11 +44,17 @@ func leave_lobby():
 remote func update_lobby(pos, player_names):
 	get_node("/root/Lobby").update_lobby(pos, player_names)
 
+
+
 # Game Setup
 func server_start_game():
 	rpc_id(1, "start_game")
 
+func client_ready():
+	emit_signal("game_start")
+
 remote func set_player(player):
+	print("setting player")
 	player_id = player
 
 # Server to Client
@@ -58,20 +66,29 @@ signal wild_pick_request(player)
 
 remote func emit_game_start(rules={}, game_state={}):
 	if !Server.is_local:
-		pass
+		Rules.load_from_dict(rules)
+		GameState.load_from_dict(game_state)
 		SceneManager.goto_scene("res://src/game/Game.tscn", false)
-	emit_signal("game_start")
+		# wait for client_ready()
+	else:
+		emit_signal("game_start")
 
 remote func emit_game_update(game_state={}):
 	if !Server.is_local:
-		pass
+		GameState.load_from_dict(game_state)
 	emit_signal("game_update")
 
-remote func emit_card_added(player, card: CardBase):
-	emit_signal("card_added", card)
+remote func emit_card_added(player, card):
+	if !Server.is_local: # card is passed as dictionary via network
+		emit_signal("card_added", CardBase.new().load_from_dict(card))
+	else:
+		emit_signal("card_added", card)
 
-remote func emit_card_removed(player, card: CardBase):
-	emit_signal("card_removed", card)
+remote func emit_card_removed(player, card):
+	if !Server.is_local: # card is passed as dictionary via network
+		emit_signal("card_removed", CardBase.new().load_from_dict(card))
+	else:
+		emit_signal("card_removed", card)
 
 remote func request_wild_pick(player):
 	emit_signal("wild_pick_request")
@@ -82,26 +99,26 @@ signal draw_request(player)
 signal uno_request(player)
 signal wild_pick(colour)
 
-func request_play_card(card: CardBase):
+func request_play_card(card):
 	if !Server.is_local:
-		pass
+		rpc_id(1, "request_play_card", player_id, card.to_dict())
 	else:
 		emit_signal("play_request", player_id, card)
 
 func request_draw_card():
 	if !Server.is_local:
-		pass
+		rpc_id(1, "request_draw_card", player_id)
 	else:
 		emit_signal("draw_request", player_id)
 
 func request_uno():
 	if !Server.is_local:
-		pass
+		rpc_id(1, "request_uno", player_id)
 	else:
 		emit_signal("uno_request", player_id)
 
 func emit_wild_pick(colour):
 	if !Server.is_local:
-		pass
+		rpc_id(1, "wild_pick", colour)
 	else:
 		emit_signal("wild_pick", colour)
