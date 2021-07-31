@@ -50,3 +50,23 @@ func card_asset(type) -> Texture:
 		Types.card_type.CARD_WILD:
 			return card_wild_asset
 	return null
+
+var normal_border = StyleBoxFlat.new()
+var playable_border = StyleBoxFlat.new()
+var hover_border = StyleBoxFlat.new()
+
+func _ready():
+	normal_border.bg_color = Color(0,0,0,0)
+	normal_border.border_color = Values.normal
+	normal_border.set_border_width_all(2)
+	normal_border.set_corner_radius_individual(15, 15, 12, 13)
+
+	playable_border.bg_color = Color(0,0,0,0)
+	playable_border.border_color = Values.playable
+	playable_border.set_border_width_all(5)
+	playable_border.set_corner_radius_individual(15, 15, 12, 13)
+
+	hover_border.bg_color = Color(0,0,0,0)
+	hover_border.border_color = Values.hover
+	hover_border.set_border_width_all(3)
+	hover_border.set_corner_radius_individual(15, 15, 12, 13)
