@@ -63,7 +63,7 @@ func _update_playable():
 		has_playable_card = has_playable_card || is_playable
 
 func _update_card_positions():
-	var card_seperation = 260
+	var card_seperation = 140
 	if self.cards.size() > 7:
 		card_seperation = float(1600)/float(self.cards.size()-1)
 

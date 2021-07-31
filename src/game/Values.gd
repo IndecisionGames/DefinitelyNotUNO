@@ -1,10 +1,10 @@
 extends Node
 
-const red = Color(0.7,0.13,0.13,1)
-const green = Color(0.18,0.55,0.34,1)
-const yellow = Color(0.85,0.65,0.13,1)
-const blue = Color(0.1,0.1,0.44,1)
-const wild = Color(0.44,0.5,0.56,1)
+const red = Color(0.84,0.15,0,1)
+const green = Color(0.22,0.59,0.07,1)
+const yellow = Color(0.82,0.72,0.02,1)
+const blue = Color(0.04,0.34,0.75,1)
+const wild = Color(0.12,0.12,0.12,1)
 const facedown = Color(0,0,0,1)
 
 const playable = Color(0.58,0,0.83,1)

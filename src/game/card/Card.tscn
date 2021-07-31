@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/game/card/Card.gd" type="Script" id=1]
+[ext_resource path="res://assets/cards/0.png" type="Texture" id=2]
 
-[node name="CardBase" type="MarginContainer"]
+[node name="CardBase" type="Control"]
 margin_right = 250.0
 margin_bottom = 350.0
 rect_min_size = Vector2( 250, 350 )
@@ -12,155 +13,33 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="ColorRect" parent="."]
-margin_right = 250.0
-margin_bottom = 350.0
+[node name="Colour" type="ColorRect" parent="."]
+margin_left = 9.0
+margin_top = 9.0
+margin_right = 192.0
+margin_bottom = 307.0
 color = Color( 1, 0.0470588, 0.0470588, 1 )
-
-[node name="Border" type="ReferenceRect" parent="."]
-margin_right = 250.0
-margin_bottom = 350.0
-border_color = Color( 0, 0, 0, 1 )
-editor_only = false
-
-[node name="Text" type="VBoxContainer" parent="."]
-margin_right = 250.0
-margin_bottom = 350.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TopGap" type="MarginContainer" parent="Text"]
-margin_right = 250.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 0, 25 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Top" type="HBoxContainer" parent="Text"]
-margin_top = 29.0
-margin_right = 250.0
-margin_bottom = 43.0
-
-[node name="LeftGap" type="MarginContainer" parent="Text/Top"]
-margin_right = 25.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 25, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Text/Top"]
-margin_left = 29.0
-margin_right = 60.0
-margin_bottom = 14.0
-text = "Num"
-align = 1
-valign = 1
-
-[node name="RightGap" type="MarginContainer" parent="Text/Top"]
-margin_left = 64.0
-margin_right = 250.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TopMiddleGap" type="MarginContainer" parent="Text"]
-margin_top = 47.0
-margin_right = 250.0
-margin_bottom = 164.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Middle" type="HBoxContainer" parent="Text"]
-margin_top = 168.0
-margin_right = 250.0
-margin_bottom = 182.0
-
-[node name="LeftGap" type="MarginContainer" parent="Text/Middle"]
-margin_right = 105.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Text/Middle"]
-margin_left = 109.0
-margin_right = 140.0
-margin_bottom = 14.0
-text = "Num"
-align = 1
-valign = 1
-
-[node name="RightGap" type="MarginContainer" parent="Text/Middle"]
-margin_left = 144.0
-margin_right = 250.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BottomMiddleGap" type="MarginContainer" parent="Text"]
-margin_top = 186.0
-margin_right = 250.0
-margin_bottom = 303.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Bottom" type="HBoxContainer" parent="Text"]
-margin_top = 307.0
-margin_right = 250.0
-margin_bottom = 321.0
-
-[node name="LeftGap" type="MarginContainer" parent="Text/Bottom"]
-margin_right = 186.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Text/Bottom"]
-margin_left = 190.0
-margin_right = 221.0
-margin_bottom = 14.0
-text = "Num"
-align = 1
-valign = 1
-
-[node name="RightGap" type="MarginContainer" parent="Text/Bottom"]
-margin_left = 225.0
-margin_right = 250.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 25, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BottomGap" type="MarginContainer" parent="Text"]
-margin_top = 325.0
-margin_right = 250.0
-margin_bottom = 350.0
-rect_min_size = Vector2( 0, 25 )
-size_flags_horizontal = 3
+[node name="CardImage" type="TextureRect" parent="."]
+margin_left = -109.602
+margin_top = -26.8701
+margin_right = 1296.4
+margin_bottom = 1181.13
+rect_scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Interact" type="TextureButton" parent="."]
-margin_right = 250.0
-margin_bottom = 350.0
+visible = false
+margin_left = -7.0
+margin_top = 4.0
+margin_right = 899.0
+margin_bottom = 1212.0
 rect_min_size = Vector2( 250, 350 )
 expand = true
 [connection signal="mouse_entered" from="Interact" to="." method="_on_Interact_mouse_entered"]

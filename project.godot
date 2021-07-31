@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "MarginContainer",
+"base": "Node",
 "class": "Card",
 "language": "GDScript",
 "path": "res://src/game/card/Card.gd"
@@ -31,6 +31,7 @@ SceneManager="*res://src/SceneManager.gd"
 Types="*res://src/game/Types.gd"
 Rules="*res://src/game/Rules.gd"
 GameState="*res://src/game/GameState.gd"
+CardAssets="*res://src/game/card/CardAssets.gd"
 CardBase="res://src/game/card/CardBase.gd"
 Server="*res://src/multiplayer/Server.gd"
 Values="*res://src/game/Values.gd"
