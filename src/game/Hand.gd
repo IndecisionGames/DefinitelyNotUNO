@@ -56,7 +56,7 @@ func _on_card_removed(player, card: CardBase):
 func _update_options():
 	if GameState.current_player == Server.player_id:
 		buttons.enable_draw_button(!has_playable_card && !GameState.waiting_action)
-		buttons.enable_uno_button(cards.size() == 2 && has_playable_card)
+		buttons.enable_uno_button(cards.size() == 2 && has_playable_card && !GameState.players[Server.player_id].uno_status)
 	else:
 		buttons.enable_draw_button(false)
 		buttons.enable_uno_button(false)

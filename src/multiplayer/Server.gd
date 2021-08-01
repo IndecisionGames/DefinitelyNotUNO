@@ -60,6 +60,7 @@ remote func set_player(player):
 # Server to Client
 signal game_start()
 signal game_update()
+signal game_won(player)
 signal card_added(player, card)
 signal card_removed(player, card)
 signal wild_pick_request(player)
@@ -72,6 +73,9 @@ remote func emit_game_start(rules={}, game_state={}):
 		# wait for client_ready()
 	else:
 		emit_signal("game_start")
+
+remote func emit_game_won(player):
+	emit_signal("game_won", player)
 
 remote func emit_game_update(game_state={}):
 	if !Server.is_local:

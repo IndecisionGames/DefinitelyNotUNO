@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/game/Game.gd" type="Script" id=1]
 [ext_resource path="res://src/game/GameLog.gd" type="Script" id=2]
@@ -10,9 +10,14 @@
 [ext_resource path="res://src/game/interface/TurnDisplay.gd" type="Script" id=8]
 [ext_resource path="res://src/game/interface/OpponentHands.gd" type="Script" id=9]
 [ext_resource path="res://src/game/Hand.gd" type="Script" id=10]
+[ext_resource path="res://src/game/interface/WinPopup.gd" type="Script" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
 font_data = ExtResource( 3 )
 
 [node name="Game" type="Node"]
@@ -231,8 +236,9 @@ __meta__ = {
 }
 
 [node name="HUD" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -313,6 +319,44 @@ margin_right = 320.0
 margin_bottom = 300.0
 scroll_following = true
 
+[node name="WinPopup" type="MarginContainer" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.1
+margin_left = -200.0
+margin_right = 200.0
+margin_bottom = 200.0
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="HUD/WinPopup"]
+margin_right = 399.0
+margin_bottom = 200.0
+color = Color( 0.54902, 0.54902, 0.54902, 1 )
+
+[node name="Popup" type="VBoxContainer" parent="HUD/WinPopup"]
+margin_right = 399.0
+margin_bottom = 200.0
+
+[node name="Label" type="Label" parent="HUD/WinPopup/Popup"]
+margin_right = 399.0
+margin_bottom = 98.0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+text = "Test"
+align = 1
+valign = 1
+
+[node name="Button" type="Button" parent="HUD/WinPopup/Popup"]
+margin_top = 102.0
+margin_right = 399.0
+margin_bottom = 200.0
+size_flags_vertical = 3
+text = "Play Again?"
+
 [node name="Hand" type="Node2D" parent="."]
 position = Vector2( 835, 850 )
 script = ExtResource( 10 )
@@ -322,3 +366,4 @@ script = ExtResource( 10 )
 [connection signal="pressed" from="ButtonManager/WildPicker/Buttons/Green/GreenButton" to="ButtonManager" method="_on_GreenButton_pressed"]
 [connection signal="pressed" from="ButtonManager/WildPicker/Buttons/Yellow/YellowButton" to="ButtonManager" method="_on_YellowButton_pressed"]
 [connection signal="pressed" from="ButtonManager/WildPicker/Buttons/Blue/BlueButton" to="ButtonManager" method="_on_BlueButton_pressed"]
+[connection signal="pressed" from="HUD/WinPopup/Popup/Button" to="HUD/WinPopup" method="_on_Button_pressed"]
