@@ -1,24 +1,25 @@
 extends Control
 
-onready var nameText = find_node("NameText")
-onready var playButton = find_node("Play")
-onready var errorText = find_node("Error")
+onready var name_text = find_node("NameText")
+onready var address_text = find_node("AddressText")
+onready var error_text = find_node("Error")
 
 func _ready():
-	errorText.text = ""
+	error_text.text = ""
 
 func _on_Play_pressed():
-	var name = nameText.text.strip_edges()
+	var name = name_text.text.strip_edges()
 	var check = check_name(name)
+	var ip = address_text.text.strip_edges()
 	
 	if check:
-		Server.connect_to_server(name)
+		Server.connect_to_server(name, ip)
 
 func check_name(name):
 	if name.length() == 0:
-		errorText.text = "Please enter a name"
+		error_text.text = "Please enter a name"
 		return false
-	errorText.text = ""
+	error_text.text = ""
 	return true
 
 func _on_Debug_pressed():
@@ -27,4 +28,4 @@ func _on_Debug_pressed():
 	SceneManager.goto_scene("res://src/game/Game.tscn", false)
 
 func set_error_text(txt):
-	errorText.text = txt
+	error_text.text = txt

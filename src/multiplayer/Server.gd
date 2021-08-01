@@ -9,9 +9,11 @@ var is_local: bool
 # Networking
 var network = NetworkedMultiplayerENet.new()
 var port = 31416
-var ip = "127.0.0.1"
+const default_ip = "127.0.0.1"
 
-func connect_to_server(name):
+func connect_to_server(name, ip):
+	if ip == "":
+		ip = default_ip
 	network.create_client(ip, port)
 	get_tree().set_network_peer(network)
 
