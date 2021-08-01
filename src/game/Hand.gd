@@ -10,14 +10,14 @@ var has_playable_card = false
 func _ready():
 	Server.connect("game_start", self, "_load")
 	Server.connect("game_update", self, "_on_game_update")
-	Server.connect("card_added", self, "_on_card_added")
-	Server.connect("card_removed", self, "_on_card_removed")
+	Server.connect("cards_drawn", self, "_on_cards_drawn")
+	Server.connect("card_played", self, "_on_card_played")
 
 func _load():
 	while card_bases.size() > 0:
-		_on_card_removed(Server.player_id, card_bases[0])
-	for card in GameState.players[Server.player_id].cards:
-		_on_card_added(Server.player_id, card)
+		_on_card_played(Server.player_id, card_bases[0])
+
+	_on_cards_drawn(Server.player_id, GameState.players[Server.player_id].cards)
 
 	_update_playable()
 	_update_options()
@@ -26,22 +26,23 @@ func _on_game_update():
 	_update_playable()
 	_update_options()
 
-func _on_card_added(player, card: CardBase):
+func _on_cards_drawn(player, drawn_cards):
 	if player != Server.player_id:
 		return
-
-	var card_instance = Card.instance()
-	card_instance.setup(card.colour, card.type)
-	add_child(card_instance)
-	card_instance.set_in_hand()
 	
-	card_bases.append(card_instance.base)
-	cards.append(card_instance)
+	for card in drawn_cards:
+		var card_instance = Card.instance()
+		card_instance.setup(card.colour, card.type)
+		add_child(card_instance)
+		card_instance.set_in_hand()
+		
+		card_bases.append(card_instance.base)
+		cards.append(card_instance)
 
 	_update_playable()
 	_update_card_positions()
 
-func _on_card_removed(player, card: CardBase):
+func _on_card_played(player, card):
 	if player != Server.player_id:
 		return
 

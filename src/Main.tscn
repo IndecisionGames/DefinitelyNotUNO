@@ -243,6 +243,7 @@ text = "Debug"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer/VBoxContainer/PlayContainer/MarginContainer/Play" to="." method="_on_Play_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Debug" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Debug" to="." method="_on_Debug_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Debug" to="." method="_on_Play_pressed"]

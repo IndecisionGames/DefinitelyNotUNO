@@ -61,8 +61,8 @@ remote func set_player(player):
 signal game_start()
 signal game_update()
 signal game_won(player)
-signal card_added(player, card)
-signal card_removed(player, card)
+signal cards_drawn(player, cards)
+signal card_played(player, card)
 signal wild_pick_request(player)
 
 remote func emit_game_start(rules={}, game_state={}):
@@ -82,17 +82,20 @@ remote func emit_game_update(game_state={}):
 		GameState.load_from_dict(game_state)
 	emit_signal("game_update")
 
-remote func emit_card_added(player, card):
+remote func emit_cards_drawn(player, cards):
 	if !Server.is_local: # card is passed as dictionary via network
-		emit_signal("card_added", player, CardBase.new().load_from_dict(card))
+		var drawn_cards = []
+		for card in cards:
+			drawn_cards.append(CardBase.new().load_from_dict(card))
+		emit_signal("cards_drawn", player, drawn_cards)
 	else:
-		emit_signal("card_added", player, card)
+		emit_signal("cards_drawn", player, cards)
 
-remote func emit_card_removed(player, card):
+remote func emit_card_played(player, card):
 	if !Server.is_local: # card is passed as dictionary via network
-		emit_signal("card_removed", player, CardBase.new().load_from_dict(card))
+		emit_signal("card_played", player, CardBase.new().load_from_dict(card))
 	else:
-		emit_signal("card_removed", player, card)
+		emit_signal("card_played", player, card)
 
 remote func request_wild_pick(player):
 	emit_signal("wild_pick_request")
