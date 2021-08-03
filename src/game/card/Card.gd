@@ -7,6 +7,7 @@ class_name Card
 onready var background = get_node("Colour")
 onready var card_image = get_node("CardImage")
 onready var border = get_node("Border")
+onready var tween = get_node("Tween")
 
 var base: CardBase
 var is_face_up: bool
@@ -64,11 +65,7 @@ func _set_card_colour():
 			background.color = Values.wild
 
 func _set_border():
-	if !is_in_hand:
-		border.set("custom_styles/panel", CardAssets.normal_border)
-	elif is_hovered:
-		border.set("custom_styles/panel", CardAssets.hover_border)
-	elif is_playable:
+	if is_playable:
 		border.set("custom_styles/panel", CardAssets.playable_border)
 	else:
 		border.set("custom_styles/panel", CardAssets.normal_border)
@@ -77,10 +74,12 @@ func _set_card_asset():
 	card_image.set_texture(CardAssets.card_asset(base.type))
 
 func _move_up():
-	set_position(Vector2(rect_position.x, -40))
+	tween.interpolate_property(self, "rect_position", null, Vector2(rect_position.x, -80), 0.1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.start()
 
 func _move_down():
-	set_position(Vector2(rect_position.x, 0))
+	tween.interpolate_property(self, "rect_position", null, Vector2(rect_position.x, 0), 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.start()
 
 func _on_Interact_mouse_entered():
 	if is_in_hand:

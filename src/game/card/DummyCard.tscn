@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/cards/back.png" type="Texture" id=1]
+
+[node name="Card" type="Control"]
+anchor_right = 0.035
+anchor_bottom = 0.096
+margin_right = -0.199997
+margin_bottom = 0.32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -36.7569
+margin_top = -8.76151
+margin_right = 1369.24
+margin_bottom = 1199.24
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+flip_h = true
+flip_v = true

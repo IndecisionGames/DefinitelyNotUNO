@@ -2,6 +2,8 @@ extends Node2D
 
 const Card = preload("res://src/game/card/Card.tscn")
 onready var buttons = get_node("../ButtonManager")
+onready var draw_anim = get_node("DrawAnim")
+onready var draw_card_layer = get_node("../PlaySpace/Deck/TopDeckLayer/TopDeckLayer2")
 
 var cards = []
 var card_bases = []
@@ -17,7 +19,7 @@ func _load():
 	while card_bases.size() > 0:
 		_on_card_played(Server.player_id, card_bases[0])
 
-	_on_cards_drawn(Server.player_id, GameState.players[Server.player_id].cards)
+	_on_cards_drawn(Server.player_id, GameState.players[Server.player_id].cards, true)
 
 	_update_playable()
 	_update_options()
@@ -27,11 +29,19 @@ func _on_game_update():
 	_update_playable()
 	_update_options()
 
-func _on_cards_drawn(player, drawn_cards):
+func _process(_delta):
+	if draw_anim.is_playing():
+		draw_card_layer.set_layer(2)
+	else:
+		draw_card_layer.set_layer(4)
+
+func _on_cards_drawn(player, drawn_cards, initial=false):
 	if player != Server.player_id:
 		return
 	
 	for card in drawn_cards:
+		if not initial:
+			draw_anim.play("PlayerDraw")
 		var card_instance = Card.instance()
 		card_instance.setup(card.colour, card.type)
 		add_child(card_instance)

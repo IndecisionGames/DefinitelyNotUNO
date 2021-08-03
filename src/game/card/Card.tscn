@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/cards/0.png" type="Texture" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
+bg_color = Color( 1, 1, 1, 0 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -66,10 +66,13 @@ margin_top = 9.0
 margin_right = -3.00002
 margin_bottom = -1.12201
 rect_min_size = Vector2( 180, 280 )
+mouse_default_cursor_shape = 2
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="mouse_entered" from="Interact" to="." method="_on_Interact_mouse_entered"]
 [connection signal="mouse_exited" from="Interact" to="." method="_on_Interact_mouse_exited"]
