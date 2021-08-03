@@ -189,7 +189,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
 align = 1
-max_length = 10
 placeholder_text = "Server IP"
 caret_blink = true
 

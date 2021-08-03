@@ -333,16 +333,16 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="HUD/WinPopup"]
-margin_right = 399.0
+margin_right = 400.0
 margin_bottom = 200.0
 color = Color( 0.54902, 0.54902, 0.54902, 1 )
 
 [node name="Popup" type="VBoxContainer" parent="HUD/WinPopup"]
-margin_right = 399.0
+margin_right = 400.0
 margin_bottom = 200.0
 
 [node name="Label" type="Label" parent="HUD/WinPopup/Popup"]
-margin_right = 399.0
+margin_right = 400.0
 margin_bottom = 98.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
@@ -352,7 +352,7 @@ valign = 1
 
 [node name="Button" type="Button" parent="HUD/WinPopup/Popup"]
 margin_top = 102.0
-margin_right = 399.0
+margin_right = 400.0
 margin_bottom = 200.0
 size_flags_vertical = 3
 text = "Play Again?"
@@ -360,6 +360,7 @@ text = "Play Again?"
 [node name="Hand" type="Node2D" parent="."]
 position = Vector2( 835, 850 )
 script = ExtResource( 10 )
+
 [connection signal="pressed" from="ButtonManager/Draw/DrawButton" to="ButtonManager" method="_on_DrawButton_pressed"]
 [connection signal="pressed" from="ButtonManager/Uno/UnoButton" to="ButtonManager" method="_on_UnoButton_pressed"]
 [connection signal="pressed" from="ButtonManager/WildPicker/Buttons/Red/RedButton" to="ButtonManager" method="_on_RedButton_pressed"]
