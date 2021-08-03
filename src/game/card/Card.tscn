@@ -27,10 +27,10 @@ __meta__ = {
 }
 
 [node name="Colour" type="ColorRect" parent="."]
-margin_left = 9.0
-margin_top = 9.0
-margin_right = 192.0
-margin_bottom = 307.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 193.0
+margin_bottom = 308.0
 mouse_filter = 2
 color = Color( 1, 0.0470588, 0.0470588, 1 )
 __meta__ = {
@@ -38,10 +38,10 @@ __meta__ = {
 }
 
 [node name="CardImage" type="TextureRect" parent="."]
-margin_left = -109.602
-margin_top = -26.8701
-margin_right = 1296.4
-margin_bottom = 1181.13
+margin_left = -109.0
+margin_top = -26.0
+margin_right = 1297.0
+margin_bottom = 1182.0
 rect_scale = Vector2( 0.3, 0.3 )
 mouse_filter = 2
 texture = ExtResource( 2 )
@@ -50,9 +50,8 @@ __meta__ = {
 }
 
 [node name="Border" type="Panel" parent="."]
-margin_top = -1.0
-margin_right = 202.0
-margin_bottom = 314.0
+margin_right = 204.0
+margin_bottom = 317.0
 mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
@@ -62,15 +61,16 @@ __meta__ = {
 [node name="Interact" type="TextureButton" parent="."]
 anchor_right = 1.0
 anchor_bottom = 0.994
-margin_left = 7.0
-margin_top = 6.0
-margin_right = -5.00002
-margin_bottom = -4.12201
+margin_left = 9.0
+margin_top = 9.0
+margin_right = -3.00002
+margin_bottom = -1.12201
 rect_min_size = Vector2( 180, 280 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="mouse_entered" from="Interact" to="." method="_on_Interact_mouse_entered"]
 [connection signal="mouse_exited" from="Interact" to="." method="_on_Interact_mouse_exited"]
 [connection signal="pressed" from="Interact" to="." method="_on_Interact_pressed"]

@@ -8,4 +8,4 @@ const wild = Color(0.12,0.12,0.12,1)
 
 const normal = Color(0.2,0.2,0.2,1)
 const hover = Color(0.01,0.99,0.87,1)
-const playable = Color(0.86,0.64,0.04,1)
+const playable = Color(1,0.08,0.58,1)

@@ -21,6 +21,7 @@ func _load():
 
 	_update_playable()
 	_update_options()
+	_update_card_positions()
 
 func _on_game_update():
 	_update_playable()
@@ -40,6 +41,7 @@ func _on_cards_drawn(player, drawn_cards):
 		cards.append(card_instance)
 
 	_update_playable()
+	_update_options()
 	_update_card_positions()
 
 func _on_card_played(player, card):
@@ -57,7 +59,7 @@ func _on_card_played(player, card):
 func _update_options():
 	if GameState.current_player == Server.player_id:
 		buttons.enable_draw_button(!has_playable_card && !GameState.waiting_action)
-		buttons.enable_uno_button(cards.size() == 2 && has_playable_card && !GameState.players[Server.player_id].uno_status)
+		buttons.enable_uno_button(cards.size() == 2 && has_playable_card)
 	else:
 		buttons.enable_draw_button(false)
 		buttons.enable_uno_button(false)
