@@ -1,5 +1,6 @@
 extends Node
 
+const white = Color(0.94,0.97,1,1)
 const red = Color(0.84,0.15,0,1)
 const green = Color(0.22,0.59,0.07,1)
 const yellow = Color(0.82,0.72,0.02,1)
