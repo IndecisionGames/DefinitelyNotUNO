@@ -1,0 +1,120 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/lobby/RuleSettings.gd" type="Script" id=1]
+
+[node name="RuleSettings" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1520.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 400.0
+margin_bottom = 300.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Rule1" type="Panel" parent="VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 97.0
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Rule1"]
+margin_right = 400.0
+margin_bottom = 100.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RuleName" type="Label" parent="VBoxContainer/Rule1/HBoxContainer"]
+margin_right = 372.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Rule"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Input" type="CheckBox" parent="VBoxContainer/Rule1/HBoxContainer"]
+margin_left = 376.0
+margin_right = 400.0
+margin_bottom = 100.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rule2" type="Panel" parent="VBoxContainer"]
+margin_top = 101.0
+margin_right = 400.0
+margin_bottom = 198.0
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Rule2"]
+margin_right = 400.0
+margin_bottom = 100.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RuleName" type="Label" parent="VBoxContainer/Rule2/HBoxContainer"]
+margin_right = 372.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Rule"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Input" type="CheckBox" parent="VBoxContainer/Rule2/HBoxContainer"]
+margin_left = 376.0
+margin_right = 400.0
+margin_bottom = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rule3" type="Panel" parent="VBoxContainer"]
+margin_top = 202.0
+margin_right = 400.0
+margin_bottom = 300.0
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Rule3"]
+margin_right = 400.0
+margin_bottom = 100.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RuleName" type="Label" parent="VBoxContainer/Rule3/HBoxContainer"]
+margin_right = 372.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Rule"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Input" type="CheckBox" parent="VBoxContainer/Rule3/HBoxContainer"]
+margin_left = 376.0
+margin_right = 400.0
+margin_bottom = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

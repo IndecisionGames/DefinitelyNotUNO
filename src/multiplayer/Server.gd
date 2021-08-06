@@ -49,8 +49,8 @@ remote func update_lobby(pos, player_names):
 
 
 # Game Setup
-func server_start_game():
-	rpc_id(1, "start_game")
+func server_start_game(rules={}):
+	rpc_id(1, "start_game", rules)
 
 func client_ready():
 	emit_signal("game_start")

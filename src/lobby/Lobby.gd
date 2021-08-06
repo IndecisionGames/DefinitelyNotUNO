@@ -9,6 +9,8 @@ onready var slot6 = find_node("Slot6")
 onready var slot7 = find_node("Slot7")
 onready var slot8 = find_node("Slot8")
 
+onready var rules_settings = find_node("RuleSettings")
+
 var position = -1
 var slots = []
 
@@ -39,4 +41,4 @@ func update_lobby(position, players):
 	slots[position].set_highlight(true)
 
 func _on_Play_pressed():
-	Server.server_start_game()
+	Server.server_start_game(rules_settings.get_rules())
