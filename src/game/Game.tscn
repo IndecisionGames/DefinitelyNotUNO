@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/game/Game.gd" type="Script" id=1]
 [ext_resource path="res://assets/cards/back.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://src/game/interface/WinPopup.gd" type="Script" id=11]
 [ext_resource path="res://src/game/interface/EventDisplay.gd" type="Script" id=12]
 [ext_resource path="res://src/game/GameLog.gd" type="Script" id=13]
+[ext_resource path="res://src/game/AudioManager.gd" type="Script" id=14]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0.882353, 1, 0 )
@@ -72,16 +73,15 @@ tracks/2/keys = {
 size = 36
 font_data = ExtResource( 3 )
 
+[sub_resource type="DynamicFont" id=4]
+size = 28
+font_data = ExtResource( 3 )
+
 [sub_resource type="DynamicFont" id=5]
 size = 28
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=6]
-size = 28
-font_data = ExtResource( 3 )
-
-[sub_resource type="Animation" id=4]
-resource_name = "PlayerDraw"
+[sub_resource type="Animation" id=6]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("../PlaySpace/Deck/TopDeckLayer/TopDeckCard:rect_position")
@@ -110,6 +110,9 @@ tracks/1/keys = {
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
+
+[node name="AudioManager" type="AudioStreamPlayer" parent="."]
+script = ExtResource( 14 )
 
 [node name="PlaySpace" type="Control" parent="."]
 mouse_filter = 2
@@ -416,7 +419,7 @@ __meta__ = {
 margin_top = 20.0
 margin_right = 300.0
 margin_bottom = 52.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "Event"
 align = 1
 
@@ -438,7 +441,7 @@ __meta__ = {
 margin_top = 9.0
 margin_right = 103.0
 margin_bottom = 41.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 text = "Draw X"
 align = 1
 valign = 1
@@ -463,7 +466,6 @@ margin_bottom = 300.0
 scroll_following = true
 
 [node name="WinPopup" type="MarginContainer" parent="HUD"]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.1
 anchor_right = 0.5
@@ -506,7 +508,7 @@ position = Vector2( 860, 850 )
 script = ExtResource( 10 )
 
 [node name="DrawAnim" type="AnimationPlayer" parent="Hand"]
-anims/PlayerDraw = SubResource( 4 )
+anims/PlayerDraw = SubResource( 6 )
 
 [node name="OpponentHands" type="Control" parent="."]
 __meta__ = {
