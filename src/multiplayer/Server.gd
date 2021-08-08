@@ -4,6 +4,8 @@ const CardBase = preload("res://src/game/common/CardBase.gd")
 
 var player_name: String
 var player_id: int
+var is_host: bool
+
 var is_local: bool
 
 # Networking
@@ -29,7 +31,11 @@ func _on_connection_failed():
 func _on_connection_succeeded():
 	print("Successfully connected to server")
 
-remote func join_server(players):
+remote func join_server(players, host=false):
+	Server.is_host = host
+	if Server.is_host: 
+		print("You are the Host")
+
 	print("Joining server with " + str(players) + " other players")
 	SceneManager.goto_scene("res://src/lobby/Lobby.tscn", false)
 
@@ -46,17 +52,21 @@ func leave_lobby():
 remote func update_lobby(pos, player_names):
 	get_node("/root/Lobby").update_lobby(pos, player_names)
 
+func update_rules(rules):
+	rpc_id(1, "update_rules", rules)
+
+remote func sync_rules(rules):
+	get_node("/root/Lobby").find_node("RuleSettings").sync_rules(rules)
 
 
 # Game Setup
-func server_start_game(rules={}):
-	rpc_id(1, "start_game", rules)
+func server_start_game():
+	rpc_id(1, "start_game")
 
 func client_ready():
 	emit_signal("game_start")
 
 remote func set_player(player):
-	print("setting player")
 	player_id = player
 
 # Server to Client

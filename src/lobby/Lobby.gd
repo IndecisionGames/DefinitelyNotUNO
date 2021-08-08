@@ -24,6 +24,9 @@ func _ready():
 	slots.append(slot7)
 	slots.append(slot8)
 
+	if !Server.is_host:
+		find_node("Play").hide()
+
 	join_lobby()
 
 func join_lobby():
@@ -41,4 +44,4 @@ func update_lobby(position, players):
 	slots[position].set_highlight(true)
 
 func _on_Play_pressed():
-	Server.server_start_game(rules_settings.get_rules())
+	Server.server_start_game()

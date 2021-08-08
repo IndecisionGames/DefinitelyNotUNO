@@ -16,105 +16,93 @@ margin_right = 400.0
 margin_bottom = 300.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="Rule1" type="Panel" parent="VBoxContainer"]
-margin_right = 400.0
-margin_bottom = 97.0
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Rule1"]
-margin_right = 400.0
-margin_bottom = 100.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RuleName" type="Label" parent="VBoxContainer/Rule1/HBoxContainer"]
-margin_right = 372.0
+[node name="Rule1" type="ColorRect" parent="VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 97.0
+size_flags_vertical = 3
+color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
+
+[node name="Name" type="Label" parent="VBoxContainer/Rule1"]
+margin_right = 400.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Rule"
+align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Input" type="CheckBox" parent="VBoxContainer/Rule1/HBoxContainer"]
-margin_left = 376.0
+[node name="Button" type="TextureButton" parent="VBoxContainer/Rule1"]
 margin_right = 400.0
 margin_bottom = 100.0
-size_flags_vertical = 3
+size_flags_vertical = 2
+toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Rule2" type="Panel" parent="VBoxContainer"]
+[node name="Rule2" type="ColorRect" parent="VBoxContainer"]
 margin_top = 101.0
 margin_right = 400.0
 margin_bottom = 198.0
 size_flags_vertical = 3
+color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Rule2"]
+[node name="Name" type="Label" parent="VBoxContainer/Rule2"]
 margin_right = 400.0
-margin_bottom = 100.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RuleName" type="Label" parent="VBoxContainer/Rule2/HBoxContainer"]
-margin_right = 372.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Rule"
+align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Input" type="CheckBox" parent="VBoxContainer/Rule2/HBoxContainer"]
-margin_left = 376.0
+[node name="Button" type="TextureButton" parent="VBoxContainer/Rule2"]
 margin_right = 400.0
 margin_bottom = 100.0
+size_flags_vertical = 2
+toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Rule3" type="Panel" parent="VBoxContainer"]
+[node name="Rule3" type="ColorRect" parent="VBoxContainer"]
 margin_top = 202.0
 margin_right = 400.0
 margin_bottom = 300.0
 size_flags_vertical = 3
+color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Rule3"]
+[node name="Name" type="Label" parent="VBoxContainer/Rule3"]
 margin_right = 400.0
-margin_bottom = 100.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RuleName" type="Label" parent="VBoxContainer/Rule3/HBoxContainer"]
-margin_right = 372.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Rule"
+align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Input" type="CheckBox" parent="VBoxContainer/Rule3/HBoxContainer"]
-margin_left = 376.0
+[node name="Button" type="TextureButton" parent="VBoxContainer/Rule3"]
 margin_right = 400.0
 margin_bottom = 100.0
+size_flags_vertical = 2
+toggle_mode = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="toggled" from="VBoxContainer/Rule1/Button" to="." method="_on_Rule1_Button_toggled"]
+[connection signal="toggled" from="VBoxContainer/Rule2/Button" to="." method="_on_Rule2_Button_toggled"]
+[connection signal="toggled" from="VBoxContainer/Rule3/Button" to="." method="_on_Rule3_Button_toggled"]
