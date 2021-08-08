@@ -36,6 +36,3 @@ func _on_Debug_pressed():
 	Server.is_local = true
 	Server.is_host = true
 	SceneManager.goto_scene("res://src/game/Game.tscn", false)
-
-func set_error_text(txt):
-	error_text.text = txt

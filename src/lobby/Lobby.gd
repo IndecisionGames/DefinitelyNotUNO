@@ -9,8 +9,6 @@ onready var slot6 = find_node("Slot6")
 onready var slot7 = find_node("Slot7")
 onready var slot8 = find_node("Slot8")
 
-onready var rules_settings = find_node("RuleSettings")
-
 var position = -1
 var slots = []
 
@@ -27,21 +25,15 @@ func _ready():
 	if !Server.is_host:
 		find_node("Play").hide()
 
-	join_lobby()
-
-func join_lobby():
 	Server.join_lobby()
 
-func leave_lobby():
-	Server.leave_lobby()
-
-func update_lobby(position, players):
+func update_lobby(players):
 	for slot in slots:
 		slot.remove_player()
-	print("My updated pos: " + str(position))
-	for n in range(len(players)):
-		slots[n].add_player(players[n])
-	slots[position].set_highlight(true)
+	for i in range(players.size()):
+		slots[i].add_player(players[i])
+		if players[i] == Server.player_name:
+			slots[i].highlight()
 
 func _on_Play_pressed():
 	Server.server_start_game()

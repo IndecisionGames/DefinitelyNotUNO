@@ -14,17 +14,15 @@ var port = 31416
 const default_ip = "127.0.0.1"
 
 func connect_to_server(name, ip):
+	player_name = name
 	if ip == "":
 		ip = default_ip
 	var url = "ws://" + ip + ":" + str(port)
 	network.connect_to_url(url, PoolStringArray(), true)
 	get_tree().set_network_peer(network)
-
 	network.connect("connection_failed", self, "_on_connection_failed")
 	network.connect("connection_succeeded", self, "_on_connection_succeeded")
 	network.connect("server_disconnected", self, "_server_disconnected")
-
-	player_name = name
 
 func _process(_delta):
 	if (network.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTED ||
@@ -50,13 +48,10 @@ func _server_disconnected():
 
 # Lobby
 func join_lobby():
-	rpc_id(1, "add_to_lobby", player_name)
+	rpc_id(1, "join_lobby", player_name)
 
-func leave_lobby():
-	rpc_id(1, "remove_from_lobby")
-
-remote func update_lobby(pos, player_names):
-	get_node("/root/Lobby").update_lobby(pos, player_names)
+remote func update_lobby(players):
+	get_node("/root/Lobby").update_lobby(players)
 
 func update_rules(rules):
 	rpc_id(1, "update_rules", rules)
