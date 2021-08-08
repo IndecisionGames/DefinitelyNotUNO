@@ -19,8 +19,6 @@ func _ready():
 	uno.hide()
 	wild_picker.hide()
 	draw_card_position = top_deck.rect_position
-	highlight1.hide()
-	highlight2.hide()
 	play_ripple_anim()
 
 func enable_draw_button(enable: bool):
@@ -76,18 +74,13 @@ func reset_top_deck_position():
 	tween.start()
 
 func play_ripple_anim():
-	highlight1.show()
 	ripple_playing = true
 	ripple_anim.play("DrawRipple")
-	yield(get_tree().create_timer(1.5), "timeout")
+	yield(get_tree().create_timer(1), "timeout")
 	if ripple_playing:
 		ripple_anim2.play("DrawRipple2")
-		yield(get_tree().create_timer(0.75), "timeout")
-		highlight2.show()
 
 func stop_ripple_anim():
 	ripple_playing = false
 	ripple_anim.stop()
 	ripple_anim2.stop()
-	highlight1.hide()
-	highlight2.hide()

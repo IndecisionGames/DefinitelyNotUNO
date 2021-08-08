@@ -30,7 +30,7 @@ shadow_color = Color( 0.14902, 0.14902, 0.14902, 0 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "DrawRipple"
-length = 3.0
+length = 2.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Highlight:rect_scale")
@@ -39,7 +39,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3 ),
+"times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0.88, 0.92 ), Vector2( 1.2, 1.15 ) ]
@@ -51,7 +51,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 3 ),
+"times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 14, 14 ), Vector2( -24, -24 ) ]
@@ -63,7 +63,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 3 ),
+"times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0.811765 ), Color( 1, 1, 1, 0 ) ]
@@ -153,7 +153,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "DrawRipple2"
-length = 3.0
+length = 2.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Highlight2:rect_position")
@@ -162,7 +162,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3 ),
+"times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 14, 14 ), Vector2( -24, -24 ) ]
@@ -174,7 +174,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 3 ),
+"times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0.88, 0.92 ), Vector2( 1.2, 1.15 ) ]
@@ -186,7 +186,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 3 ),
+"times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0.85098 ), Color( 1, 1, 1, 0 ) ]
@@ -332,15 +332,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Draw" type="MarginContainer" parent="ButtonManager"]
+[node name="Draw" type="Control" parent="ButtonManager"]
 margin_left = 502.0
 margin_top = 351.0
 margin_right = 732.0
 margin_bottom = 690.0
 mouse_default_cursor_shape = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="DrawButton" type="TextureButton" parent="ButtonManager/Draw"]
 margin_right = 230.0
@@ -350,16 +347,21 @@ mouse_default_cursor_shape = 2
 
 [node name="Highlight" type="Panel" parent="ButtonManager/Draw"]
 modulate = Color( 1, 1, 1, 0.811765 )
-margin_right = 230.0
-margin_bottom = 339.0
+margin_left = 14.0
+margin_top = 14.0
+margin_right = 244.0
+margin_bottom = 353.0
+rect_scale = Vector2( 0.88, 0.92 )
 mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 
 [node name="Highlight2" type="Panel" parent="ButtonManager/Draw"]
 modulate = Color( 1, 1, 1, 0.85098 )
-margin_right = 230.0
-margin_bottom = 339.0
-rect_scale = Vector2( 1e-05, 1e-05 )
+margin_left = 14.0
+margin_top = 14.0
+margin_right = 244.0
+margin_bottom = 353.0
+rect_scale = Vector2( 0.88, 0.92 )
 mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 
