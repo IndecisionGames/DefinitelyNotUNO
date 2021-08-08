@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/game/Game.gd" type="Script" id=1]
 [ext_resource path="res://assets/cards/back.png" type="Texture" id=2]
@@ -30,6 +30,88 @@ shadow_color = Color( 0.14902, 0.14902, 0.14902, 0 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "DrawRipple"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Highlight:rect_scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.88, 0.92 ), Vector2( 1.2, 1.15 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Highlight:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 14, 14 ), Vector2( -24, -24 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Highlight:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.811765 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "DrawRipple2"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Highlight2:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 14, 14 ), Vector2( -24, -24 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Highlight2:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.88, 0.92 ), Vector2( 1.2, 1.15 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Highlight2:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.85098 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "DrawRipple"
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -42,7 +124,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.8, 0.85 ), Vector2( 1.2, 1.15 ) ]
+"values": [ Vector2( 0.88, 0.92 ), Vector2( 1.2, 1.15 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Highlight:rect_position")
@@ -54,7 +136,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 23, 26 ), Vector2( -24, -24 ) ]
+"values": [ Vector2( 14, 14 ), Vector2( -24, -24 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Highlight:modulate")
@@ -69,19 +151,60 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0.811765 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="Animation" id=5]
+resource_name = "DrawRipple2"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Highlight2:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 14, 14 ), Vector2( -24, -24 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Highlight2:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.88, 0.92 ), Vector2( 1.2, 1.15 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Highlight2:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.85098 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="DynamicFont" id=6]
 size = 36
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=7]
 size = 28
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=8]
 size = 28
 font_data = ExtResource( 3 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=9]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("../PlaySpace/Deck/TopDeckLayer/TopDeckCard:rect_position")
@@ -232,11 +355,25 @@ margin_bottom = 339.0
 mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 
+[node name="Highlight2" type="Panel" parent="ButtonManager/Draw"]
+modulate = Color( 1, 1, 1, 0.85098 )
+margin_right = 230.0
+margin_bottom = 339.0
+rect_scale = Vector2( 1e-05, 1e-05 )
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+
 [node name="Tween" type="Tween" parent="ButtonManager/Draw"]
 
 [node name="Ripple" type="AnimationPlayer" parent="ButtonManager/Draw"]
 method_call_mode = 1
 anims/DrawRipple = SubResource( 2 )
+anims/DrawRipple2 = SubResource( 3 )
+
+[node name="Ripple2" type="AnimationPlayer" parent="ButtonManager/Draw"]
+method_call_mode = 1
+anims/DrawRipple = SubResource( 4 )
+anims/DrawRipple2 = SubResource( 5 )
 
 [node name="Uno" type="MarginContainer" parent="ButtonManager"]
 margin_left = 898.0
@@ -399,7 +536,7 @@ __meta__ = {
 margin_top = 131.0
 margin_right = 343.0
 margin_bottom = 172.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 6 )
 text = "Player Turn"
 align = 1
 
@@ -419,7 +556,7 @@ __meta__ = {
 margin_top = 20.0
 margin_right = 300.0
 margin_bottom = 52.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 7 )
 text = "Event"
 align = 1
 
@@ -441,7 +578,7 @@ __meta__ = {
 margin_top = 9.0
 margin_right = 103.0
 margin_bottom = 41.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 8 )
 text = "Draw X"
 align = 1
 valign = 1
@@ -491,7 +628,7 @@ margin_bottom = 200.0
 margin_right = 400.0
 margin_bottom = 98.0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 6 )
 text = "Test"
 align = 1
 valign = 1
@@ -508,7 +645,7 @@ position = Vector2( 860, 850 )
 script = ExtResource( 10 )
 
 [node name="DrawAnim" type="AnimationPlayer" parent="Hand"]
-anims/PlayerDraw = SubResource( 6 )
+anims/PlayerDraw = SubResource( 9 )
 
 [node name="OpponentHands" type="Control" parent="."]
 __meta__ = {
