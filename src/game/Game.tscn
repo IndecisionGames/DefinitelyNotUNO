@@ -1,10 +1,10 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/game/Game.gd" type="Script" id=1]
 [ext_resource path="res://assets/cards/back.png" type="Texture" id=2]
 [ext_resource path="res://assets/font/Comfortaa-Bold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://src/game/PlayPile.gd" type="Script" id=4]
-[ext_resource path="res://src/game/interface/GameInfo.gd" type="Script" id=5]
+[ext_resource path="res://src/game/interface/DrawDisplay.gd" type="Script" id=5]
 [ext_resource path="res://src/game/interface/WildPicker.gd" type="Script" id=6]
 [ext_resource path="res://src/game/interface/ButtonManager.gd" type="Script" id=7]
 [ext_resource path="res://src/game/interface/TurnDisplay.gd" type="Script" id=8]
@@ -12,6 +12,7 @@
 [ext_resource path="res://src/game/Hand.gd" type="Script" id=10]
 [ext_resource path="res://src/game/interface/WinPopup.gd" type="Script" id=11]
 [ext_resource path="res://src/game/interface/EventDisplay.gd" type="Script" id=12]
+[ext_resource path="res://src/game/GameLog.gd" type="Script" id=13]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0.882353, 1, 0 )
@@ -26,7 +27,7 @@ corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 shadow_color = Color( 0.14902, 0.14902, 0.14902, 0 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "DrawRipple"
 length = 2.0
 loop = true
@@ -67,8 +68,16 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0.811765 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 36
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 28
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 28
 font_data = ExtResource( 3 )
 
 [sub_resource type="Animation" id=4]
@@ -224,7 +233,7 @@ custom_styles/panel = SubResource( 1 )
 
 [node name="Ripple" type="AnimationPlayer" parent="ButtonManager/Draw"]
 method_call_mode = 1
-anims/DrawRipple = SubResource( 3 )
+anims/DrawRipple = SubResource( 2 )
 
 [node name="Uno" type="MarginContainer" parent="ButtonManager"]
 margin_left = 898.0
@@ -354,10 +363,14 @@ __meta__ = {
 }
 
 [node name="OpponentHands" type="MarginContainer" parent="HUD"]
-margin_left = 50.0
-margin_top = 50.0
-margin_right = 90.0
-margin_bottom = 90.0
+anchor_left = 0.832
+anchor_top = 0.5
+anchor_right = 0.832
+anchor_bottom = 0.5
+margin_left = 52.5599
+margin_top = -100.0
+margin_right = 92.5599
+margin_bottom = 100.0
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -365,15 +378,15 @@ __meta__ = {
 
 [node name="Text" type="VBoxContainer" parent="HUD/OpponentHands"]
 margin_right = 40.0
-margin_bottom = 40.0
+margin_bottom = 200.0
 
 [node name="TurnDisplay" type="MarginContainer" parent="HUD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 789.0
-margin_top = 108.0
+margin_top = 50.0
 margin_right = -788.0
-margin_bottom = -669.0
+margin_bottom = -727.0
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -383,59 +396,58 @@ __meta__ = {
 margin_top = 131.0
 margin_right = 343.0
 margin_bottom = 172.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Player Turn"
 align = 1
 
 [node name="EventDisplay" type="MarginContainer" parent="HUD"]
-margin_left = 50.0
-margin_top = 480.0
-margin_right = 340.0
-margin_bottom = 552.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -150.0
+margin_top = 280.0
+margin_right = 150.0
+margin_bottom = 352.0
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Event" type="Label" parent="HUD/EventDisplay"]
-margin_top = 29.0
-margin_right = 290.0
-margin_bottom = 43.0
+margin_top = 20.0
+margin_right = 300.0
+margin_bottom = 52.0
+custom_fonts/font = SubResource( 5 )
 text = "Event"
+align = 1
 
 [node name="Timer" type="Timer" parent="HUD/EventDisplay"]
 
-[node name="GameInfo" type="MarginContainer" parent="HUD"]
-margin_left = 863.0
-margin_top = 250.0
-margin_right = 1013.0
-margin_bottom = 300.0
+[node name="DrawDisplay" type="MarginContainer" parent="HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -50.0
+margin_top = 700.0
+margin_right = 50.0
+margin_bottom = 750.0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="ColorRect" parent="HUD/GameInfo"]
-margin_right = 150.0
-margin_bottom = 50.0
-color = Color( 0.282353, 0.760784, 0.854902, 0.223529 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Text" type="VBoxContainer" parent="HUD/GameInfo"]
-margin_right = 150.0
-margin_bottom = 50.0
-
-[node name="PickupCount" type="Label" parent="HUD/GameInfo/Text"]
-margin_right = 150.0
-margin_bottom = 14.0
+[node name="DrawCount" type="Label" parent="HUD/DrawDisplay"]
+margin_top = 9.0
+margin_right = 103.0
+margin_bottom = 41.0
+custom_fonts/font = SubResource( 6 )
+text = "Draw X"
+align = 1
+valign = 1
 
 [node name="GameLog" type="MarginContainer" parent="HUD"]
 margin_left = 1600.0
 margin_right = 1920.0
 margin_bottom = 300.0
-script = ExtResource( 2 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -451,6 +463,7 @@ margin_bottom = 300.0
 scroll_following = true
 
 [node name="WinPopup" type="MarginContainer" parent="HUD"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.1
 anchor_right = 0.5
@@ -476,7 +489,7 @@ margin_bottom = 200.0
 margin_right = 400.0
 margin_bottom = 98.0
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Test"
 align = 1
 valign = 1

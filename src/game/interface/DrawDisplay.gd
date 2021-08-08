@@ -1,6 +1,6 @@
 extends MarginContainer
 
-onready var pickup_count = get_node("Text/PickupCount")
+onready var draw_count = get_node("DrawCount")
 
 func _ready():
 	Server.connect("game_start", self, "_update")
@@ -9,6 +9,6 @@ func _ready():
 func _update():
 	if GameState.pickup_required:
 		show()
-		pickup_count.text = "Pickup %s" % GameState.pickup_count
+		draw_count.text = "Draw %s" % GameState.pickup_count
 	else:
 		hide()
