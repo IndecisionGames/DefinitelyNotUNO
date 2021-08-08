@@ -15,7 +15,7 @@ var ripple_playing = false
 
 func _ready():
 	Server.connect("wild_pick_request", self, "_on_wild_pick_request")
-	# draw.hide()
+	draw.hide()
 	uno.hide()
 	wild_picker.hide()
 	draw_card_position = top_deck.rect_position
@@ -26,7 +26,7 @@ func enable_draw_button(enable: bool):
 		draw.show()
 	else:
 		reset_top_deck_position()
-		# draw.hide()
+		draw.hide()
 
 func enable_uno_button(enable: bool):
 	if enable:
