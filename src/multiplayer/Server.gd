@@ -9,14 +9,15 @@ var is_host: bool
 var is_local: bool
 
 # Networking
-var network = NetworkedMultiplayerENet.new()
+var network = WebSocketClient.new()
 var port = 31416
 const default_ip = "127.0.0.1"
 
 func connect_to_server(name, ip):
 	if ip == "":
 		ip = default_ip
-	network.create_client(ip, port)
+	var url = "ws://" + ip + ":" + str(port)
+	network.connect_to_url(url, PoolStringArray(), true)
 	get_tree().set_network_peer(network)
 
 	network.connect("connection_failed", self, "_on_connection_failed")
@@ -24,6 +25,11 @@ func connect_to_server(name, ip):
 	network.connect("server_disconnected", self, "_server_disconnected")
 
 	player_name = name
+
+func _process(_delta):
+	if (network.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTED ||
+		network.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTING):
+		network.poll()
 
 func _on_connection_failed():
 	print("Failed to connect to server")
