@@ -274,6 +274,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 1512.0
+margin_top = -42.403
+margin_right = 1908.0
+margin_bottom = 2.59705
+custom_constants/margin_left = 7
+custom_constants/margin_bottom = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2"]
+margin_left = 7.0
+margin_right = 396.0
+margin_bottom = 38.0
+alignment = 2
+
+[node name="VersionLabel" type="Label" parent="MarginContainer2/HBoxContainer"]
+margin_left = 358.0
+margin_top = 3.0
+margin_right = 389.0
+margin_bottom = 35.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0.639216, 0.639216, 0.639216, 0.647059 )
+text = "v0"
+
 [connection signal="pressed" from="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer/VBoxContainer/PlayContainer/MarginContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Debug" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Debug" to="." method="_on_Debug_pressed"]

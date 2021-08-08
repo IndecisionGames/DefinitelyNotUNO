@@ -3,9 +3,19 @@ extends Control
 onready var name_text = find_node("NameText")
 onready var address_text = find_node("AddressText")
 onready var error_text = find_node("Error")
+onready var version_text = find_node("VersionLabel")
+onready var version_file = "res://version"
 
 func _ready():
 	error_text.text = ""
+	_set_version()
+
+func _set_version():
+	var f = File.new()
+	f.open(version_file, File.READ)
+	var line = f.get_line()
+	version_text.text = "v" + str(line)
+	f.close()
 
 func _on_Play_pressed():
 	var name = name_text.text.strip_edges()
