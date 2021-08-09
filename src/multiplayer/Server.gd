@@ -17,7 +17,7 @@ func connect_to_server(name, ip):
 	player_name = name
 	if ip == "":
 		ip = default_ip
-	var url = "wss://" + ip + ":" + str(port)
+	var url = "ws://" + ip + ":" + str(port)
 	network.connect_to_url(url, PoolStringArray(), true)
 	get_tree().set_network_peer(network)
 	network.connect("connection_failed", self, "_on_connection_failed")

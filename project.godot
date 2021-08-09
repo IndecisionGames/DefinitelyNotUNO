@@ -59,7 +59,6 @@ right_click={
 [network]
 
 limits/tcp/connect_timeout_seconds=5
-ssl/certificates="res://cert.crt"
 
 [rendering]
 
