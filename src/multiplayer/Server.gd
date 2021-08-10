@@ -65,8 +65,12 @@ remote func sync_rules(rules):
 func server_start_game():
 	rpc_id(1, "start_game")
 
+remote func request_start(rules={}):
+	Rules.load_from_dict(rules)
+	SceneManager.goto_scene("res://src/game/Game.tscn", false)
+
 func client_ready():
-	emit_signal("game_start")
+	rpc_id(1, "client_ready")
 
 remote func set_player(player):
 	player_id = player
@@ -80,14 +84,10 @@ signal card_played(player, card)
 signal event(event_type, player)
 signal wild_pick_request(player)
 
-remote func emit_game_start(rules={}, game_state={}):
+remote func emit_game_start(game_state={}):
 	if !Server.is_local:
-		Rules.load_from_dict(rules)
 		GameState.load_from_dict(game_state)
-		SceneManager.goto_scene("res://src/game/Game.tscn", false)
-		# wait for client_ready()
-	else:
-		emit_signal("game_start")
+	emit_signal("game_start")
 
 remote func emit_game_won(player):
 	emit_signal("game_won", player)
