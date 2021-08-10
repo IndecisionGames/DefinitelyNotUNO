@@ -303,5 +303,5 @@ custom_colors/font_color = Color( 0.639216, 0.639216, 0.639216, 0.647059 )
 text = "v0"
 
 [connection signal="pressed" from="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer/VBoxContainer/PlayContainer/MarginContainer/Play" to="." method="_on_Play_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Debug" to="." method="_on_Debug_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Debug" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Debug" to="." method="_on_Debug_pressed"]
