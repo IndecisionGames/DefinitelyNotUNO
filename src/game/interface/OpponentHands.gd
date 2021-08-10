@@ -10,7 +10,6 @@ onready var p7 = get_node("7P")
 onready var p8 = get_node("8P")
 
 var player_hands = []
-var player_hands_map = {}
 
 func _ready():
 	Server.connect("game_start", self, "_update")
@@ -51,47 +50,18 @@ func load_hands():
 			continue
 		player_hands.append(position_node.get_node(str(i) + "/Hand"))
 
-	assign_players_to_hands()
 	position_node.show()
-
-func assign_players_to_hands():
-	var me = Server.player_id
-	var counter = 0
-
-	if me < Rules.NUM_PLAYERS - 1:
-		for i in range(me+1, Rules.NUM_PLAYERS): # Players after me
-			print("Adding player " + str(i) + " to hand " + str(i-me-1))
-			player_hands_map[i] = player_hands[i - me -1]
-			counter += 1
-
-	print("next")
-	for i in range(me): # Players before me
-		print("Adding player " + str(i) + " to hand " + str(i+counter))
-		player_hands_map[i] = player_hands[i + counter]
-	
-	for i in Rules.NUM_PLAYERS:
-		if i == me:
-			continue
-		player_hands_map[i]._set_name("Player-" + str(i))
-
 
 func _update():
 	for i in Rules.NUM_PLAYERS:
 		if i == Server.player_id:
 			continue
-		
-		var text = ""
-		if i == GameState.current_player:
-			text = ">"
 
-		text += GameState.players[i].name
+		var pos = _player_to_position(i)
+		player_hands[pos].update_hand(GameState.players[i].name, GameState.players[i].cards.size(), i == GameState.current_player, GameState.players[i].uno_status)
 
-		if i == GameState.current_player:
-			text += "<"
-
-		if GameState.players[i].uno_status:
-			text += " (UNO)"
-		
-		player_hands_map[i]._set_name(text)
-		player_hands_map[i].card_no = GameState.players[i].cards.size()
-		player_hands_map[i]._update()
+func _player_to_position(player):
+	var pos = player - Server.player_id - 1
+	if pos < 0:
+		pos += Rules.NUM_PLAYERS
+	return pos

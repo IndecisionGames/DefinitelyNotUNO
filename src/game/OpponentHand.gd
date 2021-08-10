@@ -7,10 +7,22 @@ onready var card_count_label = get_node("CardCount")
 var cards = []
 var card_no = 0
 
-func _set_name(name):
-	name_label.text = name
+func update_hand(name, card_count, is_current_player, is_uno):
+	var text = ""
+	if is_current_player:
+		text = "> %s <" % name
+	else:
+		text = name
 
-func _update():
+	# TODO: Move to own Label
+	if is_uno:
+		text += "(UNO)"
+
+	name_label.text = text
+	card_no = card_count
+	_update_cards()
+
+func _update_cards():
 	card_count_label.text = str(card_no)
 	while len(cards) < card_no:
 		var card_instance = Card.instance()
