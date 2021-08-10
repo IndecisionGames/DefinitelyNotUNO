@@ -9,31 +9,49 @@ var is_host: bool
 var is_local: bool
 
 # Networking
+const PORT = 31416
+const DEFAULT_IP = "127.0.0.1"
 var network = WebSocketClient.new()
-var port = 31416
-const default_ip = "127.0.0.1"
+
+func _ready():
+	network.connect("connection_established", self, "_connection_established")
+	network.connect("connection_closed", self, "_connection_closed")
+	network.connect("connection_error", self, "_connection_error")
+	network.connect("connection_succeeded", self, "_on_connection_succeeded")
+	network.connect("connection_failed", self, "_on_connection_failed")
+	network.connect("server_disconnected", self, "_server_disconnected")
 
 func connect_to_server(name, ip):
 	player_name = name
 	if ip == "":
-		ip = default_ip
-	var url = "ws://" + ip + ":" + str(port)
+		ip = DEFAULT_IP
+	var url = "ws://" + ip + ":" + str(PORT)
 	network.connect_to_url(url, PoolStringArray(), true)
 	get_tree().set_network_peer(network)
-	network.connect("connection_failed", self, "_on_connection_failed")
-	network.connect("connection_succeeded", self, "_on_connection_succeeded")
-	network.connect("server_disconnected", self, "_server_disconnected")
 
 func _process(_delta):
 	if (network.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTED ||
 		network.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTING):
 		network.poll()
 
+func _connection_established(protocol):
+	print("Connected with protocol: ", protocol)
+
+func _connection_closed(clean):
+	print("Connection Closed, clean: ", clean)
+
+func _connection_error():
+	print("Connection Error")
+
 func _on_connection_failed():
 	print("Failed to connect to server")
 
 func _on_connection_succeeded():
 	print("Successfully connected to server")
+	
+func _server_disconnected():
+	print("Disconnected from server")
+
 
 remote func join_server(players, host=false):
 	Server.is_host = host
@@ -43,8 +61,6 @@ remote func join_server(players, host=false):
 	print("Joining server with " + str(players) + " other players")
 	SceneManager.goto_scene("res://src/lobby/Lobby.tscn", false)
 
-func _server_disconnected():
-	pass
 
 # Lobby
 func join_lobby():
