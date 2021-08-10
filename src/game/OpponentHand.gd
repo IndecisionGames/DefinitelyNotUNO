@@ -3,20 +3,9 @@ extends Control
 const Card = preload("res://src/game/card/DummyCard.tscn")
 onready var name_label = get_node("Name")
 onready var card_count_label = get_node("CardCount")
-onready var cards_position = get_node("Cards")
 
 var cards = []
 var card_no = 0
-
-func _input(event):
-	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_Q:
-			card_no += 1
-			_update()
-		if event.pressed and event.scancode == KEY_W:
-			if card_no > 0:
-				card_no -= 1
-				_update()
 
 func _set_name(name):
 	name_label.text = name
@@ -54,4 +43,4 @@ func _update():
 		center_amount -= ((card_no - 13) * card_width * seperation_factor * 0.7)
 
 	for i in range(cards.size()):
-		cards[i].set_position(Vector2(40+center_amount + ((i-1) * card_width * seperation_factor * scaling_factor), 0))
+		cards[i].set_position(Vector2(40+center_amount + ((i-1) * card_width * seperation_factor * scaling_factor), -30))
