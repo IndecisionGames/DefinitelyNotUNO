@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/game/card/AnimationCard.gd" type="Script" id=1]
+[ext_resource path="res://assets/cards/0.png" type="Texture" id=2]
+
+[node name="CardBase" type="Control"]
+margin_right = 200.0
+margin_bottom = 313.0
+rect_min_size = Vector2( 200, 313 )
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Colour" type="ColorRect" parent="."]
+margin_left = -95.0
+margin_top = -143.0
+margin_right = 88.0
+margin_bottom = 155.0
+mouse_filter = 2
+color = Color( 1, 0.0470588, 0.0470588, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CardImage" type="TextureRect" parent="."]
+margin_left = -214.0
+margin_top = -179.0
+margin_right = 1192.0
+margin_bottom = 1029.0
+rect_scale = Vector2( 0.3, 0.3 )
+mouse_filter = 2
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MovementTween" type="Tween" parent="."]
+
+[node name="RotationTween" type="Tween" parent="."]
