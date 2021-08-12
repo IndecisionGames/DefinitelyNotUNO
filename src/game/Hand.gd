@@ -1,6 +1,7 @@
 extends Node2D
 
 const Card = preload("res://src/game/card/Card.tscn")
+const AnimationCard = preload("res://src/game/card/AnimationCard.tscn")
 onready var buttons = get_node("../ButtonManager")
 onready var draw_anim = get_node("DrawAnim")
 onready var draw_card_layer = get_node("../PlaySpace/Deck/TopDeckLayer/TopDeckLayer2")
@@ -63,6 +64,12 @@ func _on_card_played(player, card):
 	
 	var card_instance = cards[idx]
 	cards.remove(idx)
+
+	var play_card_instance = AnimationCard.instance()
+	add_child(play_card_instance)
+	play_card_instance.setup(card_instance.base.colour, card_instance.base.type, card_instance.rect_global_position, card_instance.rect_rotation)
+	play_card_instance.move_to(Vector2(963,520))
+
 	remove_child(card_instance)
 	_update_card_positions()
 

@@ -17,24 +17,21 @@ func setup(colour, type, global_pos, rot):
 	set_global_position(global_pos)
 	set_rotation(rot)
 
-# debug
-func _input(event):
-	if event is InputEventMouseButton:
-		move_to(event.global_position)
-		print("moving to ", event.global_position)
-	elif event is InputEventKey and event.pressed:
-		if event.scancode == KEY_Q:
-			rect_rotation += 5
-		if event.scancode == KEY_E:
-			rect_rotation -= 5
-
 func move_to(pos):
+	var pos_variance = 10
+	var rot_variance = 10
+
+	randomize()
+	pos = Vector2(rand_range(pos.x - pos_variance, pos.x + pos_variance),
+		rand_range(pos.y - pos_variance, pos.y + pos_variance))
+	var rot = rand_range(-rot_variance, rot_variance)
+
 	move_tween.interpolate_property(self, "rect_global_position", 
 		rect_global_position, pos, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	move_tween.start()
 	yield(get_tree().create_timer(0.2), "timeout")
 	rotate_tween.interpolate_property(self, "rect_rotation", 
-		rect_rotation, 0, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		rect_rotation, rot, 0.2, Tween.TRANS_EXPO, Tween.EASE_OUT)
 	rotate_tween.start()
 
 func _set_card_colour():
