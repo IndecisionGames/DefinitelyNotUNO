@@ -168,12 +168,9 @@ margin_top = 84.0
 margin_right = 617.0
 margin_bottom = 164.0
 size_flags_horizontal = 3
-custom_constants/margin_right = 60
-custom_constants/margin_left = 60
 
 [node name="Address" type="HBoxContainer" parent="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer/HBoxContainer2"]
-margin_left = 60.0
-margin_right = 557.0
+margin_right = 617.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
 size_flags_horizontal = 3
@@ -182,12 +179,12 @@ __meta__ = {
 }
 
 [node name="AddressText" type="LineEdit" parent="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer/HBoxContainer2"]
-margin_left = 60.0
-margin_right = 557.0
+margin_right = 617.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
+text = "indecisiongames.ddns.net"
 align = 1
 placeholder_text = "Server IP"
 caret_blink = true
