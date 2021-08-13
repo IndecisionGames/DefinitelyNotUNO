@@ -12,7 +12,7 @@ var base: CardBase
 func setup(colour, type, global_pos, rot):
 	base = CardBase.new()
 	base.setup(colour, type)
-	_set_card_colour()
+	set_colour(colour)
 	_set_card_asset()
 	set_global_position(global_pos)
 	set_rotation(rot)
@@ -34,8 +34,8 @@ func move_to(pos):
 		rect_rotation, rot, 0.2, Tween.TRANS_EXPO, Tween.EASE_OUT)
 	rotate_tween.start()
 
-func _set_card_colour():
-	match base.colour:
+func set_colour(colour):
+	match colour:
 		Types.card_colour.RED:
 			background.color = Values.red
 		Types.card_colour.GREEN:
