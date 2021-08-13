@@ -1,7 +1,6 @@
 extends Node2D
 
 const Card = preload("res://src/game/card/Card.tscn")
-const AnimationCard = preload("res://src/game/card/AnimationCard.tscn")
 onready var buttons = get_node("../ButtonManager")
 onready var draw_anim = get_node("DrawAnim")
 onready var draw_card_layer = get_node("../PlaySpace/Deck/TopDeckLayer/TopDeckLayer2")
@@ -14,11 +13,10 @@ func _ready():
 	Server.connect("game_start", self, "_load")
 	Server.connect("game_update", self, "_on_game_update")
 	Server.connect("cards_drawn", self, "_on_cards_drawn")
-	Server.connect("card_played", self, "_on_card_played")
 
 func _load():
 	while card_bases.size() > 0:
-		_on_card_played(Server.player_id, card_bases[0])
+		on_card_played(Server.player_id, card_bases[0])
 
 	_on_cards_drawn(Server.player_id, GameState.players[Server.player_id].cards, true)
 
@@ -36,12 +34,12 @@ func _process(_delta):
 	else:
 		draw_card_layer.set_layer(4)
 
-func _on_cards_drawn(player, drawn_cards, initial=false):
+func _on_cards_drawn(player, drawn_cards, loading=false):
 	if player != Server.player_id:
 		return
 	
 	for card in drawn_cards:
-		if not initial:
+		if not loading:
 			draw_anim.play("PlayerDraw")
 		var card_instance = Card.instance()
 		card_instance.setup(card.colour, card.type)
@@ -55,7 +53,13 @@ func _on_cards_drawn(player, drawn_cards, initial=false):
 	_update_options()
 	_update_card_positions()
 
-func _on_card_played(player, card):
+# Called by PlayPile
+func get_card_position(card):
+	var idx = card.is_in(card_bases)
+	return cards[idx].rect_global_position
+
+# Called by PlayPile
+func on_card_played(player, card):
 	if player != Server.player_id:
 		return
 
@@ -64,11 +68,6 @@ func _on_card_played(player, card):
 	
 	var card_instance = cards[idx]
 	cards.remove(idx)
-
-	var play_card_instance = AnimationCard.instance()
-	add_child(play_card_instance)
-	play_card_instance.setup(card_instance.base.colour, card_instance.base.type, card_instance.rect_global_position, card_instance.rect_rotation)
-	play_card_instance.move_to(Vector2(963,520))
 
 	remove_child(card_instance)
 	_update_card_positions()
