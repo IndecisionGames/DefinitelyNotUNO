@@ -2,6 +2,7 @@ extends Control
 
 onready var lobby_code = find_node("LobbyCode")
 onready var play_button = find_node("Play")
+onready var rule_settings = find_node("RuleSettings")
 
 onready var slot1 = find_node("Slot1")
 onready var slot2 = find_node("Slot2")
@@ -28,18 +29,22 @@ func _ready():
 	play_button.hide()
 	lobby_code.text = Server.lobby_code
 
-func setup():
+func setup(rules):
 	if Server.is_host:
 		play_button.show()
 	lobby_code.text = Server.lobby_code
+	sync_rules(rules)
 
-func update_lobby(players):
+func sync_lobby(players):
 	for slot in slots:
 		slot.remove_player()
 	for i in range(players.size()):
 		slots[i].add_player(players[i])
 		if players[i] == Server.player_name:
 			slots[i].highlight()
+
+func sync_rules(rules):
+	rule_settings.sync_rules(rules)
 
 func _on_Play_pressed():
 	Server.server_start_game()

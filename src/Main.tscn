@@ -8,33 +8,33 @@
 size = 100
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=2]
 size = 42
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 42
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 48
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=5]
 size = 18
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=6]
 size = 26
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=7]
 size = 28
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=8]
 size = 24
 use_filter = true
 font_data = ExtResource( 2 )
@@ -143,7 +143,7 @@ __meta__ = {
 margin_top = 81.0
 margin_right = 617.0
 margin_bottom = 134.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 2 )
 text = "Server"
 align = 1
 
@@ -167,7 +167,7 @@ margin_right = 617.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 align = 1
 placeholder_text = "Server IP"
 caret_blink = true
@@ -185,7 +185,7 @@ margin_bottom = 61.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 54.5504, -0.0675049 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Connect"
 
 [node name="LobbyConnect" type="VBoxContainer" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer"]
@@ -221,7 +221,7 @@ margin_right = 557.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 align = 1
 max_length = 10
 placeholder_text = "Name"
@@ -231,7 +231,7 @@ caret_blink = true
 margin_top = 129.0
 margin_right = 617.0
 margin_bottom = 169.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 5 )
 text = "Host"
 
 [node name="JoinCode" type="MarginContainer" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/LobbyConnect"]
@@ -254,7 +254,7 @@ margin_right = 617.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 align = 1
 placeholder_text = "Join Code"
 caret_blink = true
@@ -272,7 +272,7 @@ margin_bottom = 61.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 54.5504, -0.0675049 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Join"
 
 [node name="Status" type="MarginContainer" parent="GUI/VBoxContainer/Input/VBoxContainer"]
@@ -285,7 +285,7 @@ custom_constants/margin_top = 20
 margin_top = 20.0
 margin_right = 617.0
 margin_bottom = 50.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.772549, 0.0980392, 0.0980392, 1 )
 text = "Error"
 align = 1
@@ -311,7 +311,7 @@ margin_bottom = 38.0
 margin_top = 3.0
 margin_right = 290.0
 margin_bottom = 35.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.639216, 0.639216, 0.639216, 0.647059 )
 text = "Indecision Games ©"
 
@@ -322,7 +322,7 @@ margin_bottom = 38.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 54.5504, -0.0675049 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "Debug"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -352,7 +352,7 @@ margin_left = 358.0
 margin_top = 3.0
 margin_right = 389.0
 margin_bottom = 35.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.639216, 0.639216, 0.639216, 0.647059 )
 text = "v0"
 
@@ -360,5 +360,4 @@ text = "v0"
 [connection signal="pressed" from="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/ServerConnect/ConnectContainer/Connect" to="." method="_on_Connect_pressed"]
 [connection signal="toggled" from="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/LobbyConnect/HostToggle" to="." method="_on_HostToggle_toggled"]
 [connection signal="pressed" from="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/LobbyConnect/JoinContainer/Join" to="." method="_on_Join_pressed"]
-[connection signal="pressed" from="Copyright/HBoxContainer/Debug" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Copyright/HBoxContainer/Debug" to="." method="_on_Debug_pressed"]

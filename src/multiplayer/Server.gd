@@ -38,24 +38,24 @@ func host_lobby(name):
 	player_name = name
 	rpc_id(1, "host_lobby", player_name)
 
-remote func join_error(error_string):
-	get_node("/root/Main").set_error(error_string)
+remote func error(msg):
+	get_node("/root/Main").set_error(msg)
 
-remote func open_lobby(code, host=false):
+remote func start_lobby(code, rules, host):
 	lobby_code = code
 	is_host = host
 	SceneManager.goto_preloaded_scene()
-	get_node("/root/Lobby").setup()
+	get_node("/root/Lobby").setup(rules)
 
 # Lobby
-remote func update_lobby(players):
-	get_node("/root/Lobby").update_lobby(players)
-
 func update_rules(rules):
 	rpc_id(1, "update_rules", rules)
 
+remote func sync_lobby(players):
+	get_node("/root/Lobby").sync_lobby(players)
+
 remote func sync_rules(rules):
-	get_node("/root/Lobby").find_node("RuleSettings").sync_rules(rules)
+	get_node("/root/Lobby").sync_rules(rules)
 
 # Game Setup
 func server_start_game():
