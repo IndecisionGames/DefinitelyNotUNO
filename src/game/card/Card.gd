@@ -10,46 +10,22 @@ onready var border = get_node("Border")
 onready var tween = get_node("Tween")
 
 var base: CardBase
-var is_face_up: bool
 var is_playable: bool
-var is_hovered: bool
-var is_in_hand: bool
 
 func setup(colour, type):
+	is_playable = false
 	base = CardBase.new()
 	base.setup(colour, type)
 
 func _ready():
-	is_playable = false
-	is_hovered = false
 	_set_border()
-	_set_face_down()
-
-func set_in_hand():
-	is_in_hand = true
-	_set_face_up()
-
-func set_in_play():
-	is_in_hand = false
-	is_hovered = false
-	is_playable = false
-	_set_face_up()
-
-func set_playable(playable: bool):
-	is_playable = playable
-	_set_border()
-
-func _set_face_up():
-	is_face_up = true
-
 	_set_card_colour()
 	_set_border()
 	_set_card_asset()
 
-func _set_face_down():
-	is_face_up = false
-	card_image.set_texture(CardAssets.card_back_asset)
-	border.set("custom_styles/panel", CardAssets.normal_border)
+func set_playable(playable: bool):
+	is_playable = playable
+	_set_border()
 
 func _set_card_colour():
 	match base.colour:
@@ -82,16 +58,12 @@ func _move_down():
 	tween.start()
 
 func _on_Interact_mouse_entered():
-	if is_in_hand:
-		is_hovered = true
-		_set_border()
-		_move_up()
+	_set_border()
+	_move_up()
 
 func _on_Interact_mouse_exited():
-	if is_in_hand:
-		is_hovered = false
-		_set_border()
-		_move_down()
+	_set_border()
+	_move_down()
 
 func _on_Interact_pressed():
 	if is_playable:

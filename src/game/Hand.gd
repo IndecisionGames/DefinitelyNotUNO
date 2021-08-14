@@ -1,6 +1,12 @@
 extends Node2D
 
 const Card = preload("res://src/game/card/Card.tscn")
+
+const CARD_WIDTH = 200
+const BASE_SEPERATION = 140
+const MAX_WIDTH = 1600
+const NUM_AT_MAX = 13
+
 onready var buttons = get_node("../ButtonManager")
 onready var draw_anim = get_node("DrawAnim")
 onready var draw_card_layer = get_node("../PlaySpace/Deck/TopDeckLayer/TopDeckLayer2")
@@ -44,7 +50,6 @@ func _on_cards_drawn(player, drawn_cards, loading=false):
 		var card_instance = Card.instance()
 		card_instance.setup(card.colour, card.type)
 		add_child(card_instance)
-		card_instance.set_in_hand()
 		
 		card_bases.append(card_instance.base)
 		cards.append(card_instance)
@@ -88,9 +93,9 @@ func _update_playable():
 		has_playable_card = has_playable_card || is_playable
 
 func _update_card_positions():
-	var card_seperation = 140
-	if self.cards.size() > 13:
-		card_seperation = float(1600)/float(self.cards.size()-1)
+	var card_seperation = BASE_SEPERATION
+	if self.cards.size() > NUM_AT_MAX:
+		card_seperation = float(MAX_WIDTH)/float(self.cards.size()-1)
 
 	for i in range(self.cards.size()):
-		cards[i].set_position(Vector2(-card_seperation/2*(self.cards.size()-1)+i*card_seperation,0))
+		cards[i].set_position(Vector2(-CARD_WIDTH/2-card_seperation/2*(self.cards.size()-1)+i*card_seperation,0))

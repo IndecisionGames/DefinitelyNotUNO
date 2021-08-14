@@ -3,12 +3,12 @@ extends Control
 const Card = preload("res://src/game/card/Card.tscn")
 const AnimationCard = preload("res://src/game/card/AnimationCard.tscn")
 
+const MAX_CARDS = 20
+
 onready var hand = get_parent().get_parent().get_node("Hand")
 onready var opponent_hands = get_parent().get_parent().get_node("OpponentHands")
 
 var pos = Vector2(963,520)
-
-const MAX_CARDS = 20
 var cards = []
 
 func _ready():

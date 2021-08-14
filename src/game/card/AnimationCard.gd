@@ -2,6 +2,9 @@ extends Control
 
 const CardBase = preload("res://src/game/common/CardBase.gd")
 
+const POSITION_VARIANCE = 10
+const ROTATION_VARIANCE = 10
+
 onready var background = get_node("Colour")
 onready var card_image = get_node("CardImage")
 onready var move_tween = get_node("MovementTween")
@@ -18,13 +21,9 @@ func setup(colour, type, global_pos, rot):
 	set_rotation(rot)
 
 func move_to(pos):
-	var pos_variance = 10
-	var rot_variance = 10
-
-	randomize()
-	pos = Vector2(rand_range(pos.x - pos_variance, pos.x + pos_variance),
-		rand_range(pos.y - pos_variance, pos.y + pos_variance))
-	var rot = rand_range(-rot_variance, rot_variance)
+	pos = Vector2(rand_range(pos.x - POSITION_VARIANCE, pos.x + POSITION_VARIANCE),
+		rand_range(pos.y - POSITION_VARIANCE, pos.y + POSITION_VARIANCE))
+	var rot = rand_range(-ROTATION_VARIANCE, ROTATION_VARIANCE)
 
 	move_tween.interpolate_property(self, "rect_global_position", 
 		rect_global_position, pos, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

@@ -645,7 +645,7 @@ size_flags_vertical = 3
 text = "Play Again?"
 
 [node name="Hand" type="Node2D" parent="."]
-position = Vector2( 860, 850 )
+position = Vector2( 960, 850 )
 script = ExtResource( 10 )
 
 [node name="DrawAnim" type="AnimationPlayer" parent="Hand"]
