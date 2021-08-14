@@ -2,11 +2,12 @@ extends Node
 
 const CardBase = preload("res://src/game/common/CardBase.gd")
 
-var player_name: String
 var player_id: int
-var is_host: bool
-
 var is_local: bool
+
+var player_name: String
+var lobby_code: String
+var is_host: bool
 
 # Networking
 const PORT = 31416
@@ -14,44 +15,39 @@ const DEFAULT_IP = "127.0.0.1"
 var network = WebSocketClient.new()
 
 func _ready():
-	network.connect("connection_succeeded", self, "_on_connection_succeeded")
-	network.connect("connection_failed", self, "_on_connection_failed")
-	network.connect("server_disconnected", self, "_server_disconnected")
-
-func connect_to_server(name, ip):
-	player_name = name
-	if ip == "":
-		ip = DEFAULT_IP
-	var url = "ws://" + ip + ":" + str(PORT)
-	network.connect_to_url(url, PoolStringArray(), true)
-	get_tree().set_network_peer(network)
+	pass
 
 func _process(_delta):
 	if (network.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTED ||
 		network.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTING):
 		network.poll()
 
-func _on_connection_succeeded():
-	print("Successfully connected to server")
+# Connecting
+func connect_to_server(ip):
+	if ip == "":
+		ip = DEFAULT_IP
+	var url = "ws://" + ip + ":" + str(PORT)
+	network.connect_to_url(url, PoolStringArray(), true)
+	get_tree().set_network_peer(network)
 
-func _on_connection_failed():
-	print("Failed to connect to server")
-	
-func _server_disconnected():
-	print("Disconnected from server")
+func join_lobby(name, join_code):
+	player_name = name
+	rpc_id(1, "join_lobby", player_name, join_code)
 
-remote func join_server(players, host=false):
-	Server.is_host = host
-	if Server.is_host: 
-		print("You are the Host")
+func host_lobby(name):
+	player_name = name
+	rpc_id(1, "host_lobby", player_name)
 
-	print("Joining server with " + str(players) + " other players")
-	SceneManager.goto_scene("res://src/lobby/Lobby.tscn", false)
+remote func join_error(error_string):
+	get_node("/root/Main").set_error(error_string)
+
+remote func open_lobby(code, host=false):
+	lobby_code = code
+	is_host = host
+	SceneManager.goto_preloaded_scene()
+	get_node("/root/Lobby").setup()
 
 # Lobby
-func join_lobby():
-	rpc_id(1, "join_lobby", player_name)
-
 remote func update_lobby(players):
 	get_node("/root/Lobby").update_lobby(players)
 

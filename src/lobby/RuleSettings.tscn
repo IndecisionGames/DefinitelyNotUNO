@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/lobby/RuleSettings.gd" type="Script" id=1]
+[ext_resource path="res://assets/font/Comfortaa-Bold.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 2 )
 
 [node name="RuleSettings" type="Control"]
 anchor_right = 1.0
@@ -31,6 +41,7 @@ margin_right = 400.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
 text = "Rule"
 align = 1
 valign = 1
@@ -59,6 +70,7 @@ margin_right = 400.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
 text = "Rule"
 align = 1
 valign = 1
@@ -87,6 +99,7 @@ margin_right = 400.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_fonts/font = SubResource( 3 )
 text = "Rule"
 align = 1
 valign = 1

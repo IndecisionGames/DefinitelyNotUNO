@@ -1,5 +1,8 @@
 extends Control
 
+onready var lobby_code = find_node("LobbyCode")
+onready var play_button = find_node("Play")
+
 onready var slot1 = find_node("Slot1")
 onready var slot2 = find_node("Slot2")
 onready var slot3 = find_node("Slot3")
@@ -22,10 +25,13 @@ func _ready():
 	slots.append(slot7)
 	slots.append(slot8)
 
-	if !Server.is_host:
-		find_node("Play").hide()
+	play_button.hide()
+	lobby_code.text = Server.lobby_code
 
-	Server.join_lobby()
+func setup():
+	if Server.is_host:
+		play_button.show()
+	lobby_code.text = Server.lobby_code
 
 func update_lobby(players):
 	for slot in slots:

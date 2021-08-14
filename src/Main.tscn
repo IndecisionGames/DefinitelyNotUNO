@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/Main.gd" type="Script" id=1]
 [ext_resource path="res://assets/font/Comfortaa-Bold.ttf" type="DynamicFontData" id=2]
@@ -6,6 +6,10 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 42
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -16,6 +20,10 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=3]
 size = 48
 use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 18
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
@@ -40,19 +48,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 margin_right = 1920.0
 margin_bottom = 1087.0
 color = Color( 0.121569, 0.121569, 0.156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Control" type="Control" parent="."]
-margin_left = 448.878
-margin_top = 342.0
-margin_right = 1468.88
-margin_bottom = 342.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -69,15 +68,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Container" type="VBoxContainer" parent="GUI"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI"]
 margin_left = 400.0
 margin_top = 125.0
 margin_right = 1517.0
 margin_bottom = 1005.0
+
+[node name="Title" type="VBoxContainer" parent="GUI/VBoxContainer"]
+margin_right = 1117.0
+margin_bottom = 438.0
 size_flags_horizontal = 15
 size_flags_vertical = 15
 
-[node name="Label" type="Label" parent="GUI/Container"]
+[node name="Title" type="Label" parent="GUI/VBoxContainer/Title"]
 margin_right = 1117.0
 margin_bottom = 113.0
 custom_fonts/font = SubResource( 1 )
@@ -85,39 +88,40 @@ custom_colors/font_color = Color( 0.819608, 0.819608, 0.819608, 1 )
 text = "Definitely Not UNO"
 align = 1
 
-[node name="PanelContainer" type="CenterContainer" parent="GUI/Container"]
+[node name="Logo" type="CenterContainer" parent="GUI/VBoxContainer/Title"]
 margin_top = 117.0
 margin_right = 1117.0
-margin_bottom = 533.0
+margin_bottom = 438.0
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="GUI/Container/PanelContainer"]
+[node name="LogoTexture" type="TextureRect" parent="GUI/VBoxContainer/Title/Logo"]
 margin_left = 380.0
-margin_top = 60.0
+margin_top = 13.0
 margin_right = 737.0
-margin_bottom = 355.0
+margin_bottom = 308.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 3 )
 
-[node name="MarginContainer" type="MarginContainer" parent="GUI/Container"]
-margin_top = 537.0
+[node name="Input" type="MarginContainer" parent="GUI/VBoxContainer"]
+margin_top = 442.0
 margin_right = 1117.0
 margin_bottom = 880.0
+size_flags_vertical = 3
 custom_constants/margin_right = 250
 custom_constants/margin_left = 250
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Container/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/VBoxContainer/Input"]
 margin_left = 250.0
 margin_right = 867.0
-margin_bottom = 343.0
+margin_bottom = 438.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="GUI/Container/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="GUI/VBoxContainer/Input/VBoxContainer"]
 margin_right = 617.0
-margin_bottom = 289.0
+margin_bottom = 384.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_top = 20
@@ -125,23 +129,83 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InnerContainer" type="VBoxContainer" parent="GUI/Container/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="ServerConnect" type="VBoxContainer" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer"]
+visible = false
 margin_top = 20.0
 margin_right = 617.0
-margin_bottom = 289.0
+margin_bottom = 384.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="MarginContainer" parent="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer"]
+[node name="ServerOption" type="OptionButton" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/ServerConnect"]
+margin_top = 81.0
+margin_right = 617.0
+margin_bottom = 134.0
+custom_fonts/font = SubResource( 7 )
+text = "Server"
+align = 1
+
+[node name="AddressSelect" type="MarginContainer" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/ServerConnect"]
+margin_top = 138.0
+margin_right = 617.0
+margin_bottom = 218.0
+size_flags_horizontal = 3
+
+[node name="Address" type="HBoxContainer" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/ServerConnect/AddressSelect"]
 margin_right = 617.0
 margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddressInput" type="LineEdit" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/ServerConnect/AddressSelect"]
+margin_right = 617.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+align = 1
+placeholder_text = "Server IP"
+caret_blink = true
+
+[node name="ConnectContainer" type="HBoxContainer" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/ServerConnect"]
+margin_top = 222.0
+margin_right = 617.0
+margin_bottom = 283.0
+alignment = 1
+
+[node name="Connect" type="Button" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/ServerConnect/ConnectContainer"]
+margin_left = 196.0
+margin_right = 421.0
+margin_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 54.5504, -0.0675049 )
+custom_fonts/font = SubResource( 3 )
+text = "Connect"
+
+[node name="LobbyConnect" type="VBoxContainer" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer"]
+margin_top = 20.0
+margin_right = 617.0
+margin_bottom = 384.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameSelect" type="MarginContainer" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/LobbyConnect"]
+margin_top = 45.0
+margin_right = 617.0
+margin_bottom = 125.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 60
 custom_constants/margin_left = 60
 
-[node name="Name" type="HBoxContainer" parent="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer/HBoxContainer"]
+[node name="Name" type="HBoxContainer" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/LobbyConnect/NameSelect"]
 margin_left = 60.0
 margin_right = 557.0
 margin_bottom = 80.0
@@ -151,7 +215,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NameText" type="LineEdit" parent="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer/HBoxContainer"]
+[node name="NameInput" type="LineEdit" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/LobbyConnect/NameSelect"]
 margin_left = 60.0
 margin_right = 557.0
 margin_bottom = 80.0
@@ -163,13 +227,20 @@ max_length = 10
 placeholder_text = "Name"
 caret_blink = true
 
-[node name="HBoxContainer2" type="MarginContainer" parent="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer"]
-margin_top = 84.0
+[node name="HostToggle" type="CheckButton" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/LobbyConnect"]
+margin_top = 129.0
 margin_right = 617.0
-margin_bottom = 164.0
+margin_bottom = 169.0
+custom_fonts/font = SubResource( 8 )
+text = "Host"
+
+[node name="JoinCode" type="MarginContainer" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/LobbyConnect"]
+margin_top = 173.0
+margin_right = 617.0
+margin_bottom = 253.0
 size_flags_horizontal = 3
 
-[node name="Address" type="HBoxContainer" parent="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer/HBoxContainer2"]
+[node name="JoinCode" type="HBoxContainer" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/LobbyConnect/JoinCode"]
 margin_right = 617.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
@@ -178,53 +249,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AddressText" type="LineEdit" parent="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer/HBoxContainer2"]
+[node name="JoinCodeInput" type="LineEdit" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/LobbyConnect/JoinCode"]
 margin_right = 617.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
-text = "indecisiongames.ddns.net"
 align = 1
-placeholder_text = "Server IP"
+placeholder_text = "Join Code"
 caret_blink = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer"]
-margin_top = 168.0
+[node name="JoinContainer" type="HBoxContainer" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/LobbyConnect"]
+margin_top = 257.0
 margin_right = 617.0
-margin_bottom = 269.0
-
-[node name="PlayContainer" type="HBoxContainer" parent="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer/VBoxContainer"]
-margin_right = 617.0
-margin_bottom = 101.0
+margin_bottom = 318.0
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer/VBoxContainer/PlayContainer"]
-margin_left = 251.0
-margin_right = 365.0
-margin_bottom = 101.0
-grow_horizontal = 2
-grow_vertical = 2
-custom_constants/margin_top = 20
-custom_constants/margin_bottom = 20
-
-[node name="Play" type="Button" parent="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer/VBoxContainer/PlayContainer/MarginContainer"]
-margin_top = 20.0
-margin_right = 114.0
-margin_bottom = 81.0
+[node name="Join" type="Button" parent="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/LobbyConnect/JoinContainer"]
+margin_left = 247.0
+margin_right = 369.0
+margin_bottom = 61.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 54.5504, -0.0675049 )
 custom_fonts/font = SubResource( 3 )
-text = "Play"
+text = "Join"
 
-[node name="MarginContainer3" type="MarginContainer" parent="GUI/Container/MarginContainer/VBoxContainer"]
-margin_top = 293.0
+[node name="Status" type="MarginContainer" parent="GUI/VBoxContainer/Input/VBoxContainer"]
+margin_top = 388.0
 margin_right = 617.0
-margin_bottom = 343.0
+margin_bottom = 438.0
 custom_constants/margin_top = 20
 
-[node name="Error" type="Label" parent="GUI/Container/MarginContainer/VBoxContainer/MarginContainer3"]
+[node name="Message" type="Label" parent="GUI/VBoxContainer/Input/VBoxContainer/Status"]
 margin_top = 20.0
 margin_right = 617.0
 margin_bottom = 50.0
@@ -233,7 +290,7 @@ custom_colors/font_color = Color( 0.772549, 0.0980392, 0.0980392, 1 )
 text = "Error"
 align = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Copyright" type="MarginContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -42.403
@@ -245,12 +302,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Copyright"]
 margin_left = 7.0
 margin_right = 396.0
 margin_bottom = 38.0
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Copyright/HBoxContainer"]
 margin_top = 3.0
 margin_right = 290.0
 margin_bottom = 35.0
@@ -258,7 +315,7 @@ custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0.639216, 0.639216, 0.639216, 0.647059 )
 text = "Indecision Games ©"
 
-[node name="Debug" type="Button" parent="MarginContainer/HBoxContainer"]
+[node name="Debug" type="Button" parent="Copyright/HBoxContainer"]
 margin_left = 294.0
 margin_right = 389.0
 margin_bottom = 38.0
@@ -271,7 +328,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer2" type="MarginContainer" parent="."]
+[node name="Version" type="MarginContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 1512.0
@@ -284,13 +341,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Version"]
 margin_left = 7.0
 margin_right = 396.0
 margin_bottom = 38.0
 alignment = 2
 
-[node name="VersionLabel" type="Label" parent="MarginContainer2/HBoxContainer"]
+[node name="VersionLabel" type="Label" parent="Version/HBoxContainer"]
 margin_left = 358.0
 margin_top = 3.0
 margin_right = 389.0
@@ -299,6 +356,9 @@ custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0.639216, 0.639216, 0.639216, 0.647059 )
 text = "v0"
 
-[connection signal="pressed" from="GUI/Container/MarginContainer/VBoxContainer/MarginContainer/InnerContainer/VBoxContainer/PlayContainer/MarginContainer/Play" to="." method="_on_Play_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Debug" to="." method="_on_Play_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Debug" to="." method="_on_Debug_pressed"]
+[connection signal="item_selected" from="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/ServerConnect/ServerOption" to="." method="_on_ServerOption_item_selected"]
+[connection signal="pressed" from="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/ServerConnect/ConnectContainer/Connect" to="." method="_on_Connect_pressed"]
+[connection signal="toggled" from="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/LobbyConnect/HostToggle" to="." method="_on_HostToggle_toggled"]
+[connection signal="pressed" from="GUI/VBoxContainer/Input/VBoxContainer/MarginContainer/LobbyConnect/JoinContainer/Join" to="." method="_on_Join_pressed"]
+[connection signal="pressed" from="Copyright/HBoxContainer/Debug" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Copyright/HBoxContainer/Debug" to="." method="_on_Debug_pressed"]
