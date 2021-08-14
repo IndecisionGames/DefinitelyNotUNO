@@ -38,6 +38,8 @@ func draw_to(pos, rot):
 	queue_free()
 
 func move_to(pos):
+	if (rect_global_position.x - pos.x == 0 and rect_global_position.y - pos.y == 0):
+		return
 	pos = Vector2(rand_range(pos.x - POSITION_VARIANCE, pos.x + POSITION_VARIANCE),
 		rand_range(pos.y - POSITION_VARIANCE, pos.y + POSITION_VARIANCE))
 	var rot = rand_range(-ROTATION_VARIANCE, ROTATION_VARIANCE)
