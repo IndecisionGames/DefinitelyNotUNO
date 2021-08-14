@@ -28,13 +28,18 @@ func _on_card_played(player, card):
 	add_child(play_card_instance)
 
 	var start_position
+	var start_rotation = 0
 	if player == Server.player_id:
 		start_position = hand.get_card_position(card)
 		hand.on_card_played(player, card)
 	else:
 		start_position = opponent_hands.get_player_position(player)
+		start_rotation = opponent_hands.get_player_rotation(player) # -90 (left), 0 (top), 90 (right)
 
-	play_card_instance.setup(card.colour, card.type, start_position, 0)
+		if start_rotation == 0:
+			play_card_instance.flip()
+
+	play_card_instance.setup(card.colour, card.type, start_position, start_rotation)
 	play_card_instance.move_to(pos)
 	_update_cards(play_card_instance)
 

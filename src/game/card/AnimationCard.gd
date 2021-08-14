@@ -30,7 +30,7 @@ func move_to(pos):
 	move_tween.start()
 	yield(get_tree().create_timer(0.2), "timeout")
 	rotate_tween.interpolate_property(self, "rect_rotation", 
-		rect_rotation, rot, 0.2, Tween.TRANS_EXPO, Tween.EASE_OUT)
+		wrapf(rect_rotation, 0, 360), wrapf(rot, 0, 360), 0.2, Tween.TRANS_EXPO, Tween.EASE_OUT)
 	rotate_tween.start()
 
 func set_colour(colour):
@@ -48,3 +48,6 @@ func set_colour(colour):
 
 func _set_card_asset():
 	card_image.set_texture(CardAssets.card_asset(base.type))
+
+func flip():
+	set_scale(Vector2(-1, -1))

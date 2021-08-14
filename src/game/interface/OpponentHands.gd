@@ -65,3 +65,6 @@ func _player_to_position(player):
 
 func get_player_position(player):
 	return player_hands[_player_to_position(player)].rect_global_position
+
+func get_player_rotation(player):
+	return player_hands[_player_to_position(player)].get_parent().rect_rotation
