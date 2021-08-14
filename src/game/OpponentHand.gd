@@ -1,6 +1,7 @@
 extends Control
 
 const Card = preload("res://src/game/card/DummyCard.tscn")
+const AnimationCard = preload("res://src/game/card/AnimationCard.tscn")
 
 const CARD_WIDTH = 67
 const BASE_SEPERATION = 30
@@ -30,6 +31,12 @@ func update_hand(name, card_count, is_current_player, is_uno):
 
 func _update_cards():
 	card_count_label.text = str(card_no)
+	if cards.size() < card_no:
+		var drawing = card_no - cards.size()
+		play_draw_animation(drawing)
+		var timeout = drawing * 0.22
+		yield(get_tree().create_timer(timeout), "timeout")
+
 	while cards.size() < card_no:
 		var card_instance = Card.instance()
 		cards.append(card_instance)
@@ -47,3 +54,13 @@ func _update_cards():
 
 	for i in range(self.cards.size()):
 		cards[i].set_position(Vector2(-CARD_WIDTH/2-card_seperation/2*(self.cards.size()-1)+i*card_seperation,-30))
+
+func play_draw_animation(n):
+	var target_position = get_parent().rect_position
+	var initial_rotation = get_parent().rect_rotation * -1
+	for _i in range(n):
+		var draw_card_instance = AnimationCard.instance()
+		add_child(draw_card_instance)
+		draw_card_instance.setup_draw()
+		draw_card_instance.draw_to(target_position,initial_rotation)
+		yield(get_tree().create_timer(0.2), "timeout")
