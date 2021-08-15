@@ -33,15 +33,14 @@ func _ready():
 	lobby_code.text = Server.lobby_code
 	Server.client_lobby_ready()
 
-func sync_lobby(players):
+func sync_lobby(players, rules):
 	for slot in slots:
 		slot.remove_player()
 	for i in range(players.size()):
 		slots[i].add_player(players[i])
 		if players[i] == Server.player_name:
 			slots[i].highlight()
-
-func sync_rules(rules):
+	
 	rule_settings.sync_rules(rules)
 
 func _on_Play_pressed():

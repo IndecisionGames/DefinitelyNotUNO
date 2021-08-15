@@ -57,11 +57,8 @@ remote func start_lobby(code, host):
 func update_rules(rules):
 	rpc_id(1, "update_rules", rules)
 
-remote func sync_lobby(players):
-	get_node("/root/Lobby").sync_lobby(players)
-
-remote func sync_rules(rules):
-	get_node("/root/Lobby").sync_rules(rules)
+remote func sync_lobby(players, rules):
+	get_node("/root/Lobby").sync_lobby(players, rules)
 
 # Game Setup
 func server_start_game():
