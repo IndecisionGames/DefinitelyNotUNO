@@ -7,7 +7,7 @@ func _ready():
 	Server.connect("card_played", self, "_on_card_played")
 
 func _on_cards_drawn(player, cards):
-	text.add_text("%s Draw %s\n" % [GameState.players[player].name, cards.size()])
+	text.add_text("%s drew %s\n" % [GameState.players[player].name, cards.size()])
 
 func _on_card_played(player, card):
-	text.add_text("%s Played\n" % GameState.players[player].name)
+	text.add_text("%s played\n" % GameState.players[player].name)

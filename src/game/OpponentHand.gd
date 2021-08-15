@@ -16,6 +16,7 @@ var card_no = 0
 
 func update_hand(name, card_count, is_current_player, is_uno):
 	var text = name
+	var count_text = str(card_count)
 	if is_current_player:
 		name_label.set("custom_colors/font_color", Values.current_player)
 		name_label.set_scale(Vector2(1.5, 1.5))
@@ -23,16 +24,20 @@ func update_hand(name, card_count, is_current_player, is_uno):
 		name_label.set("custom_colors/font_color", Values.white)
 		name_label.set_scale(Vector2(1, 1))
 
-	# TODO: Move to own Label
 	if is_uno:
-		text += "(UNO)"
+		card_count_label.set("custom_colors/font_color", Values.red)
+		count_text = "UNO"
+	else:
+		card_count_label.set("custom_colors/font_color", Values.white)
+
 
 	name_label.text = text
 	card_no = card_count
+	card_count_label.text = count_text
 	_update_cards()
 
 func _update_cards():
-	card_count_label.text = str(card_no)
+	
 	if cards.size() < card_no:
 		var drawing = card_no - cards.size()
 		play_draw_animation(drawing)
