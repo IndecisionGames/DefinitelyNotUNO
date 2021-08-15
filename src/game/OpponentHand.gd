@@ -15,11 +15,13 @@ var cards = []
 var card_no = 0
 
 func update_hand(name, card_count, is_current_player, is_uno):
-	var text = ""
+	var text = name
 	if is_current_player:
-		text = "> %s <" % name
+		name_label.set("custom_colors/font_color", Values.current_player)
+		name_label.set_scale(Vector2(1.5, 1.5))
 	else:
-		text = name
+		name_label.set("custom_colors/font_color", Values.white)
+		name_label.set_scale(Vector2(1, 1))
 
 	# TODO: Move to own Label
 	if is_uno:
