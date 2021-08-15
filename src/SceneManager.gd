@@ -6,20 +6,9 @@ var loader
 var wait_frames = 0
 var current_scene
 
-var preloaded_scene
-
 func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() -1)
-
-func preload_scene(path):
-	preloaded_scene = ResourceLoader.load(path).instance()
-	get_node("/root/").add_child_below_node(LoadingScreen, preloaded_scene)
-
-func goto_preloaded_scene():
-	current_scene.queue_free()
-	current_scene = preloaded_scene
-	preloaded_scene = null
 
 func goto_scene(path, instant=false): # Game requests to switch to this scene.
 	loader = ResourceLoader.load_interactive(path)

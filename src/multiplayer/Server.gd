@@ -22,6 +22,9 @@ func _process(_delta):
 		network.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTING):
 		network.poll()
 
+remote func error(msg):
+	get_node("/root/Main").set_error(msg)
+
 # Connecting
 func connect_to_server(ip):
 	if ip == "":
@@ -30,6 +33,7 @@ func connect_to_server(ip):
 	network.connect_to_url(url, PoolStringArray(), true)
 	get_tree().set_network_peer(network)
 
+# Lobby
 func join_lobby(name, join_code):
 	player_name = name
 	rpc_id(1, "join_lobby", player_name, join_code)
@@ -38,14 +42,16 @@ func host_lobby(name):
 	player_name = name
 	rpc_id(1, "host_lobby", player_name)
 
-remote func error(msg):
-	get_node("/root/Main").set_error(msg)
+func client_lobby_ready():
+	rpc_id(1, "client_lobby_ready")
 
-remote func start_lobby(code, rules, host):
+func return_to_lobby():
+	rpc_id(1, "return_to_lobby")
+
+remote func start_lobby(code, host):
 	lobby_code = code
 	is_host = host
-	SceneManager.goto_preloaded_scene()
-	get_node("/root/Lobby").setup(rules)
+	SceneManager.goto_scene("res://src/lobby/Lobby.tscn")
 
 # Lobby
 func update_rules(rules):
@@ -65,8 +71,8 @@ remote func request_start(rules={}):
 	Rules.load_from_dict(rules)
 	SceneManager.goto_scene("res://src/game/Game.tscn", false)
 
-func client_ready():
-	rpc_id(1, "client_ready")
+func client_game_ready():
+	rpc_id(1, "client_game_ready")
 
 remote func set_player(player):
 	player_id = player

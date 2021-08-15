@@ -48,7 +48,6 @@ func _on_connection_succeeded():
 	set_status("Connected to Server")
 	server_connect.hide()
 	lobby_connect.show()
-	SceneManager.preload_scene("res://src/lobby/Lobby.tscn")
 
 func _on_connection_failed():
 	set_error("Failed to Connect to Server")

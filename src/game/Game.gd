@@ -9,7 +9,7 @@ var clockwise_play = true
 func _ready():
 	if !Server.is_local:
 		randomize()
-		Server.client_ready()
+		Server.client_game_ready()
 	else:
 		var local_server = load("res://src/game/common/GameServer.gd").new()
 		add_child(local_server)

@@ -25,15 +25,13 @@ func _ready():
 	slots.append(slot6)
 	slots.append(slot7)
 	slots.append(slot8)
-
+	
 	play_button.hide()
-	lobby_code.text = Server.lobby_code
-
-func setup(rules):
 	if Server.is_host:
 		play_button.show()
+
 	lobby_code.text = Server.lobby_code
-	sync_rules(rules)
+	Server.client_lobby_ready()
 
 func sync_lobby(players):
 	for slot in slots:
