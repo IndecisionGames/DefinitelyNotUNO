@@ -386,6 +386,9 @@ margin_top = 351.0
 margin_right = 732.0
 margin_bottom = 690.0
 mouse_default_cursor_shape = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="DrawButton" type="TextureButton" parent="ButtonManager/Draw"]
 margin_right = 230.0
@@ -458,6 +461,7 @@ __meta__ = {
 margin_right = 125.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 125, 50 )
+mouse_default_cursor_shape = 2
 
 [node name="WildPicker" type="MarginContainer" parent="ButtonManager"]
 margin_left = 1218.0
@@ -477,6 +481,7 @@ margin_bottom = 212.0
 margin_right = 150.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 150, 50 )
+mouse_default_cursor_shape = 2
 color = Color( 1, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -495,6 +500,7 @@ margin_top = 54.0
 margin_right = 150.0
 margin_bottom = 104.0
 rect_min_size = Vector2( 150, 50 )
+mouse_default_cursor_shape = 2
 color = Color( 1, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -513,6 +519,7 @@ margin_top = 108.0
 margin_right = 150.0
 margin_bottom = 158.0
 rect_min_size = Vector2( 150, 50 )
+mouse_default_cursor_shape = 2
 color = Color( 1, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -531,6 +538,7 @@ margin_top = 162.0
 margin_right = 150.0
 margin_bottom = 212.0
 rect_min_size = Vector2( 150, 50 )
+mouse_default_cursor_shape = 2
 color = Color( 1, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -551,24 +559,6 @@ mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="OpponentHands" type="MarginContainer" parent="HUD"]
-visible = false
-anchor_left = 0.832
-anchor_top = 0.5
-anchor_right = 0.832
-anchor_bottom = 0.5
-margin_left = 52.5599
-margin_top = -100.0
-margin_right = 92.5599
-margin_bottom = 100.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Text" type="VBoxContainer" parent="HUD/OpponentHands"]
-margin_right = 40.0
-margin_bottom = 200.0
 
 [node name="TurnDisplay" type="MarginContainer" parent="HUD"]
 anchor_right = 1.0
@@ -688,6 +678,7 @@ valign = 1
 margin_top = 102.0
 margin_right = 400.0
 margin_bottom = 200.0
+mouse_default_cursor_shape = 2
 size_flags_vertical = 3
 text = "Play Again?"
 

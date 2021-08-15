@@ -13,6 +13,7 @@ onready var lobby_connect = find_node("LobbyConnect")
 onready var host_toggle = find_node("HostToggle")
 onready var join_code_input = find_node("JoinCodeInput")
 onready var name_input = find_node("NameInput")
+onready var join_button = find_node("Join")
 
 const EUROPE_SERVER = "indecisiongames.ddns.net"
 
@@ -70,8 +71,10 @@ func _on_Connect_pressed():
 func _on_HostToggle_toggled(button_pressed):
 	if button_pressed:
 		join_code_input.hide()
+		join_button.set_text("Host")
 	else:
 		join_code_input.show()
+		join_button.set_text("Join")
 
 func _on_Join_pressed():
 	var name = name_input.text.strip_edges()

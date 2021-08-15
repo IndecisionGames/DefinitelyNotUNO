@@ -181,6 +181,7 @@ size_flags_vertical = 3
 [node name="Play" type="Button" parent="GUI/MarginContainer/HBoxContainer/HBoxContainerBottom/MarginContainer"]
 margin_right = 585.0
 margin_bottom = 283.0
+mouse_default_cursor_shape = 2
 text = "Play"
 
 [node name="MarginContainer2" type="MarginContainer" parent="GUI/MarginContainer/HBoxContainer/HBoxContainerBottom"]
