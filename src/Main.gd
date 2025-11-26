@@ -15,7 +15,7 @@ onready var join_code_input = find_node("JoinCodeInput")
 onready var name_input = find_node("NameInput")
 onready var join_button = find_node("Join")
 
-const EUROPE_SERVER = "indecisiongames.ddns.net"
+const EUROPE_SERVER = "35.211.109.121"
 
 func _ready():
 	Server.network.connect("connection_succeeded", self, "_on_connection_succeeded")
