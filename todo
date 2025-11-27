@@ -1,0 +1,24 @@
+- finish godot 4 migration
+
+Server
+- create minimal TS Node server to connect to
+  - server should have no game logic
+  - server should handle:
+    - lobby management (one host, players join/leave)
+    - route messages (JSON)
+      - clients -> host (intents)
+      - host -> other clients (authoritative game state / events)
+
+Clients
+- hosts
+  - owns full game logic and deck state
+  - decide if move is valid, turn order etc.
+  - broadcasts state updates / events via server
+- guests
+  - send input/intent messages to host via server
+  - render final state sent by host
+
+Offline
+- no server interaction
+- player is "host"
+- AI are "guests" that send intent
