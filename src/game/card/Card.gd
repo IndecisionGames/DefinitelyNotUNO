@@ -2,12 +2,9 @@ extends Control
 
 const CardBase = preload("res://src/game/common/CardBase.gd")
 
-class_name Card
-
-onready var background = get_node("Colour")
-onready var card_image = get_node("CardImage")
-onready var border = get_node("Border")
-onready var tween = get_node("Tween")
+@onready var background = get_node("Colour")
+@onready var card_image = get_node("CardImage")
+@onready var border = get_node("Border")
 
 var base: CardBase
 var is_playable: bool
@@ -42,20 +39,20 @@ func _set_card_colour():
 
 func _set_border():
 	if is_playable:
-		border.set("custom_styles/panel", CardAssets.playable_border)
+		border.set("theme_override_styles/panel", CardAssets.playable_border)
 	else:
-		border.set("custom_styles/panel", CardAssets.normal_border)
+		border.set("theme_override_styles/panel", CardAssets.normal_border)
 
 func _set_card_asset():
 	card_image.set_texture(CardAssets.card_asset(base.type))
 
 func _move_up():
-	tween.interpolate_property(self, "rect_position", null, Vector2(rect_position.x, -80), 0.1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", Vector2(position.x, -80), 0.1).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 
 func _move_down():
-	tween.interpolate_property(self, "rect_position", null, Vector2(rect_position.x, 0), 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", Vector2(position.x, 0), 0.2).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
 
 func _on_Interact_mouse_entered():
 	_set_border()

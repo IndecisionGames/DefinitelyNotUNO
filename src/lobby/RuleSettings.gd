@@ -1,11 +1,11 @@
 extends Control
 
-onready var rule1_bg = get_node("VBoxContainer/Rule1")
-onready var rule1_name = get_node("VBoxContainer/Rule1/Name") 
-onready var rule2_bg = get_node("VBoxContainer/Rule2")
-onready var rule2_name = get_node("VBoxContainer/Rule2/Name") 
-onready var rule3_bg = get_node("VBoxContainer/Rule3")
-onready var rule3_name = get_node("VBoxContainer/Rule3/Name")
+@onready var rule1_bg = get_node("VBoxContainer/Rule1")
+@onready var rule1_name = get_node("VBoxContainer/Rule1/Name") 
+@onready var rule2_bg = get_node("VBoxContainer/Rule2")
+@onready var rule2_name = get_node("VBoxContainer/Rule2/Name") 
+@onready var rule3_bg = get_node("VBoxContainer/Rule3")
+@onready var rule3_name = get_node("VBoxContainer/Rule3/Name")
 
 var rule1 = false
 var rule2 = false

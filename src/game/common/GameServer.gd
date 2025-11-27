@@ -12,10 +12,10 @@ var empty_game_state
 var rng = RandomNumberGenerator.new()
 
 func _ready():
-	Server.connect("play_request", self, "_play_card")
-	Server.connect("draw_request", self, "_draw_cards")
-	Server.connect("uno_request", self, "_on_uno_request")
-	Server.connect("wild_pick", self, "_on_wild_pick")
+	Server.connect("play_request", Callable(self, "_play_card"))
+	Server.connect("draw_request", Callable(self, "_draw_cards"))
+	Server.connect("uno_request", Callable(self, "_on_uno_request"))
+	Server.connect("wild_pick", Callable(self, "_on_wild_pick"))
 	empty_game_state = GameState.to_dict()
 
 func reset_game():

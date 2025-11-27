@@ -1,16 +1,16 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/game/OpponentHand.gd" type="Script" id=1]
-[ext_resource path="res://assets/font/HoboStd.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/font/HoboStd.otf" type="FontFile" id=2]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="FontFile" id=1]
 size = 30
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="FontFile" id=2]
 size = 20
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -20,13 +20,13 @@ font_data = ExtResource( 2 )
 [node name="Hand" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1.0
-margin_top = -50.0
-margin_right = -1517.0
-margin_bottom = -1000.0
+offset_left = 1.0
+offset_top = -50.0
+offset_right = -1517.0
+offset_bottom = -1000.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_pivot_offset = Vector2( 1920, 1080 )
+pivot_offset = Vector2( 1920, 1080 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource( 1 )
@@ -35,15 +35,15 @@ __meta__ = {
 }
 
 [node name="Name" type="Label" parent="."]
-margin_left = -70.7676
-margin_top = 83.142
-margin_right = 75.2324
-margin_bottom = 118.142
+offset_left = -70.7676
+offset_top = 83.142
+offset_right = 75.2324
+offset_bottom = 118.142
 grow_horizontal = 2
 grow_vertical = 2
-rect_pivot_offset = Vector2( 73, 0 )
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+pivot_offset = Vector2( 73, 0 )
+theme_override_fonts/font = SubResource( 1 )
+theme_override_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Name"
 align = 1
 valign = 1
@@ -52,14 +52,14 @@ __meta__ = {
 }
 
 [node name="CardCount" type="Label" parent="."]
-margin_left = -70.7194
-margin_top = 131.501
-margin_right = 75.2806
-margin_bottom = 158.501
+offset_left = -70.7194
+offset_top = 131.501
+offset_right = 75.2806
+offset_bottom = 158.501
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+theme_override_fonts/font = SubResource( 2 )
+theme_override_colors/font_color = Color( 1, 1, 1, 1 )
 text = "0"
 align = 1
 valign = 1

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/draw.wav-faa8594a24506d9cc7c2e9d728d79425.sample"
+type="AudioStreamWAV"
+uid="uid://cms8ecdkta8ed"
+path="res://.godot/imported/draw.wav-faa8594a24506d9cc7c2e9d728d79425.sample"
 
 [deps]
 
 source_file="res://assets/sound_effects/draw.wav"
-dest_files=[ "res://.import/draw.wav-faa8594a24506d9cc7c2e9d728d79425.sample" ]
+dest_files=["res://.godot/imported/draw.wav-faa8594a24506d9cc7c2e9d728d79425.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

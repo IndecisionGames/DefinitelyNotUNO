@@ -2,4 +2,4 @@
 
 https://indecisiongames.github.io/DefinitelyNotUNO/
 
-Godot version 3.3.2
+Godot version 4.5.1

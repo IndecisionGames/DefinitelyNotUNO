@@ -1,10 +1,10 @@
 extends Control
 
-onready var win_label = get_node("Margin/Popup/Label")
-onready var buttons = find_node("Buttons")
+@onready var win_label = get_node("Margin/Popup/Label")
+@onready var buttons = find_child("Buttons")
 
 func _ready():
-	Server.connect("game_won", self, "_on_game_won")
+	Server.connect("game_won", Callable(self, "_on_game_won"))
 	hide()
 	buttons.hide()
 

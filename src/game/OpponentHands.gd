@@ -1,19 +1,19 @@
 extends Node
 
 # Player hand positions (e.g. p2 = positions for a 2 player game)
-onready var p2 = get_node("2P")
-onready var p3 = get_node("3P")
-onready var p4 = get_node("4P")
-onready var p5 = get_node("5P")
-onready var p6 = get_node("6P")
-onready var p7 = get_node("7P")
-onready var p8 = get_node("8P")
+@onready var p2 = get_node("2P")
+@onready var p3 = get_node("3P")
+@onready var p4 = get_node("4P")
+@onready var p5 = get_node("5P")
+@onready var p6 = get_node("6P")
+@onready var p7 = get_node("7P")
+@onready var p8 = get_node("8P")
 
 var player_hands = []
 
 func _ready():
-	Server.connect("game_start", self, "_update")
-	Server.connect("game_update", self, "_update")
+	Server.connect("game_start", Callable(self, "_update"))
+	Server.connect("game_update", Callable(self, "_update"))
 	p2.hide()
 	p3.hide()
 	p4.hide()
@@ -64,7 +64,7 @@ func _player_to_position(player):
 	return pos
 
 func get_player_position(player):
-	return player_hands[_player_to_position(player)].rect_global_position
+	return player_hands[_player_to_position(player)].global_position
 
 func get_player_rotation(player):
-	return player_hands[_player_to_position(player)].get_parent().rect_rotation
+	return player_hands[_player_to_position(player)].get_parent().rotation

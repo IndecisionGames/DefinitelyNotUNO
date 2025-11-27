@@ -11,7 +11,7 @@ func _ready():
 	current_scene = root.get_child(root.get_child_count() -1)
 
 func goto_scene(path, instant=false): # Game requests to switch to this scene.
-	loader = ResourceLoader.load_interactive(path)
+	loader = ResourceLoader.load_threaded_request(path)
 	if loader == null: # Check for errors.
 		_show_error()
 		return
@@ -23,7 +23,7 @@ func goto_scene(path, instant=false): # Game requests to switch to this scene.
 		LoadingScreen.visible = true
 		wait_frames = 1
 
-func _process(time):
+func _process(_time):
 	if loader == null:
 		# no need to process anymore
 		set_process(false)
@@ -34,9 +34,9 @@ func _process(time):
 		wait_frames -= 1
 		return
 
-	var t = OS.get_ticks_msec()
+	var t = Time.get_ticks_msec()
 	# Use "time_max" to control for how long we block this thread.
-	while OS.get_ticks_msec() < t + time_max:
+	while Time.get_ticks_msec() < t + time_max:
 		# Poll your loader.
 		var err = loader.poll()
 
@@ -59,10 +59,10 @@ func _update_progress():
 	LoadingScreen.set_progress(progress)			
 
 func _set_new_scene(scene_resource):
-	yield(get_tree().create_timer(1), "timeout")
+	await get_tree().create_timer(1).timeout
 	LoadingScreen.visible = false
 	LoadingScreen.reset()
-	current_scene = scene_resource.instance()
+	current_scene = scene_resource.instantiate()
 	get_node("/root").add_child(current_scene)
 
 func _show_error():

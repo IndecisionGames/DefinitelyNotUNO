@@ -17,7 +17,7 @@ var card_plus4_asset = preload("res://assets/cards/plus4.png")
 var card_wild_asset = preload("res://assets/cards/wild.png")
 var card_back_asset = preload("res://assets/cards/back.png")
 
-func card_asset(type) -> Texture:
+func card_asset(type) -> Texture2D:
 	match type:
 		Types.card_type.CARD_0:
 			return card_0_asset
@@ -58,9 +58,15 @@ func _ready():
 	normal_border.bg_color = Color(0,0,0,0)
 	normal_border.border_color = Values.normal
 	normal_border.set_border_width_all(2)
-	normal_border.set_corner_radius_individual(15, 15, 12, 13)
+	normal_border.set_corner_radius(CORNER_TOP_LEFT, 15)
+	normal_border.set_corner_radius(CORNER_TOP_RIGHT, 15)
+	normal_border.set_corner_radius(CORNER_BOTTOM_LEFT, 12)
+	normal_border.set_corner_radius(CORNER_BOTTOM_RIGHT, 13)
 
 	playable_border.bg_color = Color(0,0,0,0)
 	playable_border.border_color = Values.playable
 	playable_border.set_border_width_all(5)
-	playable_border.set_corner_radius_individual(15, 15, 12, 13)
+	playable_border.set_corner_radius(CORNER_TOP_LEFT, 15)
+	playable_border.set_corner_radius(CORNER_TOP_RIGHT, 15)
+	playable_border.set_corner_radius(CORNER_BOTTOM_LEFT, 12)
+	playable_border.set_corner_radius(CORNER_BOTTOM_RIGHT, 13)

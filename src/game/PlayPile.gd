@@ -5,16 +5,16 @@ const AnimationCard = preload("res://src/game/card/AnimationCard.tscn")
 
 const MAX_CARDS = 20
 
-onready var hand = get_parent().get_parent().get_node("Hand")
-onready var opponent_hands = get_parent().get_parent().get_node("OpponentHands")
+@onready var hand = get_parent().get_parent().get_node("Hand")
+@onready var opponent_hands = get_parent().get_parent().get_node("OpponentHands")
 
 var pos = Vector2(963,520)
 var cards = []
 
 func _ready():
-	Server.connect("game_start", self, "_on_game_start")
-	Server.connect("card_played", self, "_on_card_played")
-	Server.connect("game_update", self, "_on_game_update")
+	Server.connect("game_start", Callable(self, "_on_game_start"))
+	Server.connect("card_played", Callable(self, "_on_card_played"))
+	Server.connect("game_update", Callable(self, "_on_game_update"))
 
 func _on_game_start():
 	var play_card_instance = AnimationCard.instance()

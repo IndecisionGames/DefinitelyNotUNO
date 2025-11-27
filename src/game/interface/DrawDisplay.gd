@@ -1,10 +1,10 @@
 extends MarginContainer
 
-onready var draw_count = get_node("DrawCount")
+@onready var draw_count = get_node("DrawCount")
 
 func _ready():
-	Server.connect("game_start", self, "_update")
-	Server.connect("game_update", self, "_update")
+	Server.connect("game_start", Callable(self, "_update"))
+	Server.connect("game_update", Callable(self, "_update"))
 
 func _update():
 	if GameState.pickup_required:

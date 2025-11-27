@@ -38,9 +38,9 @@ func _to_string():
 			colour_string = "yellow"
 		Types.card_colour.WILD:
 			colour_string = "wild"
-	return "%s %s" % [colour_string, type()]
+	return "%s %s" % [colour_string, card_type_string()]
 
-func type() -> String:
+func card_type_string() -> String:
 	match self.type:
 		Types.card_type.CARD_0:
 			return "0"

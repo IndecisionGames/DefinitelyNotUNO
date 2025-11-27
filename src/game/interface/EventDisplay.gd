@@ -1,12 +1,12 @@
 extends MarginContainer
 
-onready var event_text = get_node("Event")
-onready var timer = get_node("Timer")
+@onready var event_text = get_node("Event")
+@onready var timer = get_node("Timer")
 
 func _ready():
 	hide()
-	Server.connect("event", self, "_on_event")
-	timer.connect("timeout", self, "_on_Timer_timeout")
+	Server.connect("event", Callable(self, "_on_event"))
+	timer.connect("timeout", Callable(self, "_on_Timer_timeout"))
 	
 func _on_event(event_type, player):
 	match event_type:

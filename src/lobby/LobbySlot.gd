@@ -1,9 +1,9 @@
 extends Control
 
-onready var active_panel = find_node("ActivePanel")
-onready var ready_on = find_node("ReadyON")
-onready var name_label = find_node("NameLabel")
-onready var highlight_panel = find_node("HighlightPanel")
+@onready var active_panel = find_child("ActivePanel")
+@onready var ready_on = find_child("ReadyON")
+@onready var name_label = find_child("NameLabel")
+@onready var highlight_panel = find_child("HighlightPanel")
 
 var is_ready = false
 

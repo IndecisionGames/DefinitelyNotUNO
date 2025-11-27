@@ -1,8 +1,8 @@
 extends Node
 
-onready var hand = get_node("Hand")
-onready var turn_indicator = get_node("TurnIndicator")
-onready var turn_indicator_anim = get_node("TurnIndicator/AnimationPlayer")
+@onready var hand = get_node("Hand")
+@onready var turn_indicator = get_node("TurnIndicator")
+@onready var turn_indicator_anim = get_node("TurnIndicator/AnimationPlayer")
 
 var clockwise_play = true
 

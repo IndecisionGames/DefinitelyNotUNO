@@ -7,18 +7,18 @@ const BASE_SEPERATION = 140
 const MAX_WIDTH = 1600
 const NUM_AT_MAX = 13
 
-onready var buttons = get_node("../ButtonManager")
-onready var draw_anim = get_node("DrawAnim")
-onready var draw_card_layer = get_node("../PlaySpace/Deck/TopDeckLayer/TopDeckLayer2")
+@onready var buttons = get_node("../ButtonManager")
+@onready var draw_anim = get_node("DrawAnim")
+@onready var draw_card_layer = get_node("../PlaySpace/Deck/TopDeckLayer/TopDeckLayer2")
 
 var cards = []
 var card_bases = []
 var has_playable_card = false
 
 func _ready():
-	Server.connect("game_start", self, "_load")
-	Server.connect("game_update", self, "_on_game_update")
-	Server.connect("cards_drawn", self, "_on_cards_drawn")
+	Server.connect("game_start", Callable(self, "_load"))
+	Server.connect("game_update", Callable(self, "_on_game_update"))
+	Server.connect("cards_drawn", Callable(self, "_on_cards_drawn"))
 
 func _load():
 	while card_bases.size() > 0:
@@ -61,7 +61,7 @@ func _on_cards_drawn(player, drawn_cards, loading=false):
 # Called by PlayPile
 func get_card_position(card):
 	var idx = card.is_in(card_bases)
-	return cards[idx].rect_global_position
+	return cards[idx].global_position
 
 # Called by PlayPile
 func on_card_played(player, card):

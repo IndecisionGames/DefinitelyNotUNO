@@ -1,17 +1,17 @@
 extends Control
 
-onready var lobby_code = find_node("LobbyCode")
-onready var play_button = find_node("Play")
-onready var rule_settings = find_node("RuleSettings")
+@onready var lobby_code = find_child("LobbyCode")
+@onready var play_button = find_child("Play")
+@onready var rule_settings = find_child("RuleSettings")
 
-onready var slot1 = find_node("Slot1")
-onready var slot2 = find_node("Slot2")
-onready var slot3 = find_node("Slot3")
-onready var slot4 = find_node("Slot4")
-onready var slot5 = find_node("Slot5")
-onready var slot6 = find_node("Slot6")
-onready var slot7 = find_node("Slot7")
-onready var slot8 = find_node("Slot8")
+@onready var slot1 = find_child("Slot1")
+@onready var slot2 = find_child("Slot2")
+@onready var slot3 = find_child("Slot3")
+@onready var slot4 = find_child("Slot4")
+@onready var slot5 = find_child("Slot5")
+@onready var slot6 = find_child("Slot6")
+@onready var slot7 = find_child("Slot7")
+@onready var slot8 = find_child("Slot8")
 
 var position = -1
 var slots = []
