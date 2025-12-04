@@ -1,6 +1,7 @@
 # Godot-specific ignores
 .import/
 export.cfg
+.godot/
 
 # Imported translations (automatically generated from CSV files)
 *.translation
@@ -17,3 +18,13 @@ build/
 
 # Temp assets
 assets/tmp/
+
+# Logs
+*.log
+
+# OS Junk
+.DS_Store
+Thumbs.db
+
+# Editor backups
+*~
